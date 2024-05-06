@@ -94,6 +94,7 @@ class ProductosController extends Controller
             $html .= '            <img src="' . $producto->img_portada . '" class="img-fluid mx-auto d-block" alt="' . $producto->titulo . '">';
             $html .= '        </div>';
             $html .= '        <div class="product-content pt-3">';
+            $html .= '        <img src="'. $producto->marca_logo .'" style="height: 30;">';
             $html .= '            <p class="text-muted font-size-13 mb-0">' . $producto->marca . '</p>';
             $html .= '            <h5 class="mt-1 mb-0"><a href="' . $producto->link . '" class="text-dark font-size-16">' . $producto->titulo . '</a></h5>';
             $html .= '            <!-- Aquí puedes agregar las estrellas de calificación si las tienes -->';
