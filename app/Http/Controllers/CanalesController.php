@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ConnectException;
+use GuzzleHttp\Exception\RequestException;
+use Illuminate\Support\Facades\Http;
 use Automattic\WooCommerce\Client as WooCommerceClient;
 use App\Models\Canal;
 use Auth;
@@ -59,17 +62,11 @@ class CanalesController extends Controller
         $url = $request->input('url');
 
         // Crear una instancia del cliente Guzzle
-        $client = new Client();
-        $response = $client->head(trim($url));
-                dd($response);
-        // Verificar el código de estado de la respuesta
-        $statusCode = $response->getStatusCode();
-
-        if ($statusCode >= 200 && $statusCode < 400) {
-            return response()->json(['success' => 'La URL existe.']);
-        } else {
-            return response()->json(['error' => 'La URL no existe o no está accesible.']);
-        }
+      
+        $client = new Client([
+            'verify' => false,
+        ]);
+            
         try {
          
             // Hacer una solicitud HEAD a la URL para verificar si existe
@@ -77,15 +74,50 @@ class CanalesController extends Controller
             
             // Verificar el código de estado de la respuesta
             $statusCode = $response->getStatusCode();
-
+        
             if ($statusCode >= 200 && $statusCode < 400) {
                 return response()->json(['success' => 'La URL existe.']);
+                // En tu controlador de Laravel o en cualquier lugar donde construyas el enlace
+                
             } else {
                 return response()->json(['error' => 'La URL no existe o no está accesible.']);
             }
-        } catch (\Exception $e) {
+        } catch (ConnectException $e) {
             return response()->json(['error' => 'No se pudo conectar a la URL.']);
+        } catch (RequestException $e) {
+            if ($e->hasResponse()) {
+                $statusCode = $e->getResponse()->getStatusCode();
+                if ($statusCode === 404) {
+                    return response()->json(['error' => 'La URL no existe.']);
+                } else {
+                    return response()->json(['error' => 'Error al acceder a la URL.']);
+                }
+            } else {
+                return response()->json(['error' => 'No se pudo acceder a la URL.']);
+            }
         }
+    }
+    public function generarEnlaceAutorizacion(Request $request)
+    {
+        $url = $request->input('url1');
+        // Verificar si la URL termina con '/' y quitarlo si es así
+        if (substr($url, -1) === '/') {
+            $url = rtrim($url, '/');
+        }
+
+        $urlbase = config('app.url');
+
+        // Construye el enlace de autorización
+        $woocommerce_auth_url = $url.'/wc-auth/v1/authorize';
+        $app_name = 'MultiTiendas';
+        $scope = 'read_write';
+        $user_id = 57855;
+        $return_url = urlencode($urlbase.'woocommerce/confirmed');
+        $callback_url = urlencode($urlbase.'woocommerce/add');
+        $authorization_link = "$woocommerce_auth_url?app_name=$app_name&scope=$scope&user_id=$user_id&return_url=$return_url&callback_url=$callback_url";
+
+        // Retorna el enlace de autorización
+        return response()->json(['authorization_link' => $authorization_link]);
     }
     public function woocommerce(): View
     {

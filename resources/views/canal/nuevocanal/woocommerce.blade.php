@@ -164,27 +164,60 @@
         <script>
             // alert success
                 
-                $('#alert-success').click(function(){
-                    alert('si');
-                    var url = $('#urlRequest').val();
-                    $.ajax({
-                        url: '{{ route("validar-url") }}',
-                        type: 'GET',
-                        data: {
-                            _token: '{{ csrf_token() }}',
-                            url: url
-                        },
-                        success: function(response){                            
-                            $('#mensaje').text(response.success);
-                        },
-                        error: function(xhr, status, error){
-                            var errors = JSON.parse(xhr.responseText).errors;                           
-                            $('#mensaje').text(errors[0]);
-                        }
-                    });
-                });
-     
+                    $('#alert-success').click(function(){
+                        
+                        var url = $('#urlRequest').val();
+                        $.ajax({
+                            url: '{{ route("validar-url") }}',
+                            type: 'GET',
+                            data: {
+                                _token: '{{ csrf_token() }}',
+                                url: url
+                            },
+                            success: function(response) {
+                                if (response.success) {
+                                    // La URL existe
+                                    $('#mensaje').html('<div><span class="text-sm text-80 text-success"> La dirección de tu página parece ser correcta. Para obtener automáticamente tu Consumer Key y Consumer Secret, haz click en el siguiente botón: <br></span><a onclick="autorizarWooCommerce()" href="#" id="btnAutorizarWooCommerce" class="mt-4 btn btn-sm btn-outline btn-success">Autorizar WooCommerce</a></div>');
 
+                                } else if (response.error) {
+                                    // Se produjo un error al validar la URL
+                                    $('#mensaje').text('Error: ' + response.error);
+                                } else {
+                                    // Manejar otros casos si es necesario
+                                    $('#mensaje').text('Error: Algo fallo con tu url');
+                                }
+                            },
+                            error: function(xhr, status, error) {
+                                // Manejar errores de AJAX
+                                alert('Error en la solicitud AJAX: ' + error);
+                            }
+                        });
+                    });
+     
+                        
+                        // Maneja el clic en el botón para autorizar WooCommerce
+                        function autorizarWooCommerce() {
+                            
+                            // Realiza una solicitud AJAX para obtener el enlace de autorización
+                            var url1 = $('#urlRequest').val();
+                            $.ajax({
+                                url: '/woo/authorize',
+                                method: 'GET',
+                                data: {
+                                    remote_store: url1
+                                },
+                                success: function(response) {
+                                    // Manejar la respuesta, por ejemplo, redirigir al usuario a la URL de autorización
+                                    window.location.href = response.redirect_url;
+                                },
+                                error: function(xhr, status, error) {
+                                    // Manejar errores, por ejemplo, mostrar un mensaje de error al usuario
+                                    console.error(xhr.responseText);
+                                }
+                            });
+                        };
+          
+                
         </script>
         <!-- dropzone plugin -->
         <script src="{{ URL::asset('../../build/libs/dropzone/min/dropzone.min.js') }}"></script>
