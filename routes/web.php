@@ -24,8 +24,8 @@ use Illuminate\Support\Facades\Artisan;
 
 
 Auth::routes();
-Route::get('woocommerce/confirmed/{any}', [WooCommerceController::class, 'confirmed'])->name('woocommerce.confirmed');
-Route::get('woocommerce/add/{any}', [WooCommerceController::class, 'add'])->name('woocommerce.add');
+Route::get('woocommerce/confirmed/{id_tienda }', [WooCommerceController::class, 'confirmed'])->name('woocommerce.confirmed');
+Route::get('woocommerce/add/{id_tienda }', [WooCommerceController::class, 'add'])->name('woocommerce.add');
 //Ruta para Iniciar el Flujo de Autorización de WooCommerce
 
 
