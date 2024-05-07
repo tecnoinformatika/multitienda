@@ -17,6 +17,9 @@ class WooCommerceController extends Controller
 {
     public function confirmed($any, Request $request)
     {
+        $canales = CanalDisponible::all();
+
+    
         $success = $request->query('success');
         if ($success == 1) {
             // Autorización exitosa, obtener los parámetros necesarios
@@ -30,10 +33,10 @@ class WooCommerceController extends Controller
             $store->save();
     
             // Redirigir o mostrar un mensaje de éxito
-            return view('canal.canales');
+            return view('canal.canales')->with('canales',$canales);;
         } else {
             // Autorización denegada, redirigir o mostrar un mensaje de error
-            return view('canal.canales');
+            return view('canal.canales')->with('canales',$canales);;
         }
     }
 

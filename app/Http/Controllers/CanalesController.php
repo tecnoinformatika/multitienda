@@ -22,7 +22,7 @@ class CanalesController extends Controller
     {
         $canales = CanalDisponible::all();
 
-        return view('canal/canales')->with('canales',$canales);;
+        return view('canal/canales')->with('canales',$canales);
     }
 
     public function nuevocanal(Request $request, $any){
