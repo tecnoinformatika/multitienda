@@ -30,10 +30,10 @@ class WooCommerceController extends Controller
             $store->save();
     
             // Redirigir o mostrar un mensaje de éxito
-            return redirect()->route('canal.canales');
+            return view('canal.canales');
         } else {
             // Autorización denegada, redirigir o mostrar un mensaje de error
-            return redirect()->route('canal.canales');
+            return view('canal.canales');
         }
     }
 
