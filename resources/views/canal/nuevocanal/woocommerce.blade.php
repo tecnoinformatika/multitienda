@@ -201,18 +201,19 @@
                             // Realiza una solicitud AJAX para obtener el enlace de autorización
                             var url1 = $('#urlRequest').val();
                             $.ajax({
-                                url: '/woo/authorize',
-                                method: 'GET',
+                                url: '/generar-enlace-autorizacion', // Ruta de tu controlador Laravel
+                                type: 'GET',
                                 data: {
-                                    remote_store: url1
+                                    url1: url1
                                 },
                                 success: function(response) {
-                                    // Manejar la respuesta, por ejemplo, redirigir al usuario a la URL de autorización
-                                    window.location.href = response.redirect_url;
+                                    // Redirige al usuario al enlace de autorización obtenido
+                                    window.location.href = response.authorization_link;
                                 },
                                 error: function(xhr, status, error) {
-                                    // Manejar errores, por ejemplo, mostrar un mensaje de error al usuario
-                                    console.error(xhr.responseText);
+                                    // Maneja los errores de la solicitud AJAX, si es necesario
+                                    console.error(error);
+                                    alert('Error al generar el enlace de autorización');
                                 }
                             });
                         };

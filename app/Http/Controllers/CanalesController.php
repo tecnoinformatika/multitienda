@@ -111,9 +111,9 @@ class CanalesController extends Controller
         $woocommerce_auth_url = $url.'/wc-auth/v1/authorize';
         $app_name = 'MultiTiendas';
         $scope = 'read_write';
-        $user_id = 57855;
-        $return_url = urlencode($urlbase.'woocommerce/confirmed');
-        $callback_url = urlencode($urlbase.'woocommerce/add');
+        $user_id = Auth::user()->id;
+        $return_url = urlencode($urlbase.'/woocommerce/confirmed');
+        $callback_url = urlencode($urlbase.'/woocommerce/add');
         $authorization_link = "$woocommerce_auth_url?app_name=$app_name&scope=$scope&user_id=$user_id&return_url=$return_url&callback_url=$callback_url";
 
         // Retorna el enlace de autorización
