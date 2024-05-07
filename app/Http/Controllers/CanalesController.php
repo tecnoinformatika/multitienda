@@ -124,7 +124,7 @@ class CanalesController extends Controller
         $return_url = $urlbase.'/woocommerce/confirmed/'.$store->id;
         $callback_url = $urlbase.'/woocommerce/add/'.$store->id;
         
-        $authorization_link = $woocommerce_auth_url."?app_name=".$app_name."&scope=".$scope."&user_id=".$user_id."&return_url=".$return_url."&callback_url=".$callback_url;
+        $authorization_link = urlencode($woocommerce_auth_url."?app_name=".$app_name."&scope=".$scope."&user_id=".$user_id."&return_url=".$return_url."&callback_url=".$callback_url);
     
         // Retorna el enlace de autorización
         return response()->json(['authorization_link' => $authorization_link]);
