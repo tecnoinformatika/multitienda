@@ -17,26 +17,43 @@ class WooCommerceController extends Controller
 {
     public function confirmed($any, Request $request)
     {
-        // Aquí puedes manejar la lógica después de que el usuario haya confirmado la autorización
-        // Por ejemplo, podrías guardar las claves API de WooCommerce en la base de datos
-
-        // Redireccionar a alguna página de confirmación o a donde desees
-        return redirect()->route('/')->with('success', 'WooCommerce ha sido vinculado exitosamente.');
+        $success = $request->query('success');
+        if ($success == 1) {
+            // Autorización exitosa, obtener los parámetros necesarios
+            $store = Canal::findOrFail($any);
+            $consumerKey = $request->consumer_key;
+            $consumerSecret = $request->consumer_secret;
+    
+            // Guardar las credenciales en la base de datos
+            $store->apikey = $consumerKey;
+            $store->secret = $consumerSecret;
+            $store->save();
+    
+            // Redirigir o mostrar un mensaje de éxito
+            return redirect()->route('canal.canales');
+        } else {
+            // Autorización denegada, redirigir o mostrar un mensaje de error
+            return redirect()->route('woocommerce.error');
+        }
     }
 
     public function add($any, Request $request)
     {
-        $data = $request->all();
+       // Obtener los datos de la solicitud en formato JSON
+        $requestData = json_decode(file_get_contents('php://input'), true);
 
-        $store = Canal::where(['id' => $any])->first();
-        if ($store) {
-            
-            $store->apikey = $request->consumer_key;
-            $store->secret = $request->consumer_secret;
-            $store->save();
-        }
-    
-        return ['s' => 200];
+        // Obtener los parámetros necesarios
+        $consumerKey = $requestData['consumer_key'];
+        $consumerSecret = $requestData['consumer_secret'];
+
+        // Guardar las credenciales en la base de datos
+        $store = Canal::findOrFail($any);
+        $store->apikey = $consumerKey;
+        $store->secret = $consumerSecret;
+        $store->save();
+
+    // Enviar una respuesta exitosa
+    return response()->json(['message' => 'Credenciales guardadas correctamente'], 200);
 
         
     }
