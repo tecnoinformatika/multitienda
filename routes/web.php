@@ -45,17 +45,17 @@ Route::get('/woo/authorize', function (Request $request) {
     $store->url = $remote_store;
     $store->save();
 
+    $store_url = $remote_store;
     $endpoint = '/wc-auth/v1/authorize';
     $params = [
-        'app_name' => 'MultiTiendas',
+        'app_name' => config('app.name'),
         'scope' => 'read_write',
         'user_id' => Auth::user()->id,
         'return_url' => $local_store.'/woo/connect/response/'.$store->id,
         'callback_url' => $local_store.'/woo/connect/callback/'.$store->id
     ];
-    $api = $remote_store . $endpoint . '?' . http_build_query($params);
-
-    return Redirect::away($api);
+    $query_string = http_build_query($params);
+    return redirect()->away($store_url . $endpoint . '?' . $query_string);
 });
 //Ruta para Manejar la Respuesta de Autorización de WooCommerce
 Route::any('/woo/connect/response/{local_store}', function ($local_store, Request $request) {
@@ -70,7 +70,7 @@ Route::any('/woo/connect/response/{local_store}', function ($local_store, Reques
 Route::any('/woo/connect/callback/{local_store}', function ($local_store, Request $request) {
     $data = $request->all();
 
-    $store = \App\Store::where(['local_store' => $data['user_id']])->first();
+    $store = \App\Store::where(['id' => $data['user_id']])->first();
     if ($store) {
         $store->data = json_encode($data);
         $store->local_store = $data['user_id'];
