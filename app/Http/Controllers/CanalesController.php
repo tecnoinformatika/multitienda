@@ -8,6 +8,8 @@ use GuzzleHttp\Client;
 use Automattic\WooCommerce\Client as WooCommerceClient;
 use App\Models\Canal;
 use Auth;
+use App\Models\CanalDisponible;
+use Illuminate\Support\Facades\Validator;
 
 class CanalesController extends Controller
 {
@@ -15,7 +17,75 @@ class CanalesController extends Controller
 
     public function Canales()
     {
-        return view('canal/canales');
+        $canales = CanalDisponible::all();
+
+        return view('canal/canales')->with('canales',$canales);;
+    }
+
+    public function nuevocanal(Request $request, $any){
+        $parts = explode('/', $any);
+        $canal = end($parts);
+        switch ($canal) {
+            case 'woocommerce':
+                return view('canal/nuevocanal/'.$canal);
+                break;
+            case 'shopify':
+                return view('canal/nuevocanal/'.$canal);
+                break;
+            case 'mercadolibre':
+                return view('canal/nuevocanal/'.$canal);
+                break;
+            case 'prestashop':
+                return view('canal/nuevocanal/'.$canal);
+                break;
+            case 'mercadoshops':
+                return view('canal/nuevocanal/'.$canal);
+                break;
+            case 'jumpseller':
+                return view('canal/nuevocanal/'.$canal);
+                break;
+            case 'amazon':
+                return view('canal/nuevocanal/'.$canal);
+                break;
+            case 'facebook':
+                return view('canal/nuevocanal/'.$canal);
+                break;
+        }
+
+       
+    }
+    public function validarURL(Request $request)
+    {
+        $url = $request->input('url');
+
+        // Crear una instancia del cliente Guzzle
+        $client = new Client();
+        $response = $client->head(trim($url));
+                dd($response);
+        // Verificar el código de estado de la respuesta
+        $statusCode = $response->getStatusCode();
+
+        if ($statusCode >= 200 && $statusCode < 400) {
+            return response()->json(['success' => 'La URL existe.']);
+        } else {
+            return response()->json(['error' => 'La URL no existe o no está accesible.']);
+        }
+        try {
+         
+            // Hacer una solicitud HEAD a la URL para verificar si existe
+            $response = $client->head($url);
+            
+            // Verificar el código de estado de la respuesta
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode >= 200 && $statusCode < 400) {
+                return response()->json(['success' => 'La URL existe.']);
+            } else {
+                return response()->json(['error' => 'La URL no existe o no está accesible.']);
+            }
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'No se pudo conectar a la URL.']);
+        }
     }
     public function woocommerce(): View
     {

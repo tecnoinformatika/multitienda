@@ -28,6 +28,9 @@ Route::controller(CanalesController::class)->group(function () {
     Route::get('syscom', 'syscom')->name('syscom');
     Route::post('crear-syscom', 'crearsyscom')->name('crear-syscom');
     Route::post('validar-credencialesSys', 'validarcredencialesSys')->name('validar-credencialesSys');
+    Route::get('canal/{any}/new', 'nuevocanal')->name('nuevocanal');
+    Route::get('validar-url', 'validarURL')->name('validar-url');
+
 });
 Route::controller(ProductosController::class)->group(function () {
     Route::post('sincronizar-producto/{id}', 'sincronizar')->name('sincronizar-producto');
