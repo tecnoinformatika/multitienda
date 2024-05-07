@@ -33,7 +33,7 @@ class WooCommerceController extends Controller
             return redirect()->route('canal.canales');
         } else {
             // Autorización denegada, redirigir o mostrar un mensaje de error
-            return redirect()->route('woocommerce.error');
+            return redirect()->route('canal.canales');
         }
     }
 

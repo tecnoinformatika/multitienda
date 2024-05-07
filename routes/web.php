@@ -27,60 +27,7 @@ Auth::routes();
 Route::get('woocommerce/confirmed/{any}', [WooCommerceController::class, 'confirmed'])->name('woocommerce.confirmed');
 Route::get('woocommerce/add/{any}', [WooCommerceController::class, 'add'])->name('woocommerce.add');
 //Ruta para Iniciar el Flujo de Autorización de WooCommerce
-Route::get('/woo/authorize', function (Request $request) {
-    $data = $request->all();
-   
-    $local_store = config('app.url');
-    $remote_store = $data['remote_store'];
 
-    // Guardar los detalles de la tienda en la base de datos
-    $store = Canal::where(['url' => $remote_store])->where('user_id',Auth::user()->id)->first();
-    if (!$store) {
-        $store = new Canal();
-    }
-    $store->canal = "Woocommerce";
-    $store->user_id = Auth::user()->id;
-    //$store->data = json_encode($data);
-    $store->nombre = "Woocommerce";
-    $store->url = $remote_store;
-    $store->save();
-
-    $endpoint = '/wc-auth/v1/authorize';
-    $params = [
-        'app_name' => 'MultiTiendas',
-        'scope' => 'read_write',
-        'user_id' => Auth::user()->id,
-        'return_url' => $local_store.'/woo/connect/response/'.$store->id,
-        'callback_url' => $local_store.'/woo/connect/callback/'.$store->id
-    ];
-    $api = $remote_store . $endpoint . '?' . http_build_query($params);
-
-    return Redirect::away($api);
-});
-//Ruta para Manejar la Respuesta de Autorización de WooCommerce
-Route::any('/woo/connect/response/{local_store}', function ($local_store, Request $request) {
-    $data = $request->all();
-
-    $store = Canal::where(['id' => $local_store])->first();
-
-    return view('woo_connect_response', ['store' => $store, 'data' => $data]);
-});
-
-//Ruta para Manejar la Devolución de Llamada de WooCommerce
-Route::any('/woo/connect/callback/{local_store}', function ($local_store, Request $request) {
-    $data = $request->all();
-
-    $store = \App\Store::where(['id' => $data['user_id']])->first();
-    if ($store) {
-        $store->data = json_encode($data);
-        $store->local_store = $data['user_id'];
-        $store->status = '200';
-        $store->synced_at = now();
-        $store->save();
-    }
-
-    return ['s' => 200];
-});
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'root']);
 Route::controller(CanalesController::class)->group(function () {
