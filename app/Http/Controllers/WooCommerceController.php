@@ -30,10 +30,9 @@ class WooCommerceController extends Controller
 
         $store = Canal::where(['id' => $any])->first();
         if ($store) {
-            $store->data = json_encode($data);
+            
             $store->apikey = $request->consumer_key;
             $store->secret = $request->consumer_secret;
-            $store->synced_at = now();
             $store->save();
         }
     
