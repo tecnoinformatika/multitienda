@@ -50,8 +50,8 @@ Route::get('/woo/authorize', function (Request $request) {
         'app_name' => 'MultiTiendas',
         'scope' => 'read_write',
         'user_id' => Auth::user()->id,
-        'return_url' => $local_store.'woo/connect/response/'.$store->id,
-        'callback_url' => $local_store.'woo/connect/callback/'.$store->id
+        'return_url' => $local_store.'/woo/connect/response/'.$store->id,
+        'callback_url' => $local_store.'/woo/connect/callback/'.$store->id
     ];
     $api = $remote_store . $endpoint . '?' . http_build_query($params);
 
