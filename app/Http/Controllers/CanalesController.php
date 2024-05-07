@@ -22,7 +22,7 @@ class CanalesController extends Controller
     {
         $canales = CanalDisponible::all();
 
-        return view('canal/canales')->with('canales',$canales);
+        return view('canal/canales')->with('canales',$canales);;
     }
 
     public function nuevocanal(Request $request, $any){
@@ -121,11 +121,10 @@ class CanalesController extends Controller
         $app_name = 'MultiTiendas';
         $scope = 'read_write';
         $user_id = Auth::user()->id;
-        $return_url = $urlbase.'/woocommerce/confirmed/'.$store->id;
-        $callback_url = $urlbase.'/woocommerce/add/'.$store->id;
-        
-        $authorization_link = urlencode($woocommerce_auth_url."?app_name=".$app_name."&scope=".$scope."&user_id=".$user_id."&return_url=".$return_url."&callback_url=".$callback_url);
-    
+        $return_url = urlencode($urlbase.'/woocommerce/confirmed/'.$store->id);
+        $callback_url = urlencode($urlbase.'/woocommerce/add/'.$store->id);
+        $authorization_link = "$woocommerce_auth_url?app_name=$app_name&scope=$scope&user_id=$user_id&return_url=$return_url&callback_url=$callback_url";
+
         // Retorna el enlace de autorización
         return response()->json(['authorization_link' => $authorization_link]);
     }
