@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Validator;
 
 class WooCommerceController extends Controller
 {
-    public function confirmed($id_tienda, Request $request)
+    public function confirmed($any, Request $request)
     {
         $canales = CanalDisponible::all();
 
@@ -23,7 +23,7 @@ class WooCommerceController extends Controller
         $success = $request->query('success');
         if ($success == 1) {
             // Autorización exitosa, obtener los parámetros necesarios
-            $store = Canal::findOrFail($id_tienda );
+            $store = Canal::findOrFail($any);
             $consumerKey = $request->consumer_key;
             $consumerSecret = $request->consumer_secret;
     
@@ -40,7 +40,7 @@ class WooCommerceController extends Controller
         }
     }
 
-    public function add($id_tienda , Request $request)
+    public function add($any, Request $request)
     {
        // Obtener los datos de la solicitud en formato JSON
         $requestData = json_decode(file_get_contents('php://input'), true);
@@ -50,7 +50,7 @@ class WooCommerceController extends Controller
         $consumerSecret = $requestData['consumer_secret'];
 
         // Guardar las credenciales en la base de datos
-        $store = Canal::findOrFail($id_tienda );
+        $store = Canal::findOrFail($any);
         $store->apikey = $consumerKey;
         $store->secret = $consumerSecret;
         $store->save();

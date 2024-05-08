@@ -6,7 +6,6 @@ use App\Http\Controllers\SyscomController;
 use App\Http\Controllers\ProductosController;
 use Illuminate\Http\Request;
 use App\Models\Canal;
-use Auth;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Controllers\WooCommerceController;
 use Illuminate\Support\Facades\Artisan;
@@ -24,8 +23,8 @@ use Illuminate\Support\Facades\Artisan;
 
 
 Auth::routes();
-Route::get('woocommerce/confirmed/{id_tienda }', [WooCommerceController::class, 'confirmed'])->name('woocommerce.confirmed');
-Route::get('woocommerce/add/{id_tienda }', [WooCommerceController::class, 'add'])->name('woocommerce.add');
+Route::any('woocommerce/confirmed/{any}', [WooCommerceController::class, 'confirmed'])->name('woocommerce.confirmed');
+Route::any('woocommerce/add/{any}', [WooCommerceController::class, 'add'])->name('woocommerce.add');
 //Ruta para Iniciar el Flujo de Autorización de WooCommerce
 
 
