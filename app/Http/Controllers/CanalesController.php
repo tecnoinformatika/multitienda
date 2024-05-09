@@ -21,8 +21,10 @@ class CanalesController extends Controller
     public function Canales()
     {
         $canales = CanalDisponible::all();
+        $miscanales = Canal::where('user_id',Auth::user()->id)->get();
 
-        return view('canal/canales')->with('canales',$canales);;
+
+        return view('canal/canales')->with('canales',$canales)->with('miscanales',$miscanales);
     }
 
     public function nuevocanal(Request $request, $any){
@@ -55,30 +57,30 @@ class CanalesController extends Controller
                 break;
         }
 
-       
+
     }
     public function validarURL(Request $request)
     {
         $url = $request->input('url');
 
         // Crear una instancia del cliente Guzzle
-      
+
         $client = new Client([
             'verify' => false,
         ]);
-            
+
         try {
-         
+
             // Hacer una solicitud HEAD a la URL para verificar si existe
             $response = $client->head($url);
-            
+
             // Verificar el código de estado de la respuesta
             $statusCode = $response->getStatusCode();
-        
+
             if ($statusCode >= 200 && $statusCode < 400) {
                 return response()->json(['success' => 'La URL existe.']);
                 // En tu controlador de Laravel o en cualquier lugar donde construyas el enlace
-                
+
             } else {
                 return response()->json(['error' => 'La URL no existe o no está accesible.']);
             }
@@ -161,25 +163,7 @@ class CanalesController extends Controller
 
 
     }
-    public function crearwoocommerce(Request $request)
-    {
 
-        $usuario = Auth::user();
-
-
-        $canal = new Canal;
-        $canal->canal = "Woocommerce";
-        $canal->nombre = "Woocommerce1";
-        $canal->user_id = Auth::user()->id;
-        $canal->url = $request->url;
-        $canal->apikey = $request->consumer_key;
-        $canal->secret = $request->consumer_secret;
-        $canal->save();
-
-        $usuario->canales()->save($canal);
-
-        return redirect('/canales');
-    }
     public function crearsyscom(Request $request)
     {
 

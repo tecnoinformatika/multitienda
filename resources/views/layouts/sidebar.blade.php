@@ -46,8 +46,23 @@
                     </ul>
                 </li>
 
-                <li class="menu-title" data-key="t-applications">Applications</li>
-
+                <li class="menu-title" data-key="t-applications">Herramientas</li>
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow">
+                        <i class="bx bx-store icon nav-icon"></i>
+                        <span class="menu-item" data-key="t-ecommerce">Tu tienda</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ url('listarproductos') }}" data-key="t-products">Productos dropshipping</a></li>
+                        <li><a href="{{ url('canales') }}" data-key="t-product-detail">Canales</a></li>
+                        <li><a href="ecommerce-orders" data-key="t-orders">Orders</a></li>
+                        <li><a href="ecommerce-customers" data-key="t-customers">Customers</a></li>
+                        <li><a href="ecommerce-cart" data-key="t-cart">Cart</a></li>
+                        <li><a href="ecommerce-checkout" data-key="t-checkout">Checkout</a></li>
+                        <li><a href="ecommerce-shops" data-key="t-shops">Shops</a></li>
+                        <li><a href="ecommerce-add-product" data-key="t-add-product">Add Product</a></li>
+                    </ul>
+                </li>
                 <li>
                     <a href="javascript: void(0);" class="has-arrow">
                         <i class="bx bx-envelope icon nav-icon"></i>
@@ -106,7 +121,7 @@
                     </ul>
                 </li>
 
-               
+
 
                 <li>
                     <a href="javascript: void(0);" class="has-arrow">
@@ -132,7 +147,7 @@
                 </li>
 
                 <li class="menu-title" data-key="t-layouts">Layouts</li>
-                
+
                 <li>
                     <a href="layouts-horizontal">
                         <i class="bx bx-layout icon nav-icon"></i>

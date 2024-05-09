@@ -5,7 +5,7 @@
 @section('css')
     <!-- dropzone css -->
     <link href="{{ URL::asset('build/libs/dropzone/min/dropzone.min.css') }}" rel="stylesheet" type="text/css" />
- 
+
 @endsection
 @section('page-title')
     Canales disponibles
@@ -42,24 +42,20 @@
                                                 <a class="text-body fw-medium py-1 d-flex align-items-center"
                                                     data-bs-toggle="collapse" href="#categories-collapse" role="button"
                                                     aria-expanded="false" aria-controls="categories-collapse">
-                                                    <i class="mdi mdi-folder font-size-20 text-warning me-2"></i> My Files
+                                                    <i class="mdi mdi-shopping-search font-size-20 text-warning me-2"></i> Mis canales
                                                     <i class="mdi mdi-chevron-up accor-down-icon ms-auto"></i>
                                                 </a>
                                                 <div class="collapse show" id="categories-collapse">
                                                     <div class="card border-0 shadow-none ps-2 mb-0">
                                                         <ul class="list-unstyled mb-0">
+                                                            @if($miscanales != '')
+
+                                                            @foreach ($miscanales as $micanal)
+
                                                             <li><a href="#" class="d-flex align-items-center"><span
-                                                                        class="me-auto">Analytics</span></a></li>
-                                                            <li><a href="#" class="d-flex align-items-center"><span
-                                                                        class="me-auto">Design</span></a></li>
-                                                            <li><a href="#" class="d-flex align-items-center"><span
-                                                                        class="me-auto">Development</span> <i
-                                                                        class="mdi mdi-pin ms-auto"></i></a></li>
-                                                            <li><a href="#" class="d-flex align-items-center"><span
-                                                                        class="me-auto">Project A</span></a></li>
-                                                            <li><a href="#" class="d-flex align-items-center"><span
-                                                                        class="me-auto">Admin</span> <i
-                                                                        class="mdi mdi-pin ms-auto"></i></a></li>
+                                                                        class="me-auto">{{ $micanal->Canal }}</span></a></li>
+                                                            @endforeach
+                                                            @endif
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -141,7 +137,7 @@
                                                 <div class="card-body p-3">
 
                                                     <div class="">
-                                                        
+
                                                         <div class="d-flex align-items-center overflow-hidden">
 
                                                             <div class="flex-shrink-0 me-3">
@@ -165,7 +161,7 @@
                                                                 <i class="mdi mdi-plus me-1"></i> Conectar
                                                             </a>
                                                         </div>
-                                                        
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -174,8 +170,8 @@
                                     @endforeach
                                 </div>
                                 <!-- end row -->
-                                @endforeach    
-                              
+                                @endforeach
+
                                 <!-- End row -->
 
                                 <h5 class="font-size-16 me-3 mb-0">Recent Files</h5>

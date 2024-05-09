@@ -22,7 +22,10 @@ class User extends Authenticatable
         'email',
         'password',
     ];
-
+    public function canales()
+    {
+        return $this->hasMany(Canal::class);
+    }
     /**
      * The attributes that should be hidden for serialization.
      *

@@ -19,19 +19,19 @@ class WooCommerceController extends Controller
     {
         $canales = CanalDisponible::all();
 
-    
+
         $success = $request->query('success');
         if ($success == 1) {
             // Autorización exitosa, obtener los parámetros necesarios
             $store = Canal::findOrFail($any);
             $consumerKey = $request->consumer_key;
             $consumerSecret = $request->consumer_secret;
-    
+
             // Guardar las credenciales en la base de datos
             $store->apikey = $consumerKey;
             $store->secret = $consumerSecret;
             $store->save();
-    
+
             // Redirigir o mostrar un mensaje de éxito
             return view('canal.canales')->with('canales',$canales);;
         } else {
@@ -58,6 +58,76 @@ class WooCommerceController extends Controller
     // Enviar una respuesta exitosa
     return response()->json(['message' => 'Credenciales guardadas correctamente'], 200);
 
-        
+
+    }
+    public function crearwoocommerce(Request $request)
+    {
+
+
+
+        $usuario = Auth::user();
+
+        $canal = Canal::where('url', $request->urlRequest)->where('user_id',Auth::user()->id)->first();
+
+        if(isset($canal))
+        {
+            $canal->canal = "Woocommerce";
+            $canal->nombre = "Woocommerce1";
+            $canal->user_id = Auth::user()->id;
+            $canal->url = $request->url;
+            $canal->apikey = $request->consumer_key;
+            $canal->secret = $request->consumer_secret;
+            $canal->save();
+        }else{
+            $canal = new Canal;
+            $canal->canal = "Woocommerce";
+            $canal->nombre = "Woocommerce1";
+            $canal->user_id = Auth::user()->id;
+            $canal->url = $request->url;
+            $canal->apikey = $request->consumer_key;
+            $canal->secret = $request->consumer_secret;
+            $canal->save();
+        }
+
+
+
+        $usuario->canales()->save($canal);
+
+        return redirect('/canales');
+    }
+    public function validarcredencialesWoo(Request $request)
+    {
+        $consumerKey = $request->input('consumer_key');
+        $consumerSecret = $request->input('consumer_secret');
+        $urlClient = $request->input('urlClient');
+
+        $woocommerce = new WooCommerceClient(
+            $urlClient,
+            $consumerKey,
+            $consumerSecret,
+            [
+                'wp_api' => true,
+                'version' => 'wc/v3',
+                'verify_ssl' => false, // Desactivar la verificación SSL
+
+            ]
+        );
+
+
+
+
+        // Recoge las credenciales del formulario
+
+
+
+        try {
+            // Intenta hacer una solicitud al API de WooCommerce
+            $productos = $woocommerce->get('products');
+                    // Si la solicitud es exitosa, devuelve una respuesta positiva
+            return response()->json(['valid' => true]);
+        } catch (\Exception $e) {
+            // Si hay un error al hacer la solicitud, devuelve una respuesta negativa
+            return response()->json(['valid' => false]);
+        }
     }
 }

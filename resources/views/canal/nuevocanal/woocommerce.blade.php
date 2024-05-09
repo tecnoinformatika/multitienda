@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('title')
-    Conectar ocn Woocommerce
+    Conectar con Woocommerce
 @endsection
 @section('css')
     <!-- choices css -->
@@ -15,7 +15,7 @@
     <link href="{{ URL::asset('../../build/css/app.min.css') }}" id="app-style" rel="stylesheet" type="text/css" />
 @endsection
 @section('page-title')
-    Conectar ocn Woocommerce
+    Conectar con Woocommerce
 @endsection
 @section('body')
 
@@ -26,7 +26,7 @@
             <div class="col-lg-12">
                 <div id="addproduct-accordion" class="custom-accordion">
                     <div class="card">
-                        <a  class="text-dark" 
+                        <a  class="text-dark"
                            >
                             <div class="p-4">
 
@@ -42,7 +42,7 @@
                                         <h5 class="font-size-16 mb-1">Crear conexión</h5>
                                         <p class="text-muted text-truncate mb-0">Completa los campos a continuación</p>
                                     </div>
-                                    
+
 
                                 </div>
 
@@ -56,14 +56,14 @@
 
                                     <div class="mb-3">
                                         <label class="form-label" for="urlRequest">Dirección de la tienda virtual</label>
-                                        <input id="urlRequest" name="urlRequest" placeholder="Ingresa la dirección de tu sitio Woocommerce"
-                                            type="text" class="form-control">
+                                        <input id="urlRequest" name="urlRequest" type="url" placeholder="Ingresa la dirección de tu sitio Woocommerce"
+                                            type="text" class="form-control" required>
                                     </div>
                                     <div class="table-responsive">
                                         <table class="table mb-0">
 
                                             <tbody>
-                                                
+
                                                 <tr>
                                                     <td>Valida la url de tu tienda</td>
                                                     <td>
@@ -77,71 +77,34 @@
                                         </table>
                                     </div>
                                     <div class="row">
-                                        <div class="col-lg-4">
+                                        <div class="col-lg-6">
 
                                             <div class="mb-3">
-                                                <label class="form-label" for="manufacturername">Manufacturer Name</label>
-                                                <input id="manufacturername" name="manufacturername"
-                                                    placeholder="Enter Manufacturer Name" type="text"
+                                                <label class="form-label" for="consumer_key">Consumer Key</label>
+                                                <input id="consumer_key" name="consumer_key" required
+                                                    placeholder="consumer key" type="text"
                                                     class="form-control">
                                             </div>
                                         </div>
-                                        <div class="col-lg-4">
+                                        <div class="col-lg-6">
 
                                             <div class="mb-3">
-                                                <label class="form-label" for="manufacturerbrand">Manufacturer Brand</label>
-                                                <input id="manufacturerbrand" name="manufacturerbrand"
-                                                    placeholder="Enter Manufacturer Brand" type="text"
+                                                <label class="form-label" for="consumer_secret">Consumer Secret</label>
+                                                <input id="consumer_secret" name="consumer_secret" required
+                                                    placeholder="Consumer Secret" type="text"
                                                     class="form-control">
                                             </div>
                                         </div>
-                                        <div class="col-lg-4">
-                                            <div class="mb-3">
-                                                <label class="form-label" for="price">Price</label>
-                                                <input id="price" name="price" placeholder="Enter Price"
-                                                    type="text" class="form-control">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="mb-3">
-                                                <label for="choices-single-default" class="form-label">Category</label>
-                                                <select class="form-control" data-trigger name="choices-single-category"
-                                                    id="choices-single-category">
-                                                    <option value="">Select</option>
-                                                    <option value="EL">Electronic</option>
-                                                    <option value="FA">Fashion</option>
-                                                    <option value="FI">Fitness</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="mb-3">
-                                                <label for="choices-single-specifications"
-                                                    class="form-label">Specifications</label>
-                                                <select class="form-control" data-trigger name="choices-single-category"
-                                                    id="choices-single-specifications">
-                                                    <option value="HI" selected>High Quality</option>
-                                                    <option value="LE" selected>Leather</option>
-                                                    <option value="NO">Notifications</option>
-                                                    <option value="SI">Sizes</option>
-                                                    <option value="DI">Different Color</option>
-                                                </select>
-                                            </div>
-                                        </div>
+                                        <a id="btnValidar" onclick="validarCredenciales()" class="btn btn-success"> <i
+                                            class=" bx bx-file me-1"></i> Validar credenciales </a>
                                     </div>
 
-                                    <div class="mb-0">
-                                        <label class="form-label" for="productdesc">Product Description</label>
-                                        <textarea class="form-control" id="productdesc" placeholder="Enter Description" rows="4"></textarea>
-                                    </div>
                                         <br>
-                                    <div class="row mb-4">
+                                    <div class="row mb-4" id="guardar">
                                         <div class="col text-end">
-                                            <a href="#" class="btn btn-danger"> <i class="bx bx-x me-1"></i> Cancel </a>
-                                            <a href="#" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#success-btn"> <i
-                                                    class=" bx bx-file me-1"></i> Save </a>
+                                            <a href="{{ url()->previous() }}" class="btn btn-danger"> <i class="bx bx-x me-1"></i> Cancel </a>
+                                            <button type="submit" class="btn btn-success"> <i
+                                                    class=" bx bx-file me-1"></i> Save </button>
                                         </div> <!-- end col -->
                                     </div> <!-- end row-->
                                 </form>
@@ -149,7 +112,7 @@
                         </div>
                     </div>
 
-                   
+
                 </div>
             </div>
         </div>
@@ -163,9 +126,9 @@
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script>
             // alert success
-                
+            $('#guardar').hide();
                     $('#alert-success').click(function(){
-                        
+
                         var url = $('#urlRequest').val();
                         $.ajax({
                             url: '{{ route("validar-url") }}',
@@ -193,11 +156,11 @@
                             }
                         });
                     });
-     
-                        
+
+
                         // Maneja el clic en el botón para autorizar WooCommerce
                         function autorizarWooCommerce() {
-                            
+
                             // Realiza una solicitud AJAX para obtener el enlace de autorización
                             var url1 = $('#urlRequest').val();
                             $.ajax({
@@ -217,8 +180,43 @@
                                 }
                             });
                         };
-          
-                
+                        function validarCredenciales() {
+                            var consumerKey = document.getElementById('consumer_key').value;
+                            var consumerSecret = document.getElementById('consumer_secret').value;
+                            var urlClient = document.getElementById('urlRequest').value;
+                            var token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+
+                            // Realizar la solicitud AJAX
+                            jQuery.ajax({
+                                url: '/validar-credencialesWoo',
+                                method: 'POST',
+                                data: {
+                                    consumer_key: consumerKey,
+                                    consumer_secret: consumerSecret,
+                                    urlClient: urlClient,
+                                    _token: token
+                                },
+                                success: function(response) {
+                                    // Si las credenciales son válidas, cambia la clase del botón a 'success'
+                                    console.log(response);
+                                    if (response.valid) {
+                                        $('#btnValidar').text('Credenciales válidas');
+                                        $('#guardar').show();
+                                    } else {
+                                        // Si las credenciales no son válidas, mantén la clase del botón como 'error'
+                                        $('#btnValidar').text('Credenciales inválidas, probar nuevamente');
+                                        $('#guardar').hide();
+                                    }
+                                },
+                                error: function(xhr, status, error) {
+                                    // Manejar errores de AJAX
+                                    console.error('Error al realizar la solicitud AJAX:', error);
+                                    $('#guardar').hide();
+                                }
+                            });
+                        }
+
         </script>
         <!-- dropzone plugin -->
         <script src="{{ URL::asset('../../build/libs/dropzone/min/dropzone.min.js') }}"></script>
