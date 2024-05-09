@@ -186,6 +186,7 @@
                                                     <th scope="col">Canal</th>
                                                     <th scope="col">Url</th>
                                                     <th scope="col">Total Productos</th>
+                                                    <th scope="col" colspan="2">Acciones</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
