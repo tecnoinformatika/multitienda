@@ -123,7 +123,14 @@
         <!-- choices js -->
         <script src="{{ URL::asset('../../build/libs/choices.js/public/assets/scripts/choices.min.js') }}"></script>
         <script src="{{ URL::asset('../../build/libs/alertifyjs/build/alertify.min.js') }}"></script>
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>      
+        <!-- dropzone plugin -->
+        <script src="{{ URL::asset('../../build/libs/dropzone/min/dropzone.min.js') }}"></script>
+
+        <!-- init js -->
+        <script src="{{ URL::asset('../../build/js/pages/ecommerce-choices.init.js') }}"></script>
+        <!-- App js -->
+        <script src="{{ URL::asset('../../build/js/app.js') }}"></script>
         <script>
             // alert success
             $('#guardar').hide();
@@ -218,11 +225,4 @@
                         }
 
         </script>
-        <!-- dropzone plugin -->
-        <script src="{{ URL::asset('../../build/libs/dropzone/min/dropzone.min.js') }}"></script>
-
-        <!-- init js -->
-        <script src="{{ URL::asset('../../build/js/pages/ecommerce-choices.init.js') }}"></script>
-        <!-- App js -->
-        <script src="{{ URL::asset('../../build/js/app.js') }}"></script>
     @endsection

@@ -69,23 +69,64 @@ class WooCommerceController extends Controller
 
         $canal = Canal::where('url', $request->urlRequest)->where('user_id',Auth::user()->id)->first();
 
+        $consumerKey = $request->consumer_key;
+        $consumerSecret = $request->consumer_secret;
+        $urlClient = $request->urlRequest;
+        
+        $woocommerce = new WooCommerceClient(
+            $urlClient,
+            $consumerKey,
+            $consumerSecret,
+            [
+                'wp_api' => true,
+                'version' => 'wc/v3',
+                'verify_ssl' => false, // Desactivar la verificación SSL
+            ]
+        );
+        $total = '';    
+        $page = 1;
+        $allProducts = [];
+
+        try {
+            // Obtener productos página por página hasta que no haya más productos
+            while (true) {
+                $products = $woocommerce->get('products', ['per_page' => 100, 'page' => $page]);
+                
+                if (empty($products)) {
+                    break; // Si no hay más productos, salir del bucle
+                }
+
+                $allProducts = array_merge($allProducts, $products);
+                $page++;
+            }          
+            $total = count($allProducts);
+           
+        } catch (\Exception $e) {
+            // Si hay un error al hacer la solicitud, devuelve una respuesta negativa
+            return response()->json(['valid' => false]);
+        }
+
         if(isset($canal))
         {
             $canal->canal = "Woocommerce";
             $canal->nombre = "Woocommerce1";
             $canal->user_id = Auth::user()->id;
-            $canal->url = $request->url;
+            $canal->url = $request->urlRequest;
             $canal->apikey = $request->consumer_key;
             $canal->secret = $request->consumer_secret;
+            $canal->productosWoo = $allProducts;
+            $canal->totalproductos = $total;
             $canal->save();
         }else{
             $canal = new Canal;
             $canal->canal = "Woocommerce";
             $canal->nombre = "Woocommerce1";
             $canal->user_id = Auth::user()->id;
-            $canal->url = $request->url;
+            $canal->url = $request->urlRequest;
             $canal->apikey = $request->consumer_key;
             $canal->secret = $request->consumer_secret;
+            $canal->productosWoo = $allProducts;
+            $canal->totalproductos = $total;
             $canal->save();
         }
 

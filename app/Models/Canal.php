@@ -17,14 +17,31 @@ class Canal extends Model
         'apikey',
         'pais',
         'incrementoprecio',
+        'productosWoo',
+        'productosShopify',
+        'productosMely',
+        'productosMelyShops',
+        'productosPrestashop',
+        'productosLinio',
+        'productosFalabella',
+        'productosFacebook',
+        'totalproductos'
+    ];
+
+    protected $casts = [
+        'productosWoo' => 'json',
+        'productosShopify' => 'json',
+        'productosMely' => 'json',
+        'productosMelyShops' => 'json',
+        'productosPrestashop' => 'json',
+        'productosLinio' => 'json',
+        'productosFalabella' => 'json',
+        'productosFacebook' => 'json',
     ];
 
     public function usuario()
     {
         return $this->belongsTo(Usuario::class);
     }
-    public function productos()
-    {
-        return $this->hasMany(Producto::class);
-    }
+    
 }
