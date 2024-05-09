@@ -190,38 +190,13 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                            @foreach($miscanales as $canal)
                                                 <tr>
                                                     <td><a href="javascript: void(0);" class="text-dark fw-medium"><i
                                                                 class="mdi mdi-file-document font-size-20 align-middle text-primary me-2"></i>
-                                                            index</a></td>
-                                                    <td>12-10-2021</td>
-                                                    <td>09 KB</td>
-                                                    <td>
-                                                        <div class="avatar-group">
-                                                            <div class="avatar-group-item">
-                                                                <a href="javascript: void(0);" class="d-inline-block">
-                                                                    <img src="{{ URL::asset('build/images/users/avatar-4.jpg') }}"
-                                                                        alt="" class="rounded-circle avatar-sm">
-                                                                </a>
-                                                            </div>
-                                                            <div class="avatar-group-item">
-                                                                <a href="javascript: void(0);" class="d-inline-block">
-                                                                    <img src="{{ URL::asset('build/images/users/avatar-5.jpg') }}"
-                                                                        alt="" class="rounded-circle avatar-sm">
-                                                                </a>
-                                                            </div>
-                                                            <div class="avatar-group-item">
-                                                                <a href="javascript: void(0);" class="d-inline-block">
-                                                                    <div class="avatar-sm">
-                                                                        <span
-                                                                            class="avatar-title rounded-circle bg-success text-white font-size-16">
-                                                                            A
-                                                                        </span>
-                                                                    </div>
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    </td>
+                                                            {{$canal->Canal}}</a></td>
+                                                    <td>{{$canal->url}}</td>
+                                                    <td>{{$canal->totalproductos}}</td>                                                   
                                                     <td>
                                                         <div class="dropdown">
                                                             <a class="font-size-16 text-muted" role="button"
@@ -239,7 +214,7 @@
                                                         </div>
                                                     </td>
                                                 </tr>
-                                              
+                                            @endforeach 
                                             </tbody>
                                         </table>
                                     </div>

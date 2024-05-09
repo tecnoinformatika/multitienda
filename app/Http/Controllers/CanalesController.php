@@ -22,7 +22,7 @@ class CanalesController extends Controller
     {
         $canales = CanalDisponible::all();
         $miscanales = Canal::where('user_id',Auth::user()->id)->get();
-
+        
 
         return view('canal/canales')->with('canales',$canales)->with('miscanales',$miscanales);
     }
@@ -153,7 +153,7 @@ class CanalesController extends Controller
     public function misCanales()
     {
         $canales = Canal::where('user_id',Auth::user()->id)->get();
-
+        
         if(!empty($canales)){
             return view('miscanales', [
 
