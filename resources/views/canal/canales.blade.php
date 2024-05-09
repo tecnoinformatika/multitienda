@@ -183,10 +183,9 @@
                                         <table class="table align-middle table-nowrap table-hover mb-0">
                                             <thead class="table-light">
                                                 <tr>
-                                                    <th scope="col">Name</th>
-                                                    <th scope="col">Date modified</th>
-                                                    <th scope="col">Size</th>
-                                                    <th scope="col" colspan="2">Members</th>
+                                                    <th scope="col">Canal</th>
+                                                    <th scope="col">Url</th>
+                                                    <th scope="col">Total Productos</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
