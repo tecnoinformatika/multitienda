@@ -52,7 +52,7 @@
 
                                                             @foreach ($miscanales as $micanal)
 
-                                                            <li><a href="#" class="d-flex align-items-center"><span
+                                                            <li><a href="/ver/{{$micanal->Canal}}/{{$micanal->id}}" class="d-flex align-items-center"><span
                                                                         class="me-auto">{{ $micanal->Canal }}</span></a></li>
                                                             @endforeach
                                                             @endif

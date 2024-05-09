@@ -31,13 +31,15 @@ Route::controller(WooCommerceController::class)->group(function () {
     Route::any('woocommerce/add/{any}', 'add')->name('woocommerce.add');
     Route::post('crear-woocommerce', 'crearwoocommerce')->name('crear-woocommerce');
     Route::post('validar-credencialesWoo', 'validarcredencialesWoo')->name('validar-credencialesWoo');
+    Route::get('VerWoocommerce/{id}', 'VerWoocommerce')->name('VerWoocommerce');
+    Route::get('/obtenerProductosWoo/{id}', 'obtenerProductosWoo')->name('obtenerProductosWoo');
 });
 Route::get('/', [App\Http\Controllers\HomeController::class, 'root']);
 Route::controller(CanalesController::class)->group(function () {
     Route::get('canales', 'canales')->name('canales');
     Route::get('mis-canales', 'misCanales')->name('mis-canales');
     Route::get('woocommerce', 'woocommerce')->name('woocommerce');
-
+    Route::get('ver/{any}/{id}', 'redirigirCanal')->name('redirigirCanal');
     Route::get('syscom', 'syscom')->name('syscom');
     Route::post('crear-syscom', 'crearsyscom')->name('crear-syscom');
     Route::post('validar-credencialesSys', 'validarcredencialesSys')->name('validar-credencialesSys');

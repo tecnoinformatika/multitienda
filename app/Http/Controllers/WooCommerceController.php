@@ -130,4 +130,47 @@ class WooCommerceController extends Controller
             return response()->json(['valid' => false]);
         }
     }
+    public function VerWoocommerce($id)
+    {
+        $canal = Canal::findOrFail($id);
+
+        $woocommerce = new WooCommerceClient(
+            $canal->url,
+            $canal->apikey,
+            $canal->secret,
+            [
+                'wp_api' => true,
+                'version' => 'wc/v3',
+                'verify_ssl' => false, // Desactivar la verificación SSL
+            ]
+        );
+        
+        // Recupera todos los productos de WooCommerce
+        $products = $woocommerce->get('products');
+        
+        // Devuelve los productos a la vista
+        return view('canal.woocommerce', ['canal' => $canal]);
+
+    }
+    public function obtenerProductosWoo($id)
+    {
+        $canal = Canal::findOrFail($id);
+
+        $woocommerce = new WooCommerceClient(
+            $canal->url,
+            $canal->apikey,
+            $canal->secret,
+            [
+                'wp_api' => true,
+                'version' => 'wc/v3',
+                'verify_ssl' => false, // Desactivar la verificación SSL
+            ]
+        );
+        
+        // Recupera todos los productos de WooCommerce
+        $products = $woocommerce->get('products');
+
+        // Devuelve los productos como respuesta JSON
+        return response()->json($products);
+    }
 }

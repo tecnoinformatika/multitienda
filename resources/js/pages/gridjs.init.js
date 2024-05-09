@@ -72,7 +72,7 @@ new gridjs.Grid({
 
 // Sorting Table
 new gridjs.Grid({
-    columns: ["Name", "Email", "Position", "Company", "Country"],
+    columns: ["Name", "Emaile", "Position", "Company", "Country"],
     pagination: {
         limit: 5
     },

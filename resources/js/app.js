@@ -34,22 +34,22 @@ File: Main Js File
             if (el) {
                 switch (lang) {
                     case "eng":
-                        el.src = "build/images/flags/us.jpg";
+                        el.src = "/build/images/flags/us.jpg";
                         break;
                     case "sp":
-                        el.src = "build/images/flags/spain.jpg";
+                        el.src = "/build/images/flags/spain.jpg";
                         break;
                     case "gr":
-                        el.src = "build/images/flags/germany.jpg";
+                        el.src = "/build/images/flags/germany.jpg";
                         break;
                     case "it":
-                        el.src = "build/images/flags/italy.jpg";
+                        el.src = "/build/images/flags/italy.jpg";
                         break;
                     case "ru":
-                        el.src = "build/images/flags/russia.jpg";
+                        el.src = "/build/images/flags/russia.jpg";
                         break;
                     default:
-                        el.src = "build/images/flags/us.jpg";
+                        el.src = "/build/images/flags/us.jpg";
                         break;
                 }
                 localStorage.setItem('language', lang);

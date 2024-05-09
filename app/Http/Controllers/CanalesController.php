@@ -260,4 +260,17 @@ class CanalesController extends Controller
             return response()->json(['valid' => false]);
         }
     }
+    public function redirigirCanal($any,$id)
+    {
+        $parts = explode('/', $any);
+        $canal = end($parts);
+        switch ($canal) {
+            case 'Woocommerce':
+                return redirect('/VerWoocommerce/'.$id);
+                break;
+            case 'Shopify':
+                return redirect('/VerShopify'.$id);
+                break;
+        }
+    }
 }
