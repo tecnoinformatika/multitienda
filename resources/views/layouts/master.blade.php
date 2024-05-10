@@ -12,7 +12,7 @@
         content="{{ csrf_token() }}"
     >
     <!-- App favicon -->
-    <link rel="shortcut icon" href="{{ URL::asset('build/images/favicon.ico') }}">
+    <link rel="shortcut icon" href="{{ URL::asset('/build/images/favicon.ico') }}">
 
     <!-- include head css -->
     @include('layouts.head-css')

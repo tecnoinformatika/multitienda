@@ -174,7 +174,7 @@
 
                                 <!-- End row -->
 
-                                <h5 class="font-size-16 me-3 mb-0">Recent Files</h5>
+                                <h5 class="font-size-16 me-3 mb-0">Tus canales</h5>
 
 
                                 <div class="mx-n4 px-4 mt-4" data-simplebar style="max-height: 350px;">
@@ -196,7 +196,7 @@
                                                                 class="mdi mdi-file-document font-size-20 align-middle text-primary me-2"></i>
                                                             {{$canal->Canal}}</a></td>
                                                     <td>{{$canal->url}}</td>
-                                                    <td>{{$canal->totalproductos}}</td>                                                   
+                                                    <td>{{$canal->totalproductos}}</td>
                                                     <td>
                                                         <div class="dropdown">
                                                             <a class="font-size-16 text-muted" role="button"
@@ -205,16 +205,13 @@
                                                             </a>
 
                                                             <div class="dropdown-menu dropdown-menu-end">
-                                                                <a class="dropdown-item" href="#">Open</a>
-                                                                <a class="dropdown-item" href="#">Edit</a>
-                                                                <a class="dropdown-item" href="#">Rename</a>
-                                                                <div class="dropdown-divider"></div>
-                                                                <a class="dropdown-item" href="#">Remove</a>
+                                                                <a class="dropdown-item" href="/ver/{{$canal->Canal}}/{{$canal->id}}">Abrir</a>
+                                                                <a class="dropdown-item" href="#">Eliminar</a>
                                                             </div>
                                                         </div>
                                                     </td>
                                                 </tr>
-                                            @endforeach 
+                                            @endforeach
                                             </tbody>
                                         </table>
                                     </div>

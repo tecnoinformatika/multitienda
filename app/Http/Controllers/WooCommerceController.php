@@ -72,7 +72,7 @@ class WooCommerceController extends Controller
         $consumerKey = $request->consumer_key;
         $consumerSecret = $request->consumer_secret;
         $urlClient = $request->urlRequest;
-        
+
         $woocommerce = new WooCommerceClient(
             $urlClient,
             $consumerKey,
@@ -83,7 +83,7 @@ class WooCommerceController extends Controller
                 'verify_ssl' => false, // Desactivar la verificación SSL
             ]
         );
-        $total = '';    
+        $total = '';
         $page = 1;
         $allProducts = [];
 
@@ -91,16 +91,16 @@ class WooCommerceController extends Controller
             // Obtener productos página por página hasta que no haya más productos
             while (true) {
                 $products = $woocommerce->get('products', ['per_page' => 100, 'page' => $page]);
-                
+
                 if (empty($products)) {
                     break; // Si no hay más productos, salir del bucle
                 }
 
                 $allProducts = array_merge($allProducts, $products);
                 $page++;
-            }          
+            }
             $total = count($allProducts);
-           
+
         } catch (\Exception $e) {
             // Si hay un error al hacer la solicitud, devuelve una respuesta negativa
             return response()->json(['valid' => false]);
@@ -175,20 +175,7 @@ class WooCommerceController extends Controller
     {
         $canal = Canal::findOrFail($id);
 
-        $woocommerce = new WooCommerceClient(
-            $canal->url,
-            $canal->apikey,
-            $canal->secret,
-            [
-                'wp_api' => true,
-                'version' => 'wc/v3',
-                'verify_ssl' => false, // Desactivar la verificación SSL
-            ]
-        );
-        
-        // Recupera todos los productos de WooCommerce
-        $products = $woocommerce->get('products');
-        
+
         // Devuelve los productos a la vista
         return view('canal.woocommerce', ['canal' => $canal]);
 
@@ -207,9 +194,9 @@ class WooCommerceController extends Controller
                 'verify_ssl' => false, // Desactivar la verificación SSL
             ]
         );
-        
+
         // Recupera todos los productos de WooCommerce
-        $products = $woocommerce->get('products');
+        $products = $canal->productosWoo;
 
         // Devuelve los productos como respuesta JSON
         return response()->json($products);
