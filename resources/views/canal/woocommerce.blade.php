@@ -86,7 +86,7 @@
                     </div><!-- end card header -->
                     <div class="card-body" >
                         <div class="table-responsive">
-                            <table id="productosTable" class="table table-nowrap table-responsive table-sm align-middle">
+                            <table id="productosTable" class="table table-responsive table-sm align-middle">
                                 <thead class="table-light">
                                     <tr>
                                         <th scope="col" class="ps-4" style="width: 50px;">
@@ -152,7 +152,7 @@
                                 return '<img src="' + imgSrc + '" class="img-fluid">';
                             }},
                             // Columna de nombre (con ancho máximo)
-                            '<div style="max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">' + product['name'] + '</div>',
+                            {data: 'name'},
                             { data: 'regular_price' },
                             { data: 'stock_quantity' },
                             { data: function(row) {
