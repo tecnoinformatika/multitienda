@@ -3,7 +3,7 @@
     Lightbox
 @endsection
 @section('css')
-    <link rel="stylesheet" href="{{ URL::asset('build/libs/glightbox/css/glightbox.min.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('/build/libs/glightbox/css/glightbox.min.css') }}">
 @endsection
 @section('page-title')
     Lightbox
@@ -27,9 +27,9 @@
                             <div class="row">
                                 <div class="col-xl-2 col-md-4 col-6">
                                     <div class="mt-4">
-                                        <a href="{{ URL::asset('build/images/small/img-1.jpg') }}" class="thumb preview-thumb image-popup">
+                                        <a href="{{ URL::asset('/build/images/small/img-1.jpg') }}" class="thumb preview-thumb image-popup">
                                             <div class="img-fluid">
-                                                <img src="{{ URL::asset('build/images/small/img-1.jpg') }}" alt=""
+                                                <img src="{{ URL::asset('/build/images/small/img-1.jpg') }}" alt=""
                                                     class="img-fluid d-block">
                                             </div>
                                         </a>
@@ -37,9 +37,9 @@
                                 </div>
                                 <div class="col-xl-2 col-md-4 col-6">
                                     <div class="mt-4">
-                                        <a href="{{ URL::asset('build/images/small/img-2.jpg') }}" class="thumb preview-thumb image-popup">
+                                        <a href="{{ URL::asset('/build/images/small/img-2.jpg') }}" class="thumb preview-thumb image-popup">
                                             <div class="img-fluid">
-                                                <img src="{{ URL::asset('build/images/small/img-2.jpg') }}" alt=""
+                                                <img src="{{ URL::asset('/build/images/small/img-2.jpg') }}" alt=""
                                                     class="img-fluid d-block">
                                             </div>
                                         </a>
@@ -47,9 +47,9 @@
                                 </div>
                                 <div class="col-xl-2 col-md-4 col-6">
                                     <div class="mt-4">
-                                        <a href="{{ URL::asset('build/images/small/img-3.jpg') }}" class="thumb preview-thumb image-popup">
+                                        <a href="{{ URL::asset('/build/images/small/img-3.jpg') }}" class="thumb preview-thumb image-popup">
                                             <div class="img-fluid">
-                                                <img src="{{ URL::asset('build/images/small/img-3.jpg') }}" alt=""
+                                                <img src="{{ URL::asset('/build/images/small/img-3.jpg') }}" alt=""
                                                     class="img-fluid d-block">
                                             </div>
                                         </a>
@@ -57,9 +57,9 @@
                                 </div>
                                 <div class="col-xl-2 col-md-4 col-6">
                                     <div class="mt-4">
-                                        <a href="{{ URL::asset('build/images/small/img-4.jpg') }}" class="thumb preview-thumb image-popup">
+                                        <a href="{{ URL::asset('/build/images/small/img-4.jpg') }}" class="thumb preview-thumb image-popup">
                                             <div class="img-fluid">
-                                                <img src="{{ URL::asset('build/images/small/img-4.jpg') }}" alt=""
+                                                <img src="{{ URL::asset('/build/images/small/img-4.jpg') }}" alt=""
                                                     class="img-fluid d-block">
                                             </div>
                                         </a>
@@ -67,9 +67,9 @@
                                 </div>
                                 <div class="col-xl-2 col-md-4 col-6">
                                     <div class="mt-4">
-                                        <a href="{{ URL::asset('build/images/small/img-5.jpg') }}" class="thumb preview-thumb image-popup">
+                                        <a href="{{ URL::asset('/build/images/small/img-5.jpg') }}" class="thumb preview-thumb image-popup">
                                             <div class="img-fluid">
-                                                <img src="{{ URL::asset('build/images/small/img-5.jpg') }}" alt=""
+                                                <img src="{{ URL::asset('/build/images/small/img-5.jpg') }}" alt=""
                                                     class="img-fluid d-block">
                                             </div>
                                         </a>
@@ -77,9 +77,9 @@
                                 </div>
                                 <div class="col-xl-2 col-md-4 col-6">
                                     <div class="mt-4">
-                                        <a href="{{ URL::asset('build/images/small/img-6.jpg') }}" class="thumb preview-thumb image-popup">
+                                        <a href="{{ URL::asset('/build/images/small/img-6.jpg') }}" class="thumb preview-thumb image-popup">
                                             <div class="img-fluid">
-                                                <img src="{{ URL::asset('build/images/small/img-6.jpg') }}" alt=""
+                                                <img src="{{ URL::asset('/build/images/small/img-6.jpg') }}" alt=""
                                                     class="img-fluid d-block">
                                             </div>
                                         </a>
@@ -106,30 +106,30 @@
                         <div class="row">
                             <div class="col-lg-3 col-sm-6">
                                 <div class="">
-                                    <a href="{{ URL::asset('build/images/small/img-4.jpg') }}" class="thumb preview-thumb image-popup-desc"
+                                    <a href="{{ URL::asset('/build/images/small/img-4.jpg') }}" class="thumb preview-thumb image-popup-desc"
                                         data-title="Project 01"
                                         data-description="Lorem ipsum dolor sit amet, consectetuer adipiscing elit">
-                                        <img src="{{ URL::asset('build/images/small/img-4.jpg') }}" class="img-fluid" alt="work-thumbnail">
+                                        <img src="{{ URL::asset('/build/images/small/img-4.jpg') }}" class="img-fluid" alt="work-thumbnail">
                                     </a>
                                 </div>
                             </div><!-- end col -->
 
                             <div class="col-lg-3 col-sm-6">
                                 <div class="mt-4 mt-md-0">
-                                    <a href="{{ URL::asset('build/images/small/img-5.jpg') }}" class="thumb preview-thumb image-popup-desc"
+                                    <a href="{{ URL::asset('/build/images/small/img-5.jpg') }}" class="thumb preview-thumb image-popup-desc"
                                         data-title="Project 02"
                                         data-description="Lorem ipsum dolor sit amet, consectetuer adipiscing elit">
-                                        <img src="{{ URL::asset('build/images/small/img-5.jpg') }}" class="img-fluid" alt="work-thumbnail">
+                                        <img src="{{ URL::asset('/build/images/small/img-5.jpg') }}" class="img-fluid" alt="work-thumbnail">
                                     </a>
                                 </div>
                             </div><!-- end col -->
 
                             <div class="col-lg-3 col-sm-6">
                                 <div class="mt-4 mt-lg-0">
-                                    <a href="{{ URL::asset('build/images/small/img-1.jpg') }}" class="thumb preview-thumb image-popup-desc"
+                                    <a href="{{ URL::asset('/build/images/small/img-1.jpg') }}" class="thumb preview-thumb image-popup-desc"
                                         data-title="Project 03"
                                         data-description="Lorem ipsum dolor sit amet, consectetuer adipiscing elit">
-                                        <img src="{{ URL::asset('build/images/small/img-1.jpg') }}" class="img-fluid" alt="work-thumbnail">
+                                        <img src="{{ URL::asset('/build/images/small/img-1.jpg') }}" class="img-fluid" alt="work-thumbnail">
                                     </a>
                                 </div>
                             </div><!-- end col -->
@@ -165,9 +165,9 @@
         </div> <!-- end row -->
     @endsection
     @section('scripts')
-        <script src="{{ URL::asset('build/libs/glightbox/js/glightbox.min.js') }}"></script>
+        <script src="{{ URL::asset('/build/libs/glightbox/js/glightbox.min.js') }}"></script>
 
-        <script src="{{ URL::asset('build/js/pages/lightbox.init.js') }}"></script>
+        <script src="{{ URL::asset('/build/js/pages/lightbox.init.js') }}"></script>
         <!-- App js -->
-        <script src="{{ URL::asset('build/js/app.js') }}"></script>
+        <script src="{{ URL::asset('/build/js/app.js') }}"></script>
     @endsection

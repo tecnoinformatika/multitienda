@@ -177,7 +177,7 @@
         <!-- end row -->
     @endsection
     @section('scripts')
-        <script src="{{ URL::asset('build/js/pages/form-validation.init.js') }}"></script>
+        <script src="{{ URL::asset('/build/js/pages/form-validation.init.js') }}"></script>
         <!-- App js -->
-        <script src="{{ URL::asset('build/js/app.js') }}"></script>
+        <script src="{{ URL::asset('/build/js/app.js') }}"></script>
     @endsection

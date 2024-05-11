@@ -18,7 +18,7 @@
                             <h4 class="float-end font-size-15">Invoice #DS0204 <span
                                     class="badge bg-success font-size-12 ms-2">Paid</span></h4>
                             <div class="mb-4">
-                                <img src="{{ URL::asset('build/images/logo-dark-sm.png') }}" alt="logo" height="34" />
+                                <img src="{{ URL::asset('/build/images/logo-dark-sm.png') }}" alt="logo" height="34" />
                             </div>
                             <div class="text-muted">
                                 <p class="mb-1">3184 Spruce Drive Pittsburgh, PA 15201</p>
@@ -149,5 +149,5 @@
     @endsection
     @section('scripts')
         <!-- App js -->
-        <script src="{{ URL::asset('build/js/app.js') }}"></script>
+        <script src="{{ URL::asset('/build/js/app.js') }}"></script>
     @endsection

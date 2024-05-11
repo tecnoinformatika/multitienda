@@ -79,9 +79,9 @@
     @endsection
     @section('scripts')
         <!-- rater-js plugin -->
-        <script src="{{ URL::asset('build/libs/rater-js/index.js') }}"></script>
+        <script src="{{ URL::asset('/build/libs/rater-js/index.js') }}"></script>
         <!-- rating init -->
-        <script src="{{ URL::asset('build/js/pages/rating.init.js') }}"></script>
+        <script src="{{ URL::asset('/build/js/pages/rating.init.js') }}"></script>
         <!-- App js -->
-        <script src="{{ URL::asset('build/js/app.js') }}"></script>
+        <script src="{{ URL::asset('/build/js/app.js') }}"></script>
     @endsection

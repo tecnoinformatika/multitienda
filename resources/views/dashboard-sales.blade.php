@@ -366,7 +366,7 @@
                             <div class="border-bottom sales-history">
                                 <div class="d-flex align-items-center">
                                     <div class="flex-shrink-0">
-                                        <img src="{{ URL::asset('build/images/users/avatar-4.jpg') }}"
+                                        <img src="{{ URL::asset('/build/images/users/avatar-4.jpg') }}"
                                             class="rounded-circle avatar img-thumbnail" alt="">
                                     </div>
                                     <div class="flex-grow-1 ms-3 overflow-hidden">
@@ -382,7 +382,7 @@
                             <div class="border-bottom sales-history">
                                 <div class="d-flex align-items-center">
                                     <div class="flex-shrink-0">
-                                        <img src="{{ URL::asset('build/images/users/avatar-5.jpg') }}"
+                                        <img src="{{ URL::asset('/build/images/users/avatar-5.jpg') }}"
                                             class="rounded-circle avatar img-thumbnail" alt="">
                                     </div>
                                     <div class="flex-grow-1 ms-3 overflow-hidden">
@@ -400,7 +400,7 @@
                             <div class="border-bottom sales-history">
                                 <div class="d-flex align-items-center">
                                     <div class="flex-shrink-0">
-                                        <img src="{{ URL::asset('build/images/users/avatar-7.jpg') }}"
+                                        <img src="{{ URL::asset('/build/images/users/avatar-7.jpg') }}"
                                             class="rounded-circle avatar img-thumbnail" alt="">
                                     </div>
                                     <div class="flex-grow-1 ms-3 overflow-hidden">
@@ -416,7 +416,7 @@
                             <div class="border-bottom sales-history">
                                 <div class="d-flex align-items-center">
                                     <div class="flex-shrink-0">
-                                        <img src="{{ URL::asset('build/images/users/avatar-8.jpg') }}"
+                                        <img src="{{ URL::asset('/build/images/users/avatar-8.jpg') }}"
                                             class="rounded-circle avatar img-thumbnail" alt="">
                                     </div>
                                     <div class="flex-grow-1 ms-3 overflow-hidden">
@@ -432,7 +432,7 @@
                             <div class="border-bottom sales-history">
                                 <div class="d-flex align-items-center">
                                     <div class="flex-shrink-0">
-                                        <img src="{{ URL::asset('build/images/users/avatar-2.jpg') }}"
+                                        <img src="{{ URL::asset('/build/images/users/avatar-2.jpg') }}"
                                             class="rounded-circle avatar img-thumbnail" alt="">
                                     </div>
                                     <div class="flex-grow-1 ms-3 overflow-hidden">
@@ -448,7 +448,7 @@
                             <div class="border-bottom sales-history">
                                 <div class="d-flex align-items-center">
                                     <div class="flex-shrink-0">
-                                        <img src="{{ URL::asset('build/images/users/avatar-3.jpg') }}"
+                                        <img src="{{ URL::asset('/build/images/users/avatar-3.jpg') }}"
                                             class="rounded-circle avatar img-thumbnail" alt="">
                                     </div>
                                     <div class="flex-grow-1 ms-3 overflow-hidden">
@@ -472,7 +472,7 @@
                             <div class="col-xl-4 col-7">
                                 <div class="d-flex align-items-center">
                                     <div class="flex-shrink-0 avatar me-3 d-sm-block d-none">
-                                        <img src="{{ URL::asset('build/images/users/avatar-6.jpg') }}" alt=""
+                                        <img src="{{ URL::asset('/build/images/users/avatar-6.jpg') }}" alt=""
                                             class="img-fluid d-block rounded-circle">
                                     </div>
                                     <div class="flex-grow-1">
@@ -532,7 +532,7 @@
                                 <li>
                                     <div class="conversation-list">
                                         <div class="d-flex">
-                                            <img src="{{ URL::asset('build/images/users/avatar-6.jpg') }}"
+                                            <img src="{{ URL::asset('/build/images/users/avatar-6.jpg') }}"
                                                 class="rounded-circle avatar" alt="">
                                             <div class="flex-1">
                                                 <div class="ctext-wrap">
@@ -593,7 +593,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <img src="{{ URL::asset('build/images/users/avatar-3.jpg') }}"
+                                            <img src="{{ URL::asset('/build/images/users/avatar-3.jpg') }}"
                                                 class="rounded-circle avatar" alt="">
                                         </div>
 
@@ -604,7 +604,7 @@
                                 <li>
                                     <div class="conversation-list">
                                         <div class="d-flex">
-                                            <img src="{{ URL::asset('build/images/users/avatar-6.jpg') }}"
+                                            <img src="{{ URL::asset('/build/images/users/avatar-6.jpg') }}"
                                                 class="rounded-circle avatar" alt="">
                                             <div class="flex-1">
                                                 <div class="ctext-wrap">
@@ -658,14 +658,14 @@
                                                         <ul class="list-inline message-img mt-2 mb-0">
                                                             <li class="list-inline-item message-img-list">
                                                                 <a class="d-inline-block" href="">
-                                                                    <img src="{{ URL::asset('build/images/small/img-1.jpg') }}"
+                                                                    <img src="{{ URL::asset('/build/images/small/img-1.jpg') }}"
                                                                         alt="" class="rounded img-thumbnail">
                                                                 </a>
                                                             </li>
 
                                                             <li class="list-inline-item message-img-list">
                                                                 <a class="d-inline-block" href="">
-                                                                    <img src="{{ URL::asset('build/images/small/img-2.jpg') }}"
+                                                                    <img src="{{ URL::asset('/build/images/small/img-2.jpg') }}"
                                                                         alt="" class="rounded img-thumbnail">
                                                                 </a>
                                                             </li>
@@ -688,7 +688,7 @@
                                                 </div>
 
                                             </div>
-                                            <img src="{{ URL::asset('build/images/users/avatar-3.jpg') }}"
+                                            <img src="{{ URL::asset('/build/images/users/avatar-3.jpg') }}"
                                                 class="rounded-circle avatar" alt="">
                                         </div>
                                     </div>
@@ -697,7 +697,7 @@
                                 <li>
                                     <div class="conversation-list">
                                         <div class="d-flex">
-                                            <img src="{{ URL::asset('build/images/users/avatar-6.jpg') }}"
+                                            <img src="{{ URL::asset('/build/images/users/avatar-6.jpg') }}"
                                                 class="rounded-circle avatar" alt="">
                                             <div class="flex-1">
                                                 <div class="ctext-wrap">
@@ -759,7 +759,7 @@
                                                 </div>
 
                                             </div>
-                                            <img src="{{ URL::asset('build/images/users/avatar-3.jpg') }}"
+                                            <img src="{{ URL::asset('/build/images/users/avatar-3.jpg') }}"
                                                 class="rounded-circle avatar" alt="">
                                         </div>
                                     </div>
@@ -898,7 +898,7 @@
                                             <div class="avatar">
                                                 <div
                                                     class="product-img avatar-title img-thumbnail bg-soft-primary border-0">
-                                                    <img src="{{ URL::asset('build/images/product/img-1.png') }}"
+                                                    <img src="{{ URL::asset('/build/images/product/img-1.png') }}"
                                                         class="img-fluid" alt="">
                                                 </div>
                                             </div>
@@ -938,7 +938,7 @@
                                             <div class="avatar">
                                                 <div
                                                     class="product-img avatar-title img-thumbnail bg-soft-success border-0">
-                                                    <img src="{{ URL::asset('build/images/product/img-2.png') }}"
+                                                    <img src="{{ URL::asset('/build/images/product/img-2.png') }}"
                                                         class="img-fluid" alt="">
                                                 </div>
                                             </div>
@@ -978,7 +978,7 @@
                                             <div class="avatar">
                                                 <div
                                                     class="product-img avatar-title img-thumbnail bg-soft-danger border-0">
-                                                    <img src="{{ URL::asset('build/images/product/img-3.png') }}"
+                                                    <img src="{{ URL::asset('/build/images/product/img-3.png') }}"
                                                         class="img-fluid" alt="">
                                                 </div>
                                             </div>
@@ -1018,7 +1018,7 @@
                                             <div class="avatar">
                                                 <div
                                                     class="product-img avatar-title img-thumbnail bg-soft-primary border-0">
-                                                    <img src="{{ URL::asset('build/images/product/img-4.png') }}"
+                                                    <img src="{{ URL::asset('/build/images/product/img-4.png') }}"
                                                         class="img-fluid" alt="">
                                                 </div>
                                             </div>
@@ -1058,7 +1058,7 @@
                                             <div class="avatar">
                                                 <div
                                                     class="product-img avatar-title img-thumbnail bg-soft-success border-0">
-                                                    <img src="{{ URL::asset('build/images/product/img-5.png') }}"
+                                                    <img src="{{ URL::asset('/build/images/product/img-5.png') }}"
                                                         class="img-fluid" alt="">
                                                 </div>
                                             </div>
@@ -1104,10 +1104,10 @@
     @endsection
     @section('scripts')
         <!-- apexcharts -->
-        <script src="{{ URL::asset('build/libs/apexcharts/apexcharts.min.js') }}"></script>
+        <script src="{{ URL::asset('/build/libs/apexcharts/apexcharts.min.js') }}"></script>
 
-        <script src="{{ URL::asset('build/js/pages/dashboard-sales.init.js') }}"></script>
+        <script src="{{ URL::asset('/build/js/pages/dashboard-sales.init.js') }}"></script>
 
         <!-- App js -->
-        <script src="{{ URL::asset('build/js/app.js') }}"></script>
+        <script src="{{ URL::asset('/build/js/app.js') }}"></script>
     @endsection

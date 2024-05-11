@@ -4,10 +4,10 @@
 @endsection
 @section('css')
     <!-- datepicker css -->
-    <link rel="stylesheet" href="{{ URL::asset('build/libs/flatpickr/flatpickr.min.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('/build/libs/flatpickr/flatpickr.min.css') }}">
 
     <!-- gridjs css -->
-    <link rel="stylesheet" href="{{ URL::asset('build/libs/gridjs/theme/mermaid.min.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('/build/libs/gridjs/theme/mermaid.min.css') }}">
 @endsection
 @section('page-title')
     Customers
@@ -199,12 +199,12 @@
     @endsection
     @section('scripts')
         <!-- datepicker js -->
-        <script src="{{ URL::asset('build/libs/flatpickr/flatpickr.min.js') }}"></script>
+        <script src="{{ URL::asset('/build/libs/flatpickr/flatpickr.min.js') }}"></script>
 
         <!-- gridjs js -->
-        <script src="{{ URL::asset('build/libs/gridjs/gridjs.umd.js') }}"></script>
+        <script src="{{ URL::asset('/build/libs/gridjs/gridjs.umd.js') }}"></script>
 
-        <script src="{{ URL::asset('build/js/pages/ecommerce-customers.init.js') }}"></script>
+        <script src="{{ URL::asset('/build/js/pages/ecommerce-customers.init.js') }}"></script>
         <!-- App js -->
-        <script src="{{ URL::asset('build/js/app.js') }}"></script>
+        <script src="{{ URL::asset('/build/js/app.js') }}"></script>
     @endsection

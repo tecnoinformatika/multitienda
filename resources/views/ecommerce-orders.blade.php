@@ -3,10 +3,10 @@
     Orders
 @endsection
 @section('css')
-    <link rel="stylesheet" href="{{ URL::asset('build/libs/gridjs/theme/mermaid.min.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('/build/libs/gridjs/theme/mermaid.min.css') }}">
 
     <!-- datepicker css -->
-    <link rel="stylesheet" href="{{ URL::asset('build/libs/flatpickr/flatpickr.min.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('/build/libs/flatpickr/flatpickr.min.css') }}">
 @endsection
 @section('page-title')
     Orders
@@ -237,7 +237,7 @@
                                     <tr>
                                         <th scope="row">
                                             <div>
-                                                <img src="{{ URL::asset('build/images/product/img-1.png') }}" alt=""
+                                                <img src="{{ URL::asset('/build/images/product/img-1.png') }}" alt=""
                                                     class="rounded avatar-md">
                                             </div>
                                         </th>
@@ -252,7 +252,7 @@
                                     <tr>
                                         <th scope="row">
                                             <div>
-                                                <img src="{{ URL::asset('build/images/product/img-2.png') }}" alt=""
+                                                <img src="{{ URL::asset('/build/images/product/img-2.png') }}" alt=""
                                                     class="rounded avatar-md">
                                             </div>
                                         </th>
@@ -302,15 +302,15 @@
     @endsection
     @section('scripts')
         <!-- apexcharts -->
-        <script src="{{ URL::asset('build/libs/apexcharts/apexcharts.min.js') }}"></script>
+        <script src="{{ URL::asset('/build/libs/apexcharts/apexcharts.min.js') }}"></script>
 
         <!-- gridjs js -->
-        <script src="{{ URL::asset('build/libs/gridjs/gridjs.umd.js') }}"></script>
+        <script src="{{ URL::asset('/build/libs/gridjs/gridjs.umd.js') }}"></script>
 
         <!-- datepicker js -->
-        <script src="{{ URL::asset('build/libs/flatpickr/flatpickr.min.js') }}"></script>
+        <script src="{{ URL::asset('/build/libs/flatpickr/flatpickr.min.js') }}"></script>
 
-        <script src="{{ URL::asset('build/js/pages/ecommerce-orders.init.js') }}"></script>
+        <script src="{{ URL::asset('/build/js/pages/ecommerce-orders.init.js') }}"></script>
         <!-- App js -->
-        <script src="{{ URL::asset('build/js/app.js') }}"></script>
+        <script src="{{ URL::asset('/build/js/app.js') }}"></script>
     @endsection

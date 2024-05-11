@@ -105,7 +105,7 @@ var LeafIcon = L.Icon.extend({
     }
 });
 
-var greenIcon = new LeafIcon({iconUrl: 'build/images/logo-dark-sm.png'});
+var greenIcon = new LeafIcon({iconUrl: '/build/images/logo-dark-sm.png'});
 
 L.marker([51.5, -0.09], {icon: greenIcon}).addTo(customiconsmap);
 

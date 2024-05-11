@@ -69,7 +69,7 @@
                         </div>
                         <div class="d-flex align-items-center">
                             <div>
-                                <img src="{{ URL::asset('build/images/users/avatar-2.jpg') }}" alt=""
+                                <img src="{{ URL::asset('/build/images/users/avatar-2.jpg') }}" alt=""
                                     class="avatar-md rounded-circle img-thumbnail">
                             </div>
                             <div class="flex-1 ms-3">
@@ -120,7 +120,7 @@
                         </div>
                         <div class="d-flex align-items-center">
                             <div>
-                                <img src="{{ URL::asset('build/images/users/avatar-1.jpg') }}" alt=""
+                                <img src="{{ URL::asset('/build/images/users/avatar-1.jpg') }}" alt=""
                                     class="avatar-md rounded-circle img-thumbnail">
                             </div>
                             <div class="flex-1 ms-3">
@@ -169,7 +169,7 @@
                         </div>
                         <div class="d-flex align-items-center">
                             <div>
-                                <img src="{{ URL::asset('build/images/users/avatar-3.jpg') }}" alt=""
+                                <img src="{{ URL::asset('/build/images/users/avatar-3.jpg') }}" alt=""
                                     class="avatar-md rounded-circle img-thumbnail">
                             </div>
                             <div class="flex-1 ms-3">
@@ -318,7 +318,7 @@
                         </div>
                         <div class="d-flex align-items-center">
                             <div>
-                                <img src="{{ URL::asset('build/images/users/avatar-6.jpg') }}" alt=""
+                                <img src="{{ URL::asset('/build/images/users/avatar-6.jpg') }}" alt=""
                                     class="avatar-md rounded-circle img-thumbnail">
                             </div>
                             <div class="flex-1 ms-3">
@@ -366,7 +366,7 @@
                         </div>
                         <div class="d-flex align-items-center">
                             <div>
-                                <img src="{{ URL::asset('build/images/users/avatar-8.jpg') }}" alt=""
+                                <img src="{{ URL::asset('/build/images/users/avatar-8.jpg') }}" alt=""
                                     class="avatar-md rounded-circle img-thumbnail">
                             </div>
                             <div class="flex-1 ms-3">
@@ -414,7 +414,7 @@
                         </div>
                         <div class="d-flex align-items-center">
                             <div>
-                                <img src="{{ URL::asset('build/images/users/avatar-4.jpg') }}" alt=""
+                                <img src="{{ URL::asset('/build/images/users/avatar-4.jpg') }}" alt=""
                                     class="avatar-md rounded-circle img-thumbnail">
                             </div>
                             <div class="flex-1 ms-3">
@@ -569,5 +569,5 @@
     @endsection
     @section('scripts')
         <!-- App js -->
-        <script src="{{ URL::asset('build/js/app.js') }}"></script>
+        <script src="{{ URL::asset('/build/js/app.js') }}"></script>
     @endsection

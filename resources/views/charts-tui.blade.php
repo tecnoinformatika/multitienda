@@ -4,7 +4,7 @@
 @endsection
 @section('css')
     <!-- tui charts Css -->
-    <link href="{{ URL::asset('build/libs/tui-chart/tui-chart.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ URL::asset('/build/libs/tui-chart/tui-chart.min.css') }}" rel="stylesheet" type="text/css" />
 @endsection
 @section('page-title')
     Toast UI Charts
@@ -197,13 +197,13 @@
     @endsection
     @section('scripts')
         <!-- tui charts plugins -->
-        <script src="{{ URL::asset('build/libs/tui-chart/tui-chart-all.min.js') }}"></script>
+        <script src="{{ URL::asset('/build/libs/tui-chart/tui-chart-all.min.js') }}"></script>
 
         <!-- tui charts map -->
-        <script src="{{ URL::asset('build/libs/tui-chart/maps/usa.js') }}"></script>
+        <script src="{{ URL::asset('/build/libs/tui-chart/maps/usa.js') }}"></script>
 
         <!-- tui charts plugins -->
-        <script src="{{ URL::asset('build/js/pages/tui-charts.init.js') }}"></script>
+        <script src="{{ URL::asset('/build/js/pages/tui-charts.init.js') }}"></script>
         <!-- App js -->
-        <script src="{{ URL::asset('build/js/app.js') }}"></script>
+        <script src="{{ URL::asset('/build/js/app.js') }}"></script>
     @endsection

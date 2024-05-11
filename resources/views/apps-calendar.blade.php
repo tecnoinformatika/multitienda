@@ -4,7 +4,7 @@
 @endsection
 @section('css')
     <!-- fullcalendar css -->
-    <link href="{{ URL::asset('build/libs/fullcalendar/main.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ URL::asset('/build/libs/fullcalendar/main.min.css') }}" rel="stylesheet" type="text/css" />
 @endsection
 @section('page-title')
     Calendar
@@ -41,7 +41,7 @@
                                 </div>
 
                                 <div class="row justify-content-center mt-5">
-                                    <img src="{{ URL::asset('build/images/calendar-img.png') }}" alt="" class="img-fluid d-block">
+                                    <img src="{{ URL::asset('/build/images/calendar-img.png') }}" alt="" class="img-fluid d-block">
                                 </div>
 
                             </div>
@@ -121,10 +121,10 @@
     @endsection
     @section('scripts')
         <!-- plugin js -->
-        <script src="{{ URL::asset('build/libs/fullcalendar/main.min.js') }}"></script>
+        <script src="{{ URL::asset('/build/libs/fullcalendar/main.min.js') }}"></script>
 
         <!-- Calendar init -->
-        <script src="{{ URL::asset('build/js/pages/calendar.init.js') }}"></script>
+        <script src="{{ URL::asset('/build/js/pages/calendar.init.js') }}"></script>
         <!-- App js -->
-        <script src="{{ URL::asset('build/js/app.js') }}"></script>
+        <script src="{{ URL::asset('/build/js/app.js') }}"></script>
     @endsection

@@ -135,7 +135,7 @@ var worldemapmarkersimage = new jsVectorMap({
 	],
 	markerStyle: {
 		initial: {
-		  image: "build/images/logo-dark-sm.png"
+		  image: "/build/images/logo-dark-sm.png"
 		}
 	},
 	labels: {

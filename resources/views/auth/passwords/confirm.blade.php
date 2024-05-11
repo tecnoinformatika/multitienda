@@ -19,9 +19,9 @@
 
                             <div class="mb-4 pb-2">
                                 <a href="index" class="d-block auth-logo">
-                                    <img src="{{ URL::asset('build/images/logo-dark.png') }}" alt="" height="30"
+                                    <img src="{{ URL::asset('/build/images/logo-dark.png') }}" alt="" height="30"
                                         class="auth-logo-dark me-start">
-                                    <img src="{{ URL::asset('build/images/logo-light.png') }}" alt="" height="30"
+                                    <img src="{{ URL::asset('/build/images/logo-light.png') }}" alt="" height="30"
                                         class="auth-logo-light me-start">
                                 </a>
                             </div>
@@ -34,7 +34,7 @@
                                     </div>
                                     <div class="p-2 mt-4">
                                         <div class="user-thumb text-center mb-4">
-                                            <img src="{{ URL::asset('build/images/users/avatar-3.jpg') }}"
+                                            <img src="{{ URL::asset('/build/images/users/avatar-3.jpg') }}"
                                                 class="rounded-circle img-thumbnail avatar-lg" alt="thumbnail">
                                             <h5 class="font-size-15 mt-3">Martin Gurley</h5>
                                         </div>
@@ -90,5 +90,5 @@
     @endsection
     @section('scripts')
         <!-- App js -->
-        <script src="{{ URL::asset('build/js/app.js') }}"></script>
+        <script src="{{ URL::asset('/build/js/app.js') }}"></script>
     @endsection

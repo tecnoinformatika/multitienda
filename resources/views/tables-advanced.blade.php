@@ -4,7 +4,7 @@
 @endsection
 @section('css')
     <!-- gridjs css -->
-    <link rel="stylesheet" href="{{ URL::asset('build/libs/gridjs/theme/mermaid.min.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('/build/libs/gridjs/theme/mermaid.min.css') }}">
 @endsection
 @section('page-title')
     Advance Tables
@@ -135,9 +135,9 @@
     @endsection
     @section('scripts')
         <!-- gridjs js -->
-        <script src="{{ URL::asset('build/libs/gridjs/gridjs.umd.js') }}"></script>
+        <script src="{{ URL::asset('/build/libs/gridjs/gridjs.umd.js') }}"></script>
 
-        <script src="{{ URL::asset('build/js/pages/gridjs.init.js') }}"></script>
+        <script src="{{ URL::asset('/build/js/pages/gridjs.init.js') }}"></script>
         <!-- App js -->
-        <script src="{{ URL::asset('build/js/app.js') }}"></script>
+        <script src="{{ URL::asset('/build/js/app.js') }}"></script>
     @endsection

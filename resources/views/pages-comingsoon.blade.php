@@ -21,15 +21,15 @@
                     <div class="col-lg-12">
                         <div class="text-center">
                             <a href="index" class="d-block auth-logo">
-                                <img src="{{ URL::asset('build/images/logo-dark.png') }}" alt="" height="36"
+                                <img src="{{ URL::asset('/build/images/logo-dark.png') }}" alt="" height="36"
                                     class="auth-logo-dark mx-auto">
-                                <img src="{{ URL::asset('build/images/logo-light.png') }}" alt="" height="36"
+                                <img src="{{ URL::asset('/build/images/logo-light.png') }}" alt="" height="36"
                                     class="auth-logo-light mx-auto">
                             </a>
                             <div class="row justify-content-center mt-5">
                                 <div class="col-sm-6">
                                     <div class="maintenance-img">
-                                        <img src="{{ URL::asset('build/images/coming-soon.png') }}" alt=""
+                                        <img src="{{ URL::asset('/build/images/coming-soon.png') }}" alt=""
                                             class="img-fluid mx-auto d-block">
                                     </div>
                                 </div>
@@ -60,7 +60,7 @@
     @endsection
     @section('scripts')
         <!-- Countdown js -->
-        <script src="{{ URL::asset('build/js/pages/coming-soon.init.js') }}"></script>
+        <script src="{{ URL::asset('/build/js/pages/coming-soon.init.js') }}"></script>
         <!-- App js -->
-        <script src="{{ URL::asset('build/js/app.js') }}"></script>
+        <script src="{{ URL::asset('/build/js/app.js') }}"></script>
     @endsection

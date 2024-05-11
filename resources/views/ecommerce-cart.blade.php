@@ -30,7 +30,7 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <th><img src="{{ URL::asset('build/images/product/img-1.png') }}" alt=""
+                                        <th><img src="{{ URL::asset('/build/images/product/img-1.png') }}" alt=""
                                                 class="avatar-lg rounded p-1"></th>
                                         <td>
                                             <div>
@@ -76,7 +76,7 @@
                                     </tr>
 
                                     <tr>
-                                        <th><img src="{{ URL::asset('build/images/product/img-2.png') }}" alt=""
+                                        <th><img src="{{ URL::asset('/build/images/product/img-2.png') }}" alt=""
                                                 class="avatar-lg rounded p-1"></th>
                                         <td>
                                             <div>
@@ -122,7 +122,7 @@
                                     </tr>
 
                                     <tr>
-                                        <th><img src="{{ URL::asset('build/images/product/img-5.png') }}" alt=""
+                                        <th><img src="{{ URL::asset('/build/images/product/img-5.png') }}" alt=""
                                                 class="avatar-lg rounded p-1"></th>
                                         <td>
                                             <div>
@@ -168,7 +168,7 @@
                                     </tr>
 
                                     <tr>
-                                        <th><img src="{{ URL::asset('build/images/product/img-7.png') }}" alt=""
+                                        <th><img src="{{ URL::asset('/build/images/product/img-7.png') }}" alt=""
                                                 class="avatar-lg rounded p-1"></th>
                                         <td>
                                             <div>
@@ -214,7 +214,7 @@
                                     </tr>
 
                                     <tr>
-                                        <th><img src="{{ URL::asset('build/images/product/img-8.png') }}" alt=""
+                                        <th><img src="{{ URL::asset('/build/images/product/img-8.png') }}" alt=""
                                                 class="avatar-lg rounded p-1"></th>
                                         <td>
                                             <div>
@@ -329,5 +329,5 @@
     @endsection
     @section('scripts')
         <!-- App js -->
-        <script src="{{ URL::asset('build/js/app.js') }}"></script>
+        <script src="{{ URL::asset('/build/js/app.js') }}"></script>
     @endsection

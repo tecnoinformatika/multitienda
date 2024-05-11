@@ -10,7 +10,63 @@
     <link href="{{ URL::asset('/build/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- App Css-->
     <link href="{{ URL::asset('/build/css/app.min.css') }}" id="app-style" rel="stylesheet" type="text/css" />
-    <link href="https://cdn.datatables.net/v/bs/jq-3.7.0/dt-2.0.7/fh-4.0.1/kt-2.12.0/r-3.0.2/rr-1.5.0/sc-2.4.2/sb-1.7.1/sl-2.0.1/datatables.min.css" rel="stylesheet">
+    <style>
+        .dataTables_paginate {
+            text-align: center;
+        }
+
+        .dataTables_paginate a.paginate_button {
+            display: inline-block;
+            padding: 5px 10px;
+            margin: 0 2px;
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            color: #495057;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .dataTables_paginate a.paginate_button.current {
+            background-color: #007bff;
+            border-color: #007bff;
+            color: #fff;
+        }
+
+        .dataTables_paginate a.paginate_button:hover {
+            background-color: #e9ecef;
+        }
+
+        .dataTables_paginate a.paginate_button.disabled {
+            pointer-events: none;
+            opacity: 0.5;
+        }
+        #productosTable_filter {
+            margin-bottom: 20px; /* Espacio entre el cuadro de búsqueda y la tabla */
+        }
+
+        #productosTable_filter label {
+            font-weight: bold; /* Texto en negrita */
+        }
+
+        #productosTable_filter input[type="search"] {
+            padding: 5px; /* Espacio interno del cuadro de búsqueda */
+            border: 1px solid #ccc; /* Borde del cuadro de búsqueda */
+            border-radius: 5px; /* Bordes redondeados del cuadro de búsqueda */
+            width: 200px; /* Ancho del cuadro de búsqueda */
+        }
+        #productosTable th:nth-child(2),
+        #productosTable td:nth-child(2),
+        #productosTable th:nth-child(5),
+        #productosTable td:nth-child(5) {
+            max-width: 200px; /* Ancho máximo permitido */
+            overflow: hidden; /* Ocultar el texto que exceda el ancho máximo */
+            text-overflow: ellipsis; /* Mostrar puntos suspensivos (...) cuando el texto exceda el ancho máximo */
+            white-space: nowrap; /* Evitar el salto de línea para mostrar el texto en una sola línea */
+        }
+    </style>
+
+
 @endsection
 @section('page-title')
     Advance Tables
@@ -28,29 +84,31 @@
                     <div class="card-header">
                         <h4 class="card-title mb-0">Search</h4>
                     </div><!-- end card header -->
-                    <div class="card-body">
-                        <table id="example" class="display nowrap" style="width:100%">
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Position</th>
-                                    <th>Office</th>
-                                    <th>Progress</th>
-                                    <th>Start date</th>
-                                    <th>Salary</th>
-                                </tr>
-                            </thead>
-                            <tfoot>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Position</th>
-                                    <th>Office</th>
-                                    <th>Progress</th>
-                                    <th>Start date</th>
-                                    <th>Salary</th>
-                                </tr>
-                            </tfoot>
-                        </table>
+                    <div class="card-body" >
+                        <div class="table-responsive">
+                            <table id="productosTable" class="table table-nowrap table-responsive table-sm align-middle">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th scope="col" class="ps-4" style="width: 50px;">
+                                            <div class="form-check font-size-16">
+                                                <input type="checkbox" class="form-check-input" id="selectAll">
+                                                <label class="form-check-label" for="selectAll"></label>
+                                            </div>
+                                        </th>
+                                        <th scope="col">Imagen</th>
+                                        <th scope="col" style="width: 200px;">Nombre</th>
+                                        <th scope="col">Precio</th>
+                                        <th scope="col">Cantidad disponible</th>
+                                        <th scope="col" style="width: 200px;">Categorías</th>
+                                        <th scope="col" style="width: 200px;">Acción</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Aquí se agregarán las filas dinámicamente -->
+                                </tbody>
+                            </table>
+                        </div>
+
                     </div>
                     <!-- end card body -->
                 </div>
@@ -62,12 +120,13 @@
     @endsection
     @section('scripts')
         <!-- gridjs js -->
-        <script src="https://cdn.datatables.net/v/bs/jq-3.7.0/dt-2.0.7/fh-4.0.1/kt-2.12.0/r-3.0.2/rr-1.5.0/sc-2.4.2/sb-1.7.1/sl-2.0.1/datatables.min.js"></script>
-
-        <!-- App js -->
-
+       <!-- App js -->
+          <!-- jQuery (obligatorio para DataTables) -->
+          <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+          <script src="//cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
         <script src="{{ URL::asset('/build/js/app.js') }}"></script>
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
         <script>
            $(document).ready(function() {
             // Realizar una solicitud AJAX para obtener los datos de los productos de WooCommerce
@@ -77,146 +136,77 @@
                 type: 'GET',
                 dataType: 'json',
                 success: function(response) {
-                    console.log("Datos de los productos:", response);
-                    // Procesar los datos obtenidos para construir las columnas y los datos de la tabla
-                    var columns = [
-                        "imagen",
-                        "Name",
-                        "Price",
-                        "Description"
 
-                    ]; // Definir las columnas de la tabla
-                    var data = []; // Inicializar un array para almacenar los datos de la tabla
 
-                    // Iterar sobre los productos obtenidos y extraer la información relevante
-                    $.each(response, function(index, product) {
-                        var rowData = [
-                            $('<img>').attr('src', product.images[0].src).addClass('img-fluid')[0], // Imagen del producto
-                            product.name, // Nombre del producto
-                            product.price, // Precio del producto
-                            product.short_description, // Descripción del producto
-                        ];
-                        data.push(rowData); // Agregar los datos de la fila al array de datos
+                    $('#productosTable').DataTable({
+                        data: response,
+                        columns: [
+                            { data: null, render: function(data, type, row) {
+                                return '<div class="form-check font-size-16">' +
+                                    '<input type="checkbox" class="form-check-input" id="checkbox' + data.index + '">' +
+                                    '<label class="form-check-label" for="checkbox' + data.index + '"></label>' +
+                                    '</div>';
+                            }},
+                            { data: null, render: function(data, type, row) {
+                                var imgSrc = (row.images.length > 0) ? row.images[0].src : '/images/iconoscanales/woocommerce.png';
+                                return '<img src="' + imgSrc + '" class="img-fluid">';
+                            }},
+                            // Columna de nombre (con ancho máximo)
+                            '<div style="max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">' + product['name'] + '</div>',
+                            { data: 'regular_price' },
+                            { data: 'stock_quantity' },
+                            { data: function(row) {
+                                var categories = row.categories;
+                                var categoryString = '';
+                                if (categories && categories.length > 0) {
+                                    categories.forEach(function(category, index) {
+                                        if (category.name) {
+                                            if (index > 0) {
+                                                categoryString += ' > ';
+                                            }
+                                            categoryString += category.name;
+                                        }
+                                    });
+                                }
+                                if (categoryString === '') {
+                                    return 'Categoría no definida';
+                                }
+                                return categoryString;
+                            }},
+                            { data: null, render: function(data, type, row) {
+                                return '<ul class="list-inline mb-0">' +
+                                    '<li class="list-inline-item">' +
+                                    '<a href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" class="px-2 text-primary"><i class="bx bx-pencil font-size-18"></i></a>' +
+                                    '</li>' +
+                                    '<li class="list-inline-item">' +
+                                    '<a href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" class="px-2 text-danger"><i class="bx bx-trash-alt font-size-18"></i></a>' +
+                                    '</li>' +
+                                    '<li class="list-inline-item dropdown">' +
+                                    '<a class="text-muted dropdown-toggle font-size-18 px-2" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true">' +
+                                    '<i class="bx bx-dots-vertical-rounded"></i>' +
+                                    '</a>' +
+                                    '<div class="dropdown-menu dropdown-menu-end">' +
+                                    '<a class="dropdown-item" href="#">Action</a>' +
+                                    '<a class="dropdown-item" href="#">Another action</a>' +
+                                    '<a class="dropdown-item" href="#">Something else here</a>' +
+                                    '</div>' +
+                                    '</li>' +
+                                    '</ul>';
+                            }}
+                        ],
+                        paging: true,
+                        pageLength: 10 // Cantidad de registros por página
                     });
-
-                    // Llamar a la función para crear el grid con las columnas y los datos construidos
-                    createGrid(columns, data);
                 },
                 error: function(xhr, status, error) {
                     console.error("Error al obtener los datos de los productos:", error);
                 }
             });
-            new DataTable('#example', {
-                ajax: '/obtenerProductosWoo/' + idcanal,
-                columns: [
-                    {
-                        data: 'name'
-                    },
-                    {
-                        data: 'position',
-                        render: function (data, type) {
-                            if (type === 'display') {
-                                let link = 'https://datatables.net';
 
-                                if (data[0] < 'H') {
-                                    link = 'https://cloudtables.com';
-                                }
-                                else if (data[0] < 'S') {
-                                    link = 'https://editor.datatables.net';
-                                }
-
-                                return '<a href="' + link + '">' + data + '</a>';
-                            }
-
-                            return data;
-                        }
-                    },
-                    {
-                        className: 'f32', // used by world-flags-sprite library
-                        data: 'office',
-                        render: function (data, type) {
-                            if (type === 'display') {
-                                let country = '';
-
-                                switch (data) {
-                                    case 'Argentina':
-                                        country = 'ar';
-                                        break;
-                                    case 'Edinburgh':
-                                        country = '_Scotland';
-                                        break;
-                                    case 'London':
-                                        country = '_England';
-                                        break;
-                                    case 'New York':
-                                    case 'San Francisco':
-                                        country = 'us';
-                                        break;
-                                    case 'Sydney':
-                                        country = 'au';
-                                        break;
-                                    case 'Tokyo':
-                                        country = 'jp';
-                                        break;
-                                }
-
-                                return '<span class="flag ' + country + '"></span> ' + data;
-                            }
-
-                            return data;
-                        }
-                    },
-                    {
-                        data: 'extn',
-                        render: function (data, type, row, meta) {
-                            return type === 'display'
-                                ? '<progress value="' + data + '" max="9999"></progress>'
-                                : data;
-                        }
-                    },
-                    {
-                        data: 'start_date'
-                    },
-                    {
-                        data: 'salary',
-                        render: function (data, type) {
-                            var number = DataTable.render
-                                .number(',', '.', 2, '$')
-                                .display(data);
-
-                            if (type === 'display') {
-                                let color = 'green';
-                                if (data < 250000) {
-                                    color = 'red';
-                                }
-                                else if (data < 500000) {
-                                    color = 'orange';
-                                }
-
-                                return `<span style="color:${color}">${number}</span>`;
-                            }
-
-                            return number;
-                        }
-                    }
-                ]
-            });
         });
 
         // Función para crear el grid con las columnas y los datos proporcionados
-        function createGrid(columns, data) {
-            new gridjs.Grid({
-                search:true, // Opcional: habilitar búsqueda por columnas
-                pagination: true, // Opcional: habilitar paginación si hay muchos productos
-                sort: true, // Opcional: habilitar ordenamiento de columnas
-                columns: columns,
-                data: data,
-                className: {
-                    table: 'table table-striped table-responsive', // Clases para la tabla
-                    pagination: 'pagination-class' // Clases para la paginación (si se habilita)
-                },
 
-            }).render(document.getElementById("productos"));
-        }
+
         </script>
     @endsection

@@ -15,7 +15,7 @@
                 <div class="card">
                     <div class="card-body p-0">
                         <div class="user-profile-img">
-                            <img src="{{ URL::asset('build/images/pattern-bg.jpg') }}" class="profile-img profile-foreground-img rounded-top"
+                            <img src="{{ URL::asset('/build/images/pattern-bg.jpg') }}" class="profile-img profile-foreground-img rounded-top"
                                 style="height: 120px;" alt="">
                             <div class="overlay-content rounded-top">
                                 <div>
@@ -43,7 +43,7 @@
                         <div class="p-4 pt-0">
 
                             <div class="mt-n5 position-relative text-center border-bottom pb-3">
-                                <img src="{{ URL::asset('build/images/users/avatar-3.jpg') }}" alt=""
+                                <img src="{{ URL::asset('/build/images/users/avatar-3.jpg') }}" alt=""
                                     class="avatar-xl rounded-circle img-thumbnail">
 
                                 <div class="mt-3">
@@ -355,7 +355,7 @@
                                             <div class="d-flex align-items-start">
                                                 <div class="flex-grow-1">
                                                     <div class="d-flex">
-                                                        <img src="{{ URL::asset('build/images/users/avatar-2.jpg') }}"
+                                                        <img src="{{ URL::asset('/build/images/users/avatar-2.jpg') }}"
                                                             class="avatar-sm rounded-circle" alt="">
                                                         <div class="flex-1 ms-2 ps-1">
                                                             <h5 class="font-size-15 mb-0">Samuel</h5>
@@ -389,7 +389,7 @@
                                             <div class="d-flex align-items-start">
                                                 <div class="flex-grow-1">
                                                     <div class="d-flex">
-                                                        <img src="{{ URL::asset('build/images/users/avatar-3.jpg') }}"
+                                                        <img src="{{ URL::asset('/build/images/users/avatar-3.jpg') }}"
                                                             class="avatar-sm rounded-circle" alt="">
                                                         <div class="flex-1 ms-2 ps-1">
                                                             <h5 class="font-size-15 mb-0">Joseph</h5>
@@ -423,7 +423,7 @@
                                             <div class="d-flex align-items-start">
                                                 <div class="flex-grow-1">
                                                     <div class="d-flex">
-                                                        <img src="{{ URL::asset('build/images/users/avatar-6.jpg') }}"
+                                                        <img src="{{ URL::asset('/build/images/users/avatar-6.jpg') }}"
                                                             class="avatar-sm rounded-circle" alt="">
                                                         <div class="flex-1 ms-2 ps-1">
                                                             <h5 class="font-size-15 mb-0">Paul</h5>
@@ -486,7 +486,7 @@
                                     <div class="blog-post">
                                         <div class="d-flex align-items-center">
                                             <div class="me-3">
-                                                <img src="{{ URL::asset('build/images/users/avatar-6.jpg') }}" alt=""
+                                                <img src="{{ URL::asset('/build/images/users/avatar-6.jpg') }}" alt=""
                                                     class="avatar-md rounded-circle img-thumbnail">
                                             </div>
                                             <div class="flex-1">
@@ -504,7 +504,7 @@
 
                                         </div>
                                         <div class="position-relative mt-3">
-                                            <img src="{{ URL::asset('build/images/post-1.jpg') }}" alt="" class="img-thumbnail">
+                                            <img src="{{ URL::asset('/build/images/post-1.jpg') }}" alt="" class="img-thumbnail">
                                         </div>
                                         <div class="pt-3">
                                             <div
@@ -531,13 +531,13 @@
                                                         <div class="avatar-group">
                                                             <div class="avatar-group-item">
                                                                 <a href="javascript: void(0);" class="d-inline-block">
-                                                                    <img src="{{ URL::asset('build/images/users/avatar-4.jpg') }}"
+                                                                    <img src="{{ URL::asset('/build/images/users/avatar-4.jpg') }}"
                                                                         alt="" class="rounded-circle avatar-sm">
                                                                 </a>
                                                             </div>
                                                             <div class="avatar-group-item">
                                                                 <a href="javascript: void(0);" class="d-inline-block">
-                                                                    <img src="{{ URL::asset('build/images/users/avatar-5.jpg') }}"
+                                                                    <img src="{{ URL::asset('/build/images/users/avatar-5.jpg') }}"
                                                                         alt="" class="rounded-circle avatar-sm">
                                                                 </a>
                                                             </div>
@@ -557,7 +557,7 @@
                                     <div class="blog-post mt-3">
                                         <div class="d-flex align-items-center">
                                             <div class="me-3">
-                                                <img src="{{ URL::asset('build/images/users/avatar-5.jpg') }}" alt=""
+                                                <img src="{{ URL::asset('/build/images/users/avatar-5.jpg') }}" alt=""
                                                     class="avatar-md rounded-circle img-thumbnail">
                                             </div>
                                             <div class="flex-1">
@@ -575,7 +575,7 @@
 
                                         </div>
                                         <div class="position-relative mt-3">
-                                            <img src="{{ URL::asset('build/images/post-2.jpg') }}" alt="" class="img-thumbnail">
+                                            <img src="{{ URL::asset('/build/images/post-2.jpg') }}" alt="" class="img-thumbnail">
                                         </div>
                                         <div class="pt-3">
                                             <div
@@ -602,13 +602,13 @@
                                                         <div class="avatar-group">
                                                             <div class="avatar-group-item">
                                                                 <a href="javascript: void(0);" class="d-inline-block">
-                                                                    <img src="{{ URL::asset('build/images/users/avatar-4.jpg') }}"
+                                                                    <img src="{{ URL::asset('/build/images/users/avatar-4.jpg') }}"
                                                                         alt="" class="rounded-circle avatar-sm">
                                                                 </a>
                                                             </div>
                                                             <div class="avatar-group-item">
                                                                 <a href="javascript: void(0);" class="d-inline-block">
-                                                                    <img src="{{ URL::asset('build/images/users/avatar-5.jpg') }}"
+                                                                    <img src="{{ URL::asset('/build/images/users/avatar-5.jpg') }}"
                                                                         alt="" class="rounded-circle avatar-sm">
                                                                 </a>
                                                             </div>
@@ -662,7 +662,7 @@
                             <table class="table align-middle table-nowrap mb-0">
                                 <tbody>
                                     <tr>
-                                        <td style="width: 50px;"><img src="{{ URL::asset('build/images/users/avatar-2.jpg') }}"
+                                        <td style="width: 50px;"><img src="{{ URL::asset('/build/images/users/avatar-2.jpg') }}"
                                                 class="rounded-circle avatar-sm" alt=""></td>
                                         <td>
                                             <h5 class="font-size-14 m-0"><a href="javascript: void(0);"
@@ -681,7 +681,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td><img src="{{ URL::asset('build/images/users/avatar-1.jpg') }}" class="rounded-circle avatar-sm"
+                                        <td><img src="{{ URL::asset('/build/images/users/avatar-1.jpg') }}" class="rounded-circle avatar-sm"
                                                 alt=""></td>
                                         <td>
                                             <h5 class="font-size-14 m-0"><a href="javascript: void(0);"
@@ -725,7 +725,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td><img src="{{ URL::asset('build/images/users/avatar-4.jpg') }}" class="rounded-circle avatar-sm"
+                                        <td><img src="{{ URL::asset('/build/images/users/avatar-4.jpg') }}" class="rounded-circle avatar-sm"
                                                 alt=""></td>
                                         <td>
                                             <h5 class="font-size-14 m-0"><a href="javascript: void(0);"
@@ -888,9 +888,9 @@
     @endsection
     @section('scripts')
         <!-- apexcharts -->
-        <script src="{{ URL::asset('build/libs/apexcharts/apexcharts.min.js') }}"></script>
+        <script src="{{ URL::asset('/build/libs/apexcharts/apexcharts.min.js') }}"></script>
 
-        <script src="{{ URL::asset('build/js/pages/profile.init.js') }}"></script>
+        <script src="{{ URL::asset('/build/js/pages/profile.init.js') }}"></script>
         <!-- App js -->
-        <script src="{{ URL::asset('build/js/app.js') }}"></script>
+        <script src="{{ URL::asset('/build/js/app.js') }}"></script>
     @endsection

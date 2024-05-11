@@ -532,7 +532,7 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <th scope="row"><img src="{{ URL::asset('build/images/product/img-1.png') }}" alt="product-img"
+                                        <th scope="row"><img src="{{ URL::asset('/build/images/product/img-1.png') }}" alt="product-img"
                                                 title="product-img" class="avatar-md"></th>
                                         <td>
                                             <h5 class="font-size-15 text-truncate"><a href="ecommerce-product-detail"
@@ -542,7 +542,7 @@
                                         <td>$ 520</td>
                                     </tr>
                                     <tr>
-                                        <th scope="row"><img src="{{ URL::asset('build/images/product/img-2.png') }}" alt="product-img"
+                                        <th scope="row"><img src="{{ URL::asset('/build/images/product/img-2.png') }}" alt="product-img"
                                                 title="product-img" class="avatar-md"></th>
                                         <td>
                                             <h5 class="font-size-15 text-truncate"><a href="ecommerce-product-detail"
@@ -605,5 +605,5 @@
     @endsection
     @section('scripts')
         <!-- App js -->
-        <script src="{{ URL::asset('build/js/app.js') }}"></script>
+        <script src="{{ URL::asset('/build/js/app.js') }}"></script>
     @endsection

@@ -17,7 +17,7 @@
                         <div class="row justify-content-center">
                             <div class="col-lg-6">
                                 <div class="text-center my-5">
-                                    <img src="{{ URL::asset('build/images/faq-img.png') }}" class="img-fluid" alt="">
+                                    <img src="{{ URL::asset('/build/images/faq-img.png') }}" class="img-fluid" alt="">
                                 </div>
                             </div>
                         </div>
@@ -217,5 +217,5 @@
     @endsection
     @section('scripts')
         <!-- App js -->
-        <script src="{{ URL::asset('build/js/app.js') }}"></script>
+        <script src="{{ URL::asset('/build/js/app.js') }}"></script>
     @endsection

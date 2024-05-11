@@ -50,7 +50,7 @@
     @endsection
     @section('scripts')
         <!-- fontawesome icons init -->
-        <script src="{{ URL::asset('build/js/pages/fontawesome.init.js') }}"></script>
+        <script src="{{ URL::asset('/build/js/pages/fontawesome.init.js') }}"></script>
         <!-- App js -->
-        <script src="{{ URL::asset('build/js/app.js') }}"></script>
+        <script src="{{ URL::asset('/build/js/app.js') }}"></script>
     @endsection

@@ -405,7 +405,7 @@
     @endsection
     @section('scripts')
         <!-- Alert init js -->
-        <script src="{{ URL::asset('build/js/pages/alert.init.js') }}"></script>
+        <script src="{{ URL::asset('/build/js/pages/alert.init.js') }}"></script>
         <!-- App js -->
-        <script src="{{ URL::asset('build/js/app.js') }}"></script>
+        <script src="{{ URL::asset('/build/js/app.js') }}"></script>
     @endsection

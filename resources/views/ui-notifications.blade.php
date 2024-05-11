@@ -4,10 +4,10 @@
 @endsection
 @section('css')
     <!-- alertifyjs Css -->
-    <link href="{{ URL::asset('build/libs/alertifyjs/build/css/alertify.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ URL::asset('/build/libs/alertifyjs/build/css/alertify.min.css') }}" rel="stylesheet" type="text/css" />
 
     <!-- alertifyjs default themes  Css -->
-    <link href="{{ URL::asset('build/libs/alertifyjs/build/css/themes/default.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ URL::asset('/build/libs/alertifyjs/build/css/themes/default.min.css') }}" rel="stylesheet" type="text/css" />
 @endsection
 @section('page-title')
     Notifications
@@ -39,7 +39,7 @@
                                     <div class="toast fade show" role="alert" aria-live="assertive"
                                         data-bs-autohide="false" aria-atomic="true">
                                         <div class="toast-header">
-                                            <img src="{{ URL::asset('build/images/logo-dark-sm.png') }}" alt="" class="me-2"
+                                            <img src="{{ URL::asset('/build/images/logo-dark-sm.png') }}" alt="" class="me-2"
                                                 height="18">
                                             <strong class="me-auto">webadmin</strong>
                                             <small class="text-muted">11 mins ago</small>
@@ -69,7 +69,7 @@
                                         <div class="toast fade show" role="alert" aria-live="assertive"
                                             data-bs-autohide="false" aria-atomic="true">
                                             <div class="toast-header">
-                                                <img src="{{ URL::asset('build/images/logo-dark-sm.png') }}" alt="" class="me-2"
+                                                <img src="{{ URL::asset('/build/images/logo-dark-sm.png') }}" alt="" class="me-2"
                                                     height="18">
                                                 <strong class="me-auto">webadmin</strong>
                                                 <small class="text-muted">11 mins ago</small>
@@ -111,7 +111,7 @@
                                                 <div class="toast fade show" role="alert" aria-live="assertive"
                                                     data-bs-autohide="false" aria-atomic="true">
                                                     <div class="toast-header">
-                                                        <img src="{{ URL::asset('build/images/logo-dark-sm.png') }}" alt=""
+                                                        <img src="{{ URL::asset('/build/images/logo-dark-sm.png') }}" alt=""
                                                             class="me-2" height="18">
                                                         <strong class="me-auto">webadmin</strong>
                                                         <small class="text-muted">just now</small>
@@ -126,7 +126,7 @@
                                                 <div class="toast fade show" role="alert" aria-live="assertive"
                                                     data-bs-autohide="false" aria-atomic="true">
                                                     <div class="toast-header">
-                                                        <img src="{{ URL::asset('build/images/logo-dark-sm.png') }}" alt=""
+                                                        <img src="{{ URL::asset('/build/images/logo-dark-sm.png') }}" alt=""
                                                             class="me-2" height="18">
                                                         <strong class="me-auto">webadmin</strong>
                                                         <small class="text-muted">2 sec ago</small>
@@ -163,7 +163,7 @@
                                             <div class="toast fade show" role="alert" aria-live="assertive"
                                                 data-bs-autohide="false" aria-atomic="true">
                                                 <div class="toast-header">
-                                                    <img src="{{ URL::asset('build/images/logo-dark-sm.png') }}" alt=""
+                                                    <img src="{{ URL::asset('/build/images/logo-dark-sm.png') }}" alt=""
                                                         class="me-2" height="18">
                                                     <strong class="me-auto">webadmin</strong>
                                                     <small>9 min ago</small>
@@ -264,9 +264,9 @@
     @endsection
     @section('scripts')
         <!-- alertifyjs js -->
-        <script src="{{ URL::asset('build/libs/alertifyjs/build/alertify.min.js') }}"></script>
+        <script src="{{ URL::asset('/build/libs/alertifyjs/build/alertify.min.js') }}"></script>
         <!-- notification init -->
-        <script src="{{ URL::asset('build/js/pages/notification.init.js') }}"></script>
+        <script src="{{ URL::asset('/build/js/pages/notification.init.js') }}"></script>
         <!-- App js -->
-        <script src="{{ URL::asset('build/js/app.js') }}"></script>
+        <script src="{{ URL::asset('/build/js/app.js') }}"></script>
     @endsection

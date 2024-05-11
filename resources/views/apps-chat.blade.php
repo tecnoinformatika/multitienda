@@ -31,7 +31,7 @@
                             </div>
                         </div>
                         <div class="chat-user-status">
-                            <img src="{{ URL::asset('build/images/users/avatar-3.jpg') }}" class="avatar-md rounded-circle" alt="">
+                            <img src="{{ URL::asset('/build/images/users/avatar-3.jpg') }}" class="avatar-md rounded-circle" alt="">
                             <div class="">
                                 <div class="status"></div>
                             </div>
@@ -81,7 +81,7 @@
                                             <a href="#">
                                                 <div class="d-flex align-items-center">
                                                     <div class="flex-shrink-0 user-img online align-self-center me-3">
-                                                        <img src="{{ URL::asset('build/images/users/avatar-6.jpg') }}"
+                                                        <img src="{{ URL::asset('/build/images/users/avatar-6.jpg') }}"
                                                             class="rounded-circle avatar-sm" alt="">
                                                         <span class="user-status"></span>
                                                     </div>
@@ -119,7 +119,7 @@
                                             <a href="#">
                                                 <div class="d-flex align-items-center">
                                                     <div class="flex-shrink-0 user-img away align-self-center me-3">
-                                                        <img src="{{ URL::asset('build/images/users/avatar-3.jpg') }}"
+                                                        <img src="{{ URL::asset('/build/images/users/avatar-3.jpg') }}"
                                                             class="rounded-circle avatar-sm" alt="">
                                                         <span class="user-status"></span>
                                                     </div>
@@ -137,7 +137,7 @@
                                             <a href="#">
                                                 <div class="d-flex align-items-center">
                                                     <div class="flex-shrink-0 user-img align-self-center me-3">
-                                                        <img src="{{ URL::asset('build/images/users/avatar-4.jpg') }}"
+                                                        <img src="{{ URL::asset('/build/images/users/avatar-4.jpg') }}"
                                                             class="rounded-circle avatar-sm" alt="">
                                                         <span class="user-status"></span>
                                                     </div>
@@ -170,7 +170,7 @@
                                             <a href="#">
                                                 <div class="d-flex align-items-center">
                                                     <div class="flex-shrink-0 user-img align-self-center me-3">
-                                                        <img src="{{ URL::asset('build/images/users/avatar-5.jpg') }}"
+                                                        <img src="{{ URL::asset('/build/images/users/avatar-5.jpg') }}"
                                                             class="rounded-circle avatar-sm" alt="">
                                                         <span class="user-status"></span>
                                                     </div>
@@ -189,7 +189,7 @@
                                                 <div class="d-flex align-items-center">
 
                                                     <div class="flex-shrink-0 user-img align-self-center me-3">
-                                                        <img src="{{ URL::asset('build/images/users/avatar-6.jpg') }}"
+                                                        <img src="{{ URL::asset('/build/images/users/avatar-6.jpg') }}"
                                                             class="rounded-circle avatar-sm" alt="">
                                                         <span class="user-status"></span>
                                                     </div>
@@ -204,7 +204,7 @@
                                             <a href="#">
                                                 <div class="d-flex align-items-center">
                                                     <div class="flex-shrink-0 user-img away align-self-center me-3">
-                                                        <img src="{{ URL::asset('build/images/users/avatar-3.jpg') }}"
+                                                        <img src="{{ URL::asset('/build/images/users/avatar-3.jpg') }}"
                                                             class="rounded-circle avatar-sm" alt="">
                                                         <span class="user-status"></span>
                                                     </div>
@@ -220,7 +220,7 @@
                                                 <div class="d-flex align-items-center">
 
                                                     <div class="flex-shrink-0 user-img align-self-center me-3">
-                                                        <img src="{{ URL::asset('build/images/users/avatar-4.jpg') }}"
+                                                        <img src="{{ URL::asset('/build/images/users/avatar-4.jpg') }}"
                                                             class="rounded-circle avatar-sm" alt="">
                                                         <span class="user-status"></span>
                                                     </div>
@@ -416,7 +416,7 @@
                             <div class="col-xl-4 col-7">
                                 <div class="d-flex align-items-center">
                                     <div class="flex-shrink-0 avatar me-3 d-sm-block d-none">
-                                        <img src="{{ URL::asset('build/images/users/avatar-6.jpg') }}" alt=""
+                                        <img src="{{ URL::asset('/build/images/users/avatar-6.jpg') }}" alt=""
                                             class="img-fluid d-block rounded-circle">
                                     </div>
                                     <div class="flex-grow-1">
@@ -472,7 +472,7 @@
                             <li>
                                 <div class="conversation-list">
                                     <div class="d-flex">
-                                        <img src="{{ URL::asset('build/images/users/avatar-6.jpg') }}" class="rounded-circle avatar"
+                                        <img src="{{ URL::asset('/build/images/users/avatar-6.jpg') }}" class="rounded-circle avatar"
                                             alt="">
                                         <div class="flex-1">
                                             <div class="ctext-wrap">
@@ -532,7 +532,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <img src="{{ URL::asset('build/images/users/avatar-3.jpg') }}" class="rounded-circle avatar"
+                                        <img src="{{ URL::asset('/build/images/users/avatar-3.jpg') }}" class="rounded-circle avatar"
                                             alt="">
                                     </div>
 
@@ -543,7 +543,7 @@
                             <li>
                                 <div class="conversation-list">
                                     <div class="d-flex">
-                                        <img src="{{ URL::asset('build/images/users/avatar-6.jpg') }}" class="rounded-circle avatar"
+                                        <img src="{{ URL::asset('/build/images/users/avatar-6.jpg') }}" class="rounded-circle avatar"
                                             alt="">
                                         <div class="flex-1">
                                             <div class="ctext-wrap">
@@ -594,14 +594,14 @@
                                                     <ul class="list-inline message-img mt-2 mb-0">
                                                         <li class="list-inline-item message-img-list">
                                                             <a class="d-inline-block" href="">
-                                                                <img src="{{ URL::asset('build/images/small/img-1.jpg') }}" alt=""
+                                                                <img src="{{ URL::asset('/build/images/small/img-1.jpg') }}" alt=""
                                                                     class="rounded img-thumbnail">
                                                             </a>
                                                         </li>
 
                                                         <li class="list-inline-item message-img-list">
                                                             <a class="d-inline-block" href="">
-                                                                <img src="{{ URL::asset('build/images/small/img-2.jpg') }}" alt=""
+                                                                <img src="{{ URL::asset('/build/images/small/img-2.jpg') }}" alt=""
                                                                     class="rounded img-thumbnail">
                                                             </a>
                                                         </li>
@@ -624,7 +624,7 @@
                                             </div>
 
                                         </div>
-                                        <img src="{{ URL::asset('build/images/users/avatar-3.jpg') }}" class="rounded-circle avatar"
+                                        <img src="{{ URL::asset('/build/images/users/avatar-3.jpg') }}" class="rounded-circle avatar"
                                             alt="">
                                     </div>
                                 </div>
@@ -633,7 +633,7 @@
                             <li>
                                 <div class="conversation-list">
                                     <div class="d-flex">
-                                        <img src="{{ URL::asset('build/images/users/avatar-6.jpg') }}" class="rounded-circle avatar"
+                                        <img src="{{ URL::asset('/build/images/users/avatar-6.jpg') }}" class="rounded-circle avatar"
                                             alt="">
                                         <div class="flex-1">
                                             <div class="ctext-wrap">
@@ -694,7 +694,7 @@
                                             </div>
 
                                         </div>
-                                        <img src="{{ URL::asset('build/images/users/avatar-3.jpg') }}" class="rounded-circle avatar"
+                                        <img src="{{ URL::asset('/build/images/users/avatar-3.jpg') }}" class="rounded-circle avatar"
                                             alt="">
                                     </div>
                                 </div>
@@ -726,5 +726,5 @@
     @endsection
     @section('scripts')
         <!-- App js -->
-        <script src="{{ URL::asset('build/js/app.js') }}"></script>
+        <script src="{{ URL::asset('/build/js/app.js') }}"></script>
     @endsection

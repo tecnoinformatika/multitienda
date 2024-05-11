@@ -10,7 +10,7 @@
     <body>
     @endsection
     @section('content')
-    
+
         <div class="row justify-content-center">
             <div class="col-lg-6">
                 <div class="text-center mb-5">
@@ -190,5 +190,5 @@
     @endsection
     @section('scripts')
         <!-- App js -->
-        <script src="{{ URL::asset('build/js/app.js') }}"></script>
+        <script src="{{ URL::asset('/build/js/app.js') }}"></script>
     @endsection

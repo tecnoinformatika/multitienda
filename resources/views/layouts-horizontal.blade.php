@@ -4,7 +4,7 @@
 @endsection
 @section('css')
     <!-- plugin css -->
-    <link href="{{ URL::asset('build/libs/jsvectormap/css/jsvectormap.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ URL::asset('/build/libs/jsvectormap/css/jsvectormap.min.css') }}" rel="stylesheet" type="text/css" />
 @endsection
 @section('page-title')
     Horizontal
@@ -282,7 +282,7 @@
                                 <div class="row align-items-center">
                                     <div class="col-md-5">
                                         <div class="popular-product-img p-2">
-                                            <img src="{{ URL::asset('build/images/product/img.png') }}" alt="">
+                                            <img src="{{ URL::asset('/build/images/product/img.png') }}" alt="">
                                         </div>
                                     </div>
                                     <div class="col-md-7">
@@ -321,7 +321,7 @@
                                                 <div class="avatar-md">
                                                     <div
                                                         class="product-img avatar-title img-thumbnail bg-soft-primary border-0">
-                                                        <img src="{{ URL::asset('build/images/product/img-1.png') }}" class="img-fluid"
+                                                        <img src="{{ URL::asset('/build/images/product/img-1.png') }}" class="img-fluid"
                                                             alt="">
                                                     </div>
                                                 </div>
@@ -345,7 +345,7 @@
                                                 <div class="avatar-md">
                                                     <div
                                                         class="product-img avatar-title img-thumbnail bg-soft-success border-0">
-                                                        <img src="{{ URL::asset('build/images/product/img-8.png') }}" class="img-fluid"
+                                                        <img src="{{ URL::asset('/build/images/product/img-8.png') }}" class="img-fluid"
                                                             alt="">
                                                     </div>
                                                 </div>
@@ -369,7 +369,7 @@
                                                 <div class="avatar-md">
                                                     <div
                                                         class="product-img avatar-title img-thumbnail bg-soft-danger border-0">
-                                                        <img src="{{ URL::asset('build/images/product/img-3.png') }}" class="img-fluid"
+                                                        <img src="{{ URL::asset('/build/images/product/img-3.png') }}" class="img-fluid"
                                                             alt="">
                                                     </div>
                                                 </div>
@@ -393,7 +393,7 @@
                                                 <div class="avatar-md">
                                                     <div
                                                         class="product-img avatar-title img-thumbnail bg-soft-success border-0">
-                                                        <img src="{{ URL::asset('build/images/product/img-4.png') }}" class="img-fluid"
+                                                        <img src="{{ URL::asset('/build/images/product/img-4.png') }}" class="img-fluid"
                                                             alt="">
                                                     </div>
                                                 </div>
@@ -417,7 +417,7 @@
                                                 <div class="avatar-md">
                                                     <div
                                                         class="product-img avatar-title img-thumbnail bg-soft-danger border-0">
-                                                        <img src="{{ URL::asset('build/images/product/img-5.png') }}" class="img-fluid"
+                                                        <img src="{{ URL::asset('/build/images/product/img-5.png') }}" class="img-fluid"
                                                             alt="">
                                                     </div>
                                                 </div>
@@ -467,7 +467,7 @@
                                 <div class="mx-n4 px-4" data-simplebar style="max-height: 421px;">
                                     <div class="border-bottom loyal-customers-box pt-2">
                                         <div class="d-flex align-items-center">
-                                            <img src="{{ URL::asset('build/images/users/avatar-4.jpg') }}"
+                                            <img src="{{ URL::asset('/build/images/users/avatar-4.jpg') }}"
                                                 class="rounded-circle avatar img-thumbnail" alt="">
                                             <div class="flex-grow-1 ms-3 overflow-hidden">
                                                 <h5 class="font-size-15 mb-1 text-truncate">Michelle Bernard</h5>
@@ -483,7 +483,7 @@
 
                                     <div class="border-bottom loyal-customers-box">
                                         <div class="d-flex align-items-center">
-                                            <img src="{{ URL::asset('build/images/users/avatar-5.jpg') }}"
+                                            <img src="{{ URL::asset('/build/images/users/avatar-5.jpg') }}"
                                                 class="rounded-circle avatar img-thumbnail" alt="">
                                             <div class="flex-grow-1 ms-3 overflow-hidden">
                                                 <h5 class="font-size-15 mb-1 text-truncate">David Grajeda</h5>
@@ -499,7 +499,7 @@
 
                                     <div class="border-bottom loyal-customers-box">
                                         <div class="d-flex align-items-center">
-                                            <img src="{{ URL::asset('build/images/users/avatar-6.jpg') }}"
+                                            <img src="{{ URL::asset('/build/images/users/avatar-6.jpg') }}"
                                                 class="rounded-circle avatar img-thumbnail" alt="">
                                             <div class="flex-grow-1 ms-3 overflow-hidden">
                                                 <h5 class="font-size-15 mb-1 text-truncate">Charles Roman</h5>
@@ -515,7 +515,7 @@
 
                                     <div class="border-bottom loyal-customers-box">
                                         <div class="d-flex align-items-center">
-                                            <img src="{{ URL::asset('build/images/users/avatar-7.jpg') }}"
+                                            <img src="{{ URL::asset('/build/images/users/avatar-7.jpg') }}"
                                                 class="rounded-circle avatar img-thumbnail" alt="">
                                             <div class="flex-grow-1 ms-3 overflow-hidden">
                                                 <h5 class="font-size-15 mb-1 text-truncate">David Reynolds</h5>
@@ -531,7 +531,7 @@
 
                                     <div class="border-bottom loyal-customers-box">
                                         <div class="d-flex align-items-center">
-                                            <img src="{{ URL::asset('build/images/users/avatar-8.jpg') }}"
+                                            <img src="{{ URL::asset('/build/images/users/avatar-8.jpg') }}"
                                                 class="rounded-circle avatar img-thumbnail" alt="">
                                             <div class="flex-grow-1 ms-3 overflow-hidden">
                                                 <h5 class="font-size-15 mb-1 text-truncate">Marion Munroe</h5>
@@ -547,7 +547,7 @@
 
                                     <div class="py-3 loyal-customers-box">
                                         <div class="d-flex align-items-center">
-                                            <img src="{{ URL::asset('build/images/users/avatar-5.jpg') }}"
+                                            <img src="{{ URL::asset('/build/images/users/avatar-5.jpg') }}"
                                                 class="rounded-circle avatar img-thumbnail" alt="">
                                             <div class="flex-grow-1 ms-3 overflow-hidden">
                                                 <h5 class="font-size-15 mb-1 text-truncate">Christina Emerson</h5>
@@ -694,7 +694,7 @@
                                             <tr>
                                                 <td>
                                                     <div class="d-flex align-items-center">
-                                                        <img src="{{ URL::asset('build/images/flags/us.jpg') }}" class="rounded"
+                                                        <img src="{{ URL::asset('/build/images/flags/us.jpg') }}" class="rounded"
                                                             alt="user-image" height="18">
                                                         <div class="flex-grow-1 ms-3">
                                                             <p class="mb-0 text-truncate">United States</p>
@@ -708,7 +708,7 @@
                                             <tr>
                                                 <td>
                                                     <div class="d-flex align-items-center">
-                                                        <img src="{{ URL::asset('build/images/flags/italy.jpg') }}" class="rounded"
+                                                        <img src="{{ URL::asset('/build/images/flags/italy.jpg') }}" class="rounded"
                                                             alt="user-image" height="18">
                                                         <div class="flex-grow-1 ms-3">
                                                             <p class="mb-0 text-truncate">Italy</p>
@@ -722,7 +722,7 @@
                                             <tr>
                                                 <td>
                                                     <div class="d-flex align-items-center">
-                                                        <img src="{{ URL::asset('build/images/flags/spain.jpg') }}" class="rounded"
+                                                        <img src="{{ URL::asset('/build/images/flags/spain.jpg') }}" class="rounded"
                                                             alt="user-image" height="18">
                                                         <div class="flex-grow-1 ms-3">
                                                             <p class="mb-0 text-truncate">Spain</p>
@@ -736,7 +736,7 @@
                                             <tr>
                                                 <td>
                                                     <div class="d-flex align-items-center">
-                                                        <img src="{{ URL::asset('build/images/flags/french.jpg') }}" class="rounded"
+                                                        <img src="{{ URL::asset('/build/images/flags/french.jpg') }}" class="rounded"
                                                             alt="user-image" height="18">
                                                         <div class="flex-grow-1 ms-3">
                                                             <p class="mb-0 text-truncate">French</p>
@@ -808,7 +808,7 @@
                                             <td style="width: 190px;">
                                                 <div class="d-flex align-items-center">
                                                     <img class="rounded-circle avatar-sm"
-                                                        src="{{ URL::asset('build/images/users/avatar-1.jpg') }}" alt="">
+                                                        src="{{ URL::asset('/build/images/users/avatar-1.jpg') }}" alt="">
                                                     <div class="flex-grow-1 ms-3">
                                                         Neal Matthews
                                                     </div>
@@ -848,7 +848,7 @@
                                             <td style="width: 190px;">
                                                 <div class="d-flex align-items-center">
                                                     <img class="rounded-circle avatar-sm"
-                                                        src="{{ URL::asset('build/images/users/avatar-2.jpg') }}" alt="">
+                                                        src="{{ URL::asset('/build/images/users/avatar-2.jpg') }}" alt="">
                                                     <div class="flex-grow-1 ms-3">
                                                         Connie Franco
                                                     </div>
@@ -888,7 +888,7 @@
                                             <td style="width: 190px;">
                                                 <div class="d-flex align-items-center">
                                                     <img class="rounded-circle avatar-sm"
-                                                        src="{{ URL::asset('build/images/users/avatar-3.jpg') }}" alt="">
+                                                        src="{{ URL::asset('/build/images/users/avatar-3.jpg') }}" alt="">
                                                     <div class="flex-grow-1 ms-3">
                                                         Adella Perez
                                                     </div>
@@ -928,7 +928,7 @@
                                             <td style="width: 190px;">
                                                 <div class="d-flex align-items-center">
                                                     <img class="rounded-circle avatar-sm"
-                                                        src="{{ URL::asset('build/images/users/avatar-4.jpg') }}" alt="">
+                                                        src="{{ URL::asset('/build/images/users/avatar-4.jpg') }}" alt="">
                                                     <div class="flex-grow-1 ms-3">
                                                         Theresa Mayers
                                                     </div>
@@ -968,7 +968,7 @@
                                             <td style="width: 190px;">
                                                 <div class="d-flex align-items-center">
                                                     <img class="rounded-circle avatar-sm"
-                                                        src="{{ URL::asset('build/images/users/avatar-5.jpg') }}" alt="">
+                                                        src="{{ URL::asset('/build/images/users/avatar-5.jpg') }}" alt="">
                                                     <div class="flex-grow-1 ms-3">
                                                         Oliver Gonzales
                                                     </div>
@@ -1008,7 +1008,7 @@
                                             <td style="width: 190px;">
                                                 <div class="d-flex align-items-center">
                                                     <img class="rounded-circle avatar-sm"
-                                                        src="{{ URL::asset('build/images/users/avatar-6.jpg') }}" alt="">
+                                                        src="{{ URL::asset('/build/images/users/avatar-6.jpg') }}" alt="">
                                                     <div class="flex-grow-1 ms-3">
                                                         Willie Verner
                                                     </div>
@@ -1050,13 +1050,13 @@
     @endsection
     @section('scripts')
         <!-- apexcharts -->
-        <script src="{{ URL::asset('build/libs/apexcharts/apexcharts.min.js') }}"></script>
+        <script src="{{ URL::asset('/build/libs/apexcharts/apexcharts.min.js') }}"></script>
 
         <!-- Vector map-->
-        <script src="{{ URL::asset('build/libs/jsvectormap/js/jsvectormap.min.js') }}"></script>
-        <script src="{{ URL::asset('build/libs/jsvectormap/maps/world-merc.js') }}"></script>
+        <script src="{{ URL::asset('/build/libs/jsvectormap/js/jsvectormap.min.js') }}"></script>
+        <script src="{{ URL::asset('/build/libs/jsvectormap/maps/world-merc.js') }}"></script>
 
-        <script src="{{ URL::asset('build/js/pages/dashboard.init.js') }}"></script>
+        <script src="{{ URL::asset('/build/js/pages/dashboard.init.js') }}"></script>
         <!-- App js -->
-        <script src="{{ URL::asset('build/js/app.js') }}"></script>
+        <script src="{{ URL::asset('/build/js/app.js') }}"></script>
     @endsection

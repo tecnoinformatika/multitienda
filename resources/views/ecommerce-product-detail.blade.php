@@ -4,7 +4,7 @@
 @endsection
 @section('css')
     <!-- swiper css -->
-    <link rel="stylesheet" href="{{ URL::asset('build/libs/swiper/swiper-bundle.min.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('/build/libs/swiper/swiper-bundle.min.css') }}">
 @endsection
 @section('page-title')
     Product Detail
@@ -28,7 +28,7 @@
                                             <div class="swiper-slide rounded">
                                                 <div class="p-3">
                                                     <div class="product-img bg-light rounded p-3">
-                                                        <img src="{{ URL::asset('build/images/product/img-1.png') }}"
+                                                        <img src="{{ URL::asset('/build/images/product/img-1.png') }}"
                                                             class="img-fluid d-block" />
                                                     </div>
                                                 </div>
@@ -37,7 +37,7 @@
                                             <div class="swiper-slide rounded">
                                                 <div class="p-3">
                                                     <div class="product-img bg-light rounded p-3">
-                                                        <img src="{{ URL::asset('build/images/product/img-2.png') }}"
+                                                        <img src="{{ URL::asset('/build/images/product/img-2.png') }}"
                                                             class="img-fluid d-block" />
                                                     </div>
                                                 </div>
@@ -46,7 +46,7 @@
                                             <div class="swiper-slide rounded">
                                                 <div class="p-3">
                                                     <div class="product-img bg-light rounded p-3">
-                                                        <img src="{{ URL::asset('build/images/product/img-3.png') }}"
+                                                        <img src="{{ URL::asset('/build/images/product/img-3.png') }}"
                                                             class="img-fluid d-block" />
                                                     </div>
                                                 </div>
@@ -55,7 +55,7 @@
                                             <div class="swiper-slide rounded">
                                                 <div class="p-3">
                                                     <div class="product-img bg-light rounded p-3">
-                                                        <img src="{{ URL::asset('build/images/product/img-6.png') }}"
+                                                        <img src="{{ URL::asset('/build/images/product/img-6.png') }}"
                                                             class="img-fluid d-block" />
                                                     </div>
                                                 </div>
@@ -64,7 +64,7 @@
                                             <div class="swiper-slide rounded">
                                                 <div class="p-3">
                                                     <div class="product-img bg-light rounded p-3">
-                                                        <img src="{{ URL::asset('build/images/product/img-5.png') }}"
+                                                        <img src="{{ URL::asset('/build/images/product/img-5.png') }}"
                                                             class="img-fluid d-block" />
                                                     </div>
                                                 </div>
@@ -80,23 +80,23 @@
                                         <div thumbsSlider="" class="swiper product-nav-slider mt-2 overflow-hidden">
                                             <div class="swiper-wrapper">
                                                 <div class="swiper-slide rounded">
-                                                    <div class="nav-slide-item"><img src="{{ URL::asset('build/images/product/img-1.png') }}"
+                                                    <div class="nav-slide-item"><img src="{{ URL::asset('/build/images/product/img-1.png') }}"
                                                             class="img-fluid p-1 d-block rounded" /></div>
                                                 </div>
                                                 <div class="swiper-slide">
-                                                    <div class="nav-slide-item"><img src="{{ URL::asset('build/images/product/img-2.png') }}"
+                                                    <div class="nav-slide-item"><img src="{{ URL::asset('/build/images/product/img-2.png') }}"
                                                             class="img-fluid p-1 d-block rounded" /></div>
                                                 </div>
                                                 <div class="swiper-slide">
-                                                    <div class="nav-slide-item"><img src="{{ URL::asset('build/images/product/img-3.png') }}"
+                                                    <div class="nav-slide-item"><img src="{{ URL::asset('/build/images/product/img-3.png') }}"
                                                             class="img-fluid p-1 d-block rounded" /></div>
                                                 </div>
                                                 <div class="swiper-slide">
-                                                    <div class="nav-slide-item"><img src="{{ URL::asset('build/images/product/img-6.png') }}"
+                                                    <div class="nav-slide-item"><img src="{{ URL::asset('/build/images/product/img-6.png') }}"
                                                             class="img-fluid p-1 d-block rounded" /></div>
                                                 </div>
                                                 <div class="swiper-slide">
-                                                    <div class="nav-slide-item"><img src="{{ URL::asset('build/images/product/img-5.png') }}"
+                                                    <div class="nav-slide-item"><img src="{{ URL::asset('/build/images/product/img-5.png') }}"
                                                             class="img-fluid p-1 d-block rounded" /></div>
                                                 </div>
                                             </div>
@@ -323,7 +323,7 @@
                                                 <div class="d-flex align-items-start">
                                                     <div class="flex-grow-1">
                                                         <div class="d-flex">
-                                                            <img src="{{ URL::asset('build/images/users/avatar-2.jpg') }}"
+                                                            <img src="{{ URL::asset('/build/images/users/avatar-2.jpg') }}"
                                                                 class="avatar-sm rounded-circle" alt="">
                                                             <div class="flex-1 ms-2 ps-1">
                                                                 <h5 class="font-size-16 mb-0">Samuel</h5>
@@ -358,7 +358,7 @@
                                                 <div class="d-flex align-items-start">
                                                     <div class="flex-grow-1">
                                                         <div class="d-flex">
-                                                            <img src="{{ URL::asset('build/images/users/avatar-3.jpg') }}"
+                                                            <img src="{{ URL::asset('/build/images/users/avatar-3.jpg') }}"
                                                                 class="avatar-sm rounded-circle" alt="">
                                                             <div class="flex-1 ms-2 ps-1">
                                                                 <h5 class="font-size-16 mb-0">Joseph</h5>
@@ -393,7 +393,7 @@
                                                 <div class="d-flex align-items-start">
                                                     <div class="flex-grow-1">
                                                         <div class="d-flex">
-                                                            <img src="{{ URL::asset('build/images/users/avatar-6.jpg') }}"
+                                                            <img src="{{ URL::asset('/build/images/users/avatar-6.jpg') }}"
                                                                 class="avatar-sm rounded-circle" alt="">
                                                             <div class="flex-1 ms-2 ps-1">
                                                                 <h5 class="font-size-16 mb-0">Paul</h5>
@@ -466,7 +466,7 @@
                                             <div class="row">
                                                 <div class="col-sm-3 col-md-3">
                                                     <div>
-                                                        <img src="{{ URL::asset('build/images/product/img.png') }}" alt=""
+                                                        <img src="{{ URL::asset('/build/images/product/img.png') }}" alt=""
                                                             class="img-fluid mx-auto rounded d-block">
                                                     </div>
                                                 </div>
@@ -535,9 +535,9 @@
     @endsection
     @section('scripts')
         <!-- swiper js -->
-        <script src="{{ URL::asset('build/libs/swiper/swiper-bundle.min.js') }}"></script>
+        <script src="{{ URL::asset('/build/libs/swiper/swiper-bundle.min.js') }}"></script>
 
-        <script src="{{ URL::asset('build/js/pages/ecommerce-product-detail.init.js') }}"></script>
+        <script src="{{ URL::asset('/build/js/pages/ecommerce-product-detail.init.js') }}"></script>
         <!-- App js -->
-        <script src="{{ URL::asset('build/js/app.js') }}"></script>
+        <script src="{{ URL::asset('/build/js/app.js') }}"></script>
     @endsection

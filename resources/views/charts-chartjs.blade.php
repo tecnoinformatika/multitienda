@@ -89,8 +89,8 @@
     @endsection
     @section('scripts')
         <!-- Chart JS -->
-        <script src="{{ URL::asset('build/libs/chart.js/chart.min.js') }}"></script>
-        <script src="{{ URL::asset('build/js/pages/chartjs.init.js') }}"></script>
+        <script src="{{ URL::asset('/build/libs/chart.js/chart.min.js') }}"></script>
+        <script src="{{ URL::asset('/build/js/pages/chartjs.init.js') }}"></script>
         <!-- App js -->
-        <script src="{{ URL::asset('build/js/app.js') }}"></script>
+        <script src="{{ URL::asset('/build/js/app.js') }}"></script>
     @endsection

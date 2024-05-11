@@ -4,7 +4,7 @@
 @endsection
 @section('css')
     <!-- plugin css -->
-    <link href="{{ URL::asset('build/libs/jsvectormap/css/jsvectormap.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ URL::asset('/build/libs/jsvectormap/css/jsvectormap.min.css') }}" rel="stylesheet" type="text/css" />
 @endsection
 @section('page-title')
     Vector Maps
@@ -80,13 +80,13 @@
     @endsection
     @section('scripts')
         <!-- Vector map-->
-        <script src="{{ URL::asset('build/libs/jsvectormap/js/jsvectormap.min.js') }}"></script>
-        <script src="{{ URL::asset('build/libs/jsvectormap/maps/world-merc.js') }}"></script>
-        <script src="{{ URL::asset('build/libs/jsvectormap/maps/us-merc-en.js') }}"></script>
-        <script src="{{ URL::asset('build/libs/jsvectormap/maps/canada.js') }}"></script>
+        <script src="{{ URL::asset('/build/libs/jsvectormap/js/jsvectormap.min.js') }}"></script>
+        <script src="{{ URL::asset('/build/libs/jsvectormap/maps/world-merc.js') }}"></script>
+        <script src="{{ URL::asset('/build/libs/jsvectormap/maps/us-merc-en.js') }}"></script>
+        <script src="{{ URL::asset('/build/libs/jsvectormap/maps/canada.js') }}"></script>
 
         <!-- vector-maps init -->
-        <script src="{{ URL::asset('build/js/pages/vector-maps.init.js') }}"></script>
+        <script src="{{ URL::asset('/build/js/pages/vector-maps.init.js') }}"></script>
         <!-- App js -->
-        <script src="{{ URL::asset('build/js/app.js') }}"></script>
+        <script src="{{ URL::asset('/build/js/app.js') }}"></script>
     @endsection

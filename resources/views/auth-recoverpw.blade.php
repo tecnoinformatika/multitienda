@@ -19,9 +19,9 @@
 
                             <div class="mb-4 pb-2">
                                 <a href="index" class="d-block auth-logo">
-                                    <img src="{{ URL::asset('build/images/logo-dark.png') }}" alt="" height="30"
+                                    <img src="{{ URL::asset('/build/images/logo-dark.png') }}" alt="" height="30"
                                         class="auth-logo-dark me-start">
-                                    <img src="{{ URL::asset('build/images/logo-light.png') }}" alt="" height="30"
+                                    <img src="{{ URL::asset('/build/images/logo-light.png') }}" alt="" height="30"
                                         class="auth-logo-light me-start">
                                 </a>
                             </div>
@@ -86,7 +86,7 @@
         <!-- end authentication section -->
     @endsection
     @section('scripts')
-        <script src="{{ URL::asset('build/js/pages/pass-addon.init.js') }}"></script>
+        <script src="{{ URL::asset('/build/js/pages/pass-addon.init.js') }}"></script>
         <!-- App js -->
-        <script src="{{ URL::asset('build/js/app.js') }}"></script>
+        <script src="{{ URL::asset('/build/js/app.js') }}"></script>
     @endsection

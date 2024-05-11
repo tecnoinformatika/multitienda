@@ -396,12 +396,12 @@ File: Main Js File
         if (document.getElementById("layout-direction-ltr").checked == true && id === "layout-direction-ltr") {
             document.getElementsByTagName("html")[0].removeAttribute("dir");
             document.getElementById("layout-direction-rtl").checked = false;
-            document.getElementById('bootstrap-style').setAttribute('href', 'build/css/bootstrap.min.css');
-            document.getElementById('app-style').setAttribute('href', 'build/css/app.min.css');
+            document.getElementById('bootstrap-style').setAttribute('href', '/build/css/bootstrap.min.css');
+            document.getElementById('app-style').setAttribute('href', '/build/css/app.min.css');
             sessionStorage.setItem("is_visited", "layout-direction-ltr");
         } else if (document.getElementById("layout-direction-rtl").checked == true && id === "layout-direction-rtl") {
             document.getElementById("layout-direction-ltr").checked = false;
-            document.getElementById('app-style').setAttribute('href', 'build/css/app.min.rtl.css');
+            document.getElementById('app-style').setAttribute('href', '/build/css/app.min.rtl.css');
             document.getElementsByTagName("html")[0].setAttribute("dir", "rtl");
             sessionStorage.setItem("is_visited", "layout-direction-rtl");
         }
@@ -528,11 +528,11 @@ File: Main Js File
                 if (e && e.target && e.target.value) {
                     if (e.target.value == "ltr") {
                         document.getElementsByTagName("html")[0].removeAttribute("dir");
-                        document.getElementById('bootstrap-style').setAttribute('href', 'build/css/bootstrap.min.css');
-                        document.getElementById('app-style').setAttribute('href', 'build/css/app.min.css');
+                        document.getElementById('bootstrap-style').setAttribute('href', '/build/css/bootstrap.min.css');
+                        document.getElementById('app-style').setAttribute('href', '/build/css/app.min.css');
                         sessionStorage.setItem("is_visited", "layout-direction-ltr");
                     } else {
-                        document.getElementById('app-style').setAttribute('href', 'build/css/app.min.rtl.css');
+                        document.getElementById('app-style').setAttribute('href', '/build/css/app.min.rtl.css');
                         document.getElementsByTagName("html")[0].setAttribute("dir", "rtl");
                         sessionStorage.setItem("is_visited", "layout-direction-rtl");
                     }

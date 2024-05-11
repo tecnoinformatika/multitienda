@@ -423,7 +423,7 @@
     @endsection
     @section('scripts')
         <!-- apexcharts -->
-        <script src="{{ URL::asset('build/libs/apexcharts/apexcharts.min.js') }}"></script>
+        <script src="{{ URL::asset('/build/libs/apexcharts/apexcharts.min.js') }}"></script>
 
         <script src="https://apexcharts.com/samples/assets/stock-prices.js"></script>
 
@@ -433,7 +433,7 @@
         <script src="https://apexcharts.com/samples/assets/github-data.js"></script>
         <!-- for irregular timeseries chart -->
         <script src="https://apexcharts.com/samples/assets/irregular-data-series.js"></script>
-        <script src="{{ URL::asset('build/libs/moment/min/moment.min.js') }}"></script>
+        <script src="{{ URL::asset('/build/libs/moment/min/moment.min.js') }}"></script>
 
         <!-- Candlestick  -->
         <script src="https://apexcharts.com/samples/assets/ohlc.js"></script>
@@ -441,7 +441,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.8.17/dayjs.min.js"></script>
 
         <!-- linecharts init -->
-        <script src="{{ URL::asset('build/js/pages/apexcharts.init.js') }}"></script>
+        <script src="{{ URL::asset('/build/js/pages/apexcharts.init.js') }}"></script>
         <!-- App js -->
-        <script src="{{ URL::asset('build/js/app.js') }}"></script>
+        <script src="{{ URL::asset('/build/js/app.js') }}"></script>
     @endsection

@@ -4,9 +4,9 @@
 @endsection
 @section('css')
     <!-- quill css -->
-    <link href="{{ URL::asset('build/libs/quill/quill.core.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ URL::asset('build/libs/quill/quill.bubble.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ URL::asset('build/libs/quill/quill.snow.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ URL::asset('/build/libs/quill/quill.core.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ URL::asset('/build/libs/quill/quill.bubble.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ URL::asset('/build/libs/quill/quill.snow.css') }}" rel="stylesheet" type="text/css" />
 @endsection
 @section('page-title')
     Form Editors
@@ -94,13 +94,13 @@
     @endsection
     @section('scripts')
         <!-- ckeditor -->
-        <script src="{{ URL::asset('build/libs/@ckeditor/ckeditor5-build-classic/build/ckeditor.js') }}"></script>
+        <script src="{{ URL::asset('/build/libs/@ckeditor/ckeditor5-build-classic/build/ckeditor.js') }}"></script>
 
         <!-- quill js -->
-        <script src="{{ URL::asset('build/libs/quill/quill.min.js') }}"></script>
+        <script src="{{ URL::asset('/build/libs/quill/quill.min.js') }}"></script>
 
         <!-- init js -->
-        <script src="{{ URL::asset('build/js/pages/form-editor.init.js') }}"></script>
+        <script src="{{ URL::asset('/build/js/pages/form-editor.init.js') }}"></script>
         <!-- App js -->
-        <script src="{{ URL::asset('build/js/app.js') }}"></script>
+        <script src="{{ URL::asset('/build/js/app.js') }}"></script>
     @endsection

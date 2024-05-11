@@ -4,10 +4,10 @@
 @endsection
 @section('css')
     <!-- gridjs css -->
-    <link rel="stylesheet" href="{{ URL::asset('build/libs/gridjs/theme/mermaid.min.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('/build/libs/gridjs/theme/mermaid.min.css') }}">
 
     <!-- flatpickr css -->
-    <link href="{{ URL::asset('build/libs/flatpickr/flatpickr.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ URL::asset('/build/libs/flatpickr/flatpickr.min.css') }}" rel="stylesheet" type="text/css">
 @endsection
 @section('page-title')
     Invoice List
@@ -350,12 +350,12 @@
     @endsection
     @section('scripts')
         <!-- gridjs js -->
-        <script src="{{ URL::asset('build/libs/gridjs/gridjs.umd.js') }}"></script>
+        <script src="{{ URL::asset('/build/libs/gridjs/gridjs.umd.js') }}"></script>
 
         <!-- flatpickr js -->
-        <script src="{{ URL::asset('build/libs/flatpickr/flatpickr.min.js') }}"></script>
+        <script src="{{ URL::asset('/build/libs/flatpickr/flatpickr.min.js') }}"></script>
         <!-- invoice-list init -->
-        <script src="{{ URL::asset('build/js/pages/invoice-list.init.js') }}"></script>
+        <script src="{{ URL::asset('/build/js/pages/invoice-list.init.js') }}"></script>
         <!-- App js -->
-        <script src="{{ URL::asset('build/js/app.js') }}"></script>
+        <script src="{{ URL::asset('/build/js/app.js') }}"></script>
     @endsection

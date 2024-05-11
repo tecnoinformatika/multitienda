@@ -4,7 +4,7 @@
 @endsection
 @section('css')
     <!-- Plugins css -->
-    <link href="{{ URL::asset('build/libs/dropzone/min/dropzone.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ URL::asset('/build/libs/dropzone/min/dropzone.min.css') }}" rel="stylesheet" type="text/css" />
 @endsection
 @section('page-title')
     Form File Upload
@@ -49,7 +49,7 @@
     @endsection
     @section('scripts')
         <!-- Plugins js -->
-        <script src="{{ URL::asset('build/libs/dropzone/min/dropzone.min.js') }}"></script>
+        <script src="{{ URL::asset('/build/libs/dropzone/min/dropzone.min.js') }}"></script>
         <!-- App js -->
-        <script src="{{ URL::asset('build/js/app.js') }}"></script>
+        <script src="{{ URL::asset('/build/js/app.js') }}"></script>
     @endsection

@@ -4,7 +4,7 @@
 @endsection
 @section('css')
     <!-- nouisliderribute css -->
-    <link rel="stylesheet" href="{{ URL::asset('build/libs/nouislider/nouislider.min.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('/build/libs/nouislider/nouislider.min.css') }}">
 @endsection
 @section('page-title')
     Range Slider
@@ -146,11 +146,11 @@
     @endsection
     @section('scripts')
         <!-- nouisliderribute js -->
-        <script src="{{ URL::asset('build/libs/nouislider/nouislider.min.js') }}"></script>
-        <script src="{{ URL::asset('build/libs/wnumb/wNumb.min.js') }}"></script>
+        <script src="{{ URL::asset('/build/libs/nouislider/nouislider.min.js') }}"></script>
+        <script src="{{ URL::asset('/build/libs/wnumb/wNumb.min.js') }}"></script>
 
         <!-- range slider init -->
-        <script src="{{ URL::asset('build/js/pages/range-sliders.init.js') }}"></script>
+        <script src="{{ URL::asset('/build/js/pages/range-sliders.init.js') }}"></script>
         <!-- App js -->
-        <script src="{{ URL::asset('build/js/app.js') }}"></script>
+        <script src="{{ URL::asset('/build/js/app.js') }}"></script>
     @endsection

@@ -4,10 +4,10 @@
 @endsection
 @section('css')
     <!-- swiper css -->
-    <link rel="stylesheet" href="{{ URL::asset('build/libs/swiper/swiper-bundle.min.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('/build/libs/swiper/swiper-bundle.min.css') }}">
 
     <!-- nouisliderribute css -->
-    <link rel="stylesheet" href="{{ URL::asset('build/libs/nouislider/nouislider.min.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('/build/libs/nouislider/nouislider.min.css') }}">
 @endsection
 @section('page-title')
     Products
@@ -102,7 +102,7 @@
                                         <div class="card p-2 border shadow-none">
                                             <ul class="list-unstyled categories-list mb-0">
                                                 @foreach($subcategoriasArray as $subcategoria)
-                                               
+
                                                 @php
                                                     $cadenaS =  $subcategoria['nombre'];
                                                     // Quitar acentos
@@ -139,7 +139,7 @@
                                                         else{
                                                             $tercera = [];
                                                         }
-                                                        
+
 
 
                                                     @endphp
@@ -148,18 +148,18 @@
                                                     <div id="{{ $cadenaFinalS }}" class="collapse" data-parent="#accordion">
                                                         <div class="card p-2 border shadow-none">
                                                             <ul class="list-unstyled categories-list mb-0">
-                                                            
-                                                                
+
+
                                                             @foreach($tercera as $subcategoria3)
 
                                                                 <li>
                                                                     <a class="text-body fw-semibold pb-3">
                                                                         {{ $subcategoria3->nombre}}
-                                                                    
+
                                                                 </a>
                                                                 </li>
                                                             @endforeach
-                                                            
+
                                                             </ul>
                                                         </div>
                                                     </div>
@@ -267,7 +267,7 @@
                                                                     class="font-size-20">Precio desde</span>
                                                                     @if(isset($precios->precio_especial))
                                                                     <b>${{ $precios->precio_especial }}</b>
-                                                                    @endif 
+                                                                    @endif
                                                                     @if(isset($precios->precio_descuento))
                                                                         <span class="text-muted me-2">
                                                                             <del class="font-size-20 fw-normal">${{ $precios->precio_descuento }}</del>
@@ -348,7 +348,7 @@
                                     <div class="row" id="div-productos">
 
 
-                                        
+
 
 
                                     </div>
@@ -363,7 +363,7 @@
                                                     <span class="badge">New</span>
                                                 </div>
                                                 <div class="product-img bg-light p-3 rounded">
-                                                    <img src="{{ URL::asset('build/images/product/img-7.png') }}"
+                                                    <img src="{{ URL::asset('/build/images/product/img-7.png') }}"
                                                         alt="" class="img-fluid mx-auto d-block">
                                                 </div>
                                                 <div class="product-content pt-3">
@@ -396,7 +396,7 @@
                                                     <span class="badge">New</span>
                                                 </div>
                                                 <div class="product-img bg-light p-3 rounded">
-                                                    <img src="{{ URL::asset('build/images/product/img-8.png') }}"
+                                                    <img src="{{ URL::asset('/build/images/product/img-8.png') }}"
                                                         alt="" class="img-fluid mx-auto d-block">
                                                 </div>
                                                 <div class="product-content pt-3">
@@ -432,7 +432,7 @@
                                                     <span class="badge">New</span>
                                                 </div>
                                                 <div class="product-img bg-light p-3 rounded">
-                                                    <img src="{{ URL::asset('build/images/product/img-9.png') }}"
+                                                    <img src="{{ URL::asset('/build/images/product/img-9.png') }}"
                                                         alt="" class="img-fluid mx-auto d-block">
                                                 </div>
                                                 <div class="product-content pt-3">
@@ -465,7 +465,7 @@
                                                     <span class="badge">New</span>
                                                 </div>
                                                 <div class="product-img bg-light p-3 rounded">
-                                                    <img src="{{ URL::asset('build/images/product/img-6.png') }}"
+                                                    <img src="{{ URL::asset('/build/images/product/img-6.png') }}"
                                                         alt="" class="img-fluid mx-auto d-block">
                                                 </div>
                                                 <div class="product-content pt-3">
@@ -503,7 +503,7 @@
                                                     <span class="badge bg-danger"> 20 %</span>
                                                 </div>
                                                 <div class="product-img bg-light p-3 rounded">
-                                                    <img src="{{ URL::asset('build/images/product/img-9.png') }}"
+                                                    <img src="{{ URL::asset('/build/images/product/img-9.png') }}"
                                                         alt="" class="img-fluid mx-auto d-block">
                                                 </div>
                                                 <div class="product-content pt-3">
@@ -536,7 +536,7 @@
                                                     <span class="badge bg-danger"> 20 %</span>
                                                 </div>
                                                 <div class="product-img bg-light p-3 rounded">
-                                                    <img src="{{ URL::asset('build/images/product/img-6.png') }}"
+                                                    <img src="{{ URL::asset('/build/images/product/img-6.png') }}"
                                                         alt="" class="img-fluid mx-auto d-block">
                                                 </div>
                                                 <div class="product-content pt-3">
@@ -569,7 +569,7 @@
                                                     <span class="badge bg-danger"> 20 %</span>
                                                 </div>
                                                 <div class="product-img bg-light p-3 rounded">
-                                                    <img src="{{ URL::asset('build/images/product/img-5.png') }}"
+                                                    <img src="{{ URL::asset('/build/images/product/img-5.png') }}"
                                                         alt="" class="img-fluid mx-auto d-block">
                                                 </div>
                                                 <div class="product-content pt-3">
@@ -644,16 +644,16 @@
     @endsection
     @section('scripts')
         <!-- swiper js -->
-        <script src="{{ URL::asset('build/libs/swiper/swiper-bundle.min.js') }}"></script>
+        <script src="{{ URL::asset('/build/libs/swiper/swiper-bundle.min.js') }}"></script>
 
         <!-- nouisliderribute js -->
-        <script src="{{ URL::asset('build/libs/nouislider/nouislider.min.js') }}"></script>
-        <script src="{{ URL::asset('build/libs/wnumb/wNumb.min.js') }}"></script>
+        <script src="{{ URL::asset('/build/libs/nouislider/nouislider.min.js') }}"></script>
+        <script src="{{ URL::asset('/build/libs/wnumb/wNumb.min.js') }}"></script>
 
         <!-- init js -->
-        <script src="{{ URL::asset('build/js/pages/product-filter-range.init.js') }}"></script>
+        <script src="{{ URL::asset('/build/js/pages/product-filter-range.init.js') }}"></script>
         <!-- App js -->
-        <script src="{{ URL::asset('build/js/app.js') }}"></script>
+        <script src="{{ URL::asset('/build/js/app.js') }}"></script>
         <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
         <script>
            function obtenerProductos(categoriaId = null, marcaId = null) {

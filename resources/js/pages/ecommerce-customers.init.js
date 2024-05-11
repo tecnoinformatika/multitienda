@@ -23,7 +23,7 @@ new gridjs.Grid({
       {
         name: 'Username',
         formatter: (function (cell) {
-          return gridjs.html('<img src="build/images/users/'+ cell[0]+'" alt="" class="avatar-sm rounded-circle me-2" /><a href="#" class="text-body">' + cell[1] + "</a>");
+          return gridjs.html('<img src="/build/images/users/'+ cell[0]+'" alt="" class="avatar-sm rounded-circle me-2" /><a href="#" class="text-body">' + cell[1] + "</a>");
         })
       },
       {
@@ -32,7 +32,7 @@ new gridjs.Grid({
           return gridjs.html('<p class="mb-1">'+ cell[0] +'</p><p class="mb-0">'+ cell[1] +'</p>');
         })
       },
-      
+
       , "Address",
 
       {
@@ -41,7 +41,7 @@ new gridjs.Grid({
           return gridjs.html('<span class="badge bg-success font-size-12"><i class="mdi mdi-star me-1"></i>' + cell +'</span>');
         })
       },
-      
+
       "Wallet Balance", "Joining Date",
       {
         name: "Action",

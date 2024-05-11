@@ -15,7 +15,7 @@
 
                 <!-- Simple card -->
                 <div class="card">
-                    <img class="card-img-top img-fluid" src="{{ URL::asset('build/images/small/img-1.jpg') }}" alt="Card image cap">
+                    <img class="card-img-top img-fluid" src="{{ URL::asset('/build/images/small/img-1.jpg') }}" alt="Card image cap">
                     <div class="card-body">
                         <h4 class="card-title">Card title</h4>
                         <p class="card-text">Some quick example text to build on the card title and make
@@ -29,7 +29,7 @@
             <div class="col-md-6 col-xl-3">
 
                 <div class="card">
-                    <img class="card-img-top img-fluid" src="{{ URL::asset('build/images/small/img-2.jpg') }}" alt="Card image cap">
+                    <img class="card-img-top img-fluid" src="{{ URL::asset('/build/images/small/img-2.jpg') }}" alt="Card image cap">
                     <div class="card-body">
                         <h4 class="card-title">Card title</h4>
                         <p class="card-text">Some quick example text to build on the card title and make
@@ -50,7 +50,7 @@
             <div class="col-md-6 col-xl-3">
 
                 <div class="card">
-                    <img class="card-img-top img-fluid" src="{{ URL::asset('build/images/small/img-3.jpg') }}" alt="Card image cap">
+                    <img class="card-img-top img-fluid" src="{{ URL::asset('/build/images/small/img-3.jpg') }}" alt="Card image cap">
                     <div class="card-body">
                         <p class="card-text">Some quick example text to build on the card title and make
                             up the bulk of the card's content.</p>
@@ -67,7 +67,7 @@
                         <h4 class="card-title">Card title</h4>
                         <h6 class="card-subtitle text-muted">Support card subtitle</h6>
                     </div>
-                    <img class="img-fluid" src="{{ URL::asset('build/images/small/img-4.jpg') }}" alt="Card image cap">
+                    <img class="img-fluid" src="{{ URL::asset('/build/images/small/img-4.jpg') }}" alt="Card image cap">
                     <div class="card-body">
                         <p class="card-text">Some quick example text to build on the card title and make
                             up the bulk of the card's content.</p>
@@ -201,7 +201,7 @@
         <div class="row">
             <div class="col-lg-4">
                 <div class="card">
-                    <img class="card-img-top img-fluid" src="{{ URL::asset('build/images/small/img-5.jpg') }}" alt="Card image cap">
+                    <img class="card-img-top img-fluid" src="{{ URL::asset('/build/images/small/img-5.jpg') }}" alt="Card image cap">
                     <div class="card-body">
                         <h4 class="card-title">Card title</h4>
                         <p class="card-text">This is a wider card with supporting text below as a
@@ -225,13 +225,13 @@
                             <small class="text-muted">Last updated 3 mins ago</small>
                         </p>
                     </div>
-                    <img class="card-img-bottom img-fluid" src="{{ URL::asset('build/images/small/img-7.jpg') }}" alt="Card image cap">
+                    <img class="card-img-bottom img-fluid" src="{{ URL::asset('/build/images/small/img-7.jpg') }}" alt="Card image cap">
                 </div>
             </div><!-- end col -->
 
             <div class="col-lg-4">
                 <div class="card">
-                    <img class="card-img img-fluid" src="{{ URL::asset('build/images/small/img-6.jpg') }}" alt="Card image">
+                    <img class="card-img img-fluid" src="{{ URL::asset('/build/images/small/img-6.jpg') }}" alt="Card image">
                     <div class="card-img-overlay">
                         <h4 class="card-title text-white">Card title</h4>
                         <p class="card-text text-white">This is a wider card with supporting text below as a
@@ -252,7 +252,7 @@
                 <div class="card">
                     <div class="row g-0 align-items-center">
                         <div class="col-md-4">
-                            <img class="card-img img-fluid" src="{{ URL::asset('build/images/small/img-2.jpg') }}" alt="Card image">
+                            <img class="card-img img-fluid" src="{{ URL::asset('/build/images/small/img-2.jpg') }}" alt="Card image">
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">
@@ -278,7 +278,7 @@
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <img class="card-img img-fluid" src="{{ URL::asset('build/images/small/img-3.jpg') }}" alt="Card image">
+                            <img class="card-img img-fluid" src="{{ URL::asset('/build/images/small/img-3.jpg') }}" alt="Card image">
                         </div>
                     </div>
                 </div>
@@ -403,7 +403,7 @@
                 <div class="card-deck-wrapper">
                     <div class="card-group">
                         <div class="card mb-4">
-                            <img class="card-img-top img-fluid" src="{{ URL::asset('build/images/small/img-4.jpg') }}" alt="Card image cap">
+                            <img class="card-img-top img-fluid" src="{{ URL::asset('/build/images/small/img-4.jpg') }}" alt="Card image cap">
                             <div class="card-body">
                                 <h4 class="card-title">Card title</h4>
                                 <p class="card-text">This is a longer card with supporting text below as
@@ -415,7 +415,7 @@
                             </div>
                         </div>
                         <div class="card mb-4">
-                            <img class="card-img-top img-fluid" src="{{ URL::asset('build/images/small/img-5.jpg') }}" alt="Card image cap">
+                            <img class="card-img-top img-fluid" src="{{ URL::asset('/build/images/small/img-5.jpg') }}" alt="Card image cap">
                             <div class="card-body">
                                 <h4 class="card-title">Card title</h4>
                                 <p class="card-text">This card has supporting text below as a natural
@@ -426,7 +426,7 @@
                             </div>
                         </div>
                         <div class="card mb-4">
-                            <img class="card-img-top img-fluid" src="{{ URL::asset('build/images/small/img-6.jpg') }}" alt="Card image cap">
+                            <img class="card-img-top img-fluid" src="{{ URL::asset('/build/images/small/img-6.jpg') }}" alt="Card image cap">
                             <div class="card-body">
                                 <h4 class="card-title">Card title</h4>
                                 <p class="card-text">This is a wider card with supporting text below as
@@ -450,7 +450,7 @@
                 <div class="row" data-masonry='{"percentPosition": true }'>
                     <div class="col-sm-6 col-lg-4">
                         <div class="card">
-                            <img src="{{ URL::asset('build/images/small/img-3.jpg') }}" class="card-img-top" alt="...">
+                            <img src="{{ URL::asset('/build/images/small/img-3.jpg') }}" class="card-img-top" alt="...">
                             <div class="card-body">
                                 <h5 class="card-title">Card title that wraps to a new line</h5>
                                 <p class="card-text">This is a longer card with supporting text below as a natural lead-in
@@ -461,7 +461,7 @@
 
                     <div class="col-sm-6 col-lg-4">
                         <div class="card">
-                            <img src="{{ URL::asset('build/images/small/img-5.jpg') }}" class="card-img-top" alt="...">
+                            <img src="{{ URL::asset('/build/images/small/img-5.jpg') }}" class="card-img-top" alt="...">
                             <div class="card-body">
                                 <h5 class="card-title">Card title</h5>
                                 <p class="card-text">This card has supporting text below as a natural lead-in to additional
@@ -473,7 +473,7 @@
 
                     <div class="col-sm-6 col-lg-4">
                         <div class="card">
-                            <img src="{{ URL::asset('build/images/small/img-7.jpg') }}" class="card-img-top" alt="...">
+                            <img src="{{ URL::asset('/build/images/small/img-7.jpg') }}" class="card-img-top" alt="...">
                         </div>
                     </div><!-- end col -->
 
@@ -547,7 +547,7 @@
     @endsection
     @section('scripts')
         <!-- Card Masonry -->
-        <script src="{{ URL::asset('build/libs/masonry-layout/masonry.pkgd.min.js') }}"></script>
+        <script src="{{ URL::asset('/build/libs/masonry-layout/masonry.pkgd.min.js') }}"></script>
         <!-- App js -->
-        <script src="{{ URL::asset('build/js/app.js') }}"></script>
+        <script src="{{ URL::asset('/build/js/app.js') }}"></script>
     @endsection

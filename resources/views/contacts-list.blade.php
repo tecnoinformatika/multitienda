@@ -86,7 +86,7 @@
                                             </div>
                                         </th>
                                         <td>
-                                            <img src="{{ URL::asset('build/images/users/avatar-2.jpg') }}" alt=""
+                                            <img src="{{ URL::asset('/build/images/users/avatar-2.jpg') }}" alt=""
                                                 class="avatar rounded-circle img-thumbnail me-2">
                                             <a href="#" class="text-body">Simon Ryles</a>
                                         </td>
@@ -129,7 +129,7 @@
                                             </div>
                                         </th>
                                         <td>
-                                            <img src="{{ URL::asset('build/images/users/avatar-3.jpg') }}" alt=""
+                                            <img src="{{ URL::asset('/build/images/users/avatar-3.jpg') }}" alt=""
                                                 class="avatar rounded-circle img-thumbnail me-2">
                                             <a href="#" class="text-body">Marion Walker</a>
                                         </td>
@@ -222,7 +222,7 @@
                                             </div>
                                         </th>
                                         <td>
-                                            <img src="{{ URL::asset('build/images/users/avatar-4.jpg') }}" alt=""
+                                            <img src="{{ URL::asset('/build/images/users/avatar-4.jpg') }}" alt=""
                                                 class="avatar rounded-circle img-thumbnail me-2">
                                             <a href="#" class="text-body">Shanon Marvin</a>
                                         </td>
@@ -315,7 +315,7 @@
                                             </div>
                                         </th>
                                         <td>
-                                            <img src="{{ URL::asset('build/images/users/avatar-5.jpg') }}" alt=""
+                                            <img src="{{ URL::asset('/build/images/users/avatar-5.jpg') }}" alt=""
                                                 class="avatar rounded-circle img-thumbnail me-2">
                                             <a href="#" class="text-body">Janice Morgan</a>
                                         </td>
@@ -360,7 +360,7 @@
                                             </div>
                                         </th>
                                         <td>
-                                            <img src="{{ URL::asset('build/images/users/avatar-7.jpg') }}" alt=""
+                                            <img src="{{ URL::asset('/build/images/users/avatar-7.jpg') }}" alt=""
                                                 class="avatar rounded-circle img-thumbnail me-2">
                                             <a href="#" class="text-body">Patrick Petty</a>
                                         </td>
@@ -405,7 +405,7 @@
                                             </div>
                                         </th>
                                         <td>
-                                            <img src="{{ URL::asset('build/images/users/avatar-8.jpg') }}" alt=""
+                                            <img src="{{ URL::asset('/build/images/users/avatar-8.jpg') }}" alt=""
                                                 class="avatar rounded-circle img-thumbnail me-2">
                                             <a href="#" class="text-body">Marilyn Horton</a>
                                         </td>
@@ -450,7 +450,7 @@
                                             </div>
                                         </th>
                                         <td>
-                                            <img src="{{ URL::asset('build/images/users/avatar-2.jpg') }}" alt=""
+                                            <img src="{{ URL::asset('/build/images/users/avatar-2.jpg') }}" alt=""
                                                 class="avatar rounded-circle img-thumbnail me-2">
                                             <a href="#" class="text-body">Neal Womack</a>
                                         </td>
@@ -614,5 +614,5 @@
     @endsection
     @section('scripts')
         <!-- App js -->
-        <script src="{{ URL::asset('build/js/app.js') }}"></script>
+        <script src="{{ URL::asset('/build/js/app.js') }}"></script>
     @endsection

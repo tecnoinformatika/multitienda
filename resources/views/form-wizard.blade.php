@@ -4,7 +4,7 @@
 @endsection
 @section('css')
     <!-- datepicker css -->
-    <link rel="stylesheet" href="{{ URL::asset('build/libs/flatpickr/flatpickr.min.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('/build/libs/flatpickr/flatpickr.min.css') }}">
 @endsection
 @section('page-title')
     Form Wizard
@@ -256,10 +256,10 @@
     @endsection
     @section('scripts')
         <!-- datepicker js -->
-        <script src="{{ URL::asset('build/libs/flatpickr/flatpickr.min.js') }}"></script>
+        <script src="{{ URL::asset('/build/libs/flatpickr/flatpickr.min.js') }}"></script>
 
         <!-- form wizard init -->
-        <script src="{{ URL::asset('build/js/pages/form-wizard.init.js') }}"></script>
+        <script src="{{ URL::asset('/build/js/pages/form-wizard.init.js') }}"></script>
         <!-- App js -->
-        <script src="{{ URL::asset('build/js/app.js') }}"></script>
+        <script src="{{ URL::asset('/build/js/app.js') }}"></script>
     @endsection

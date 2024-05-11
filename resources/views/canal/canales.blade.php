@@ -4,7 +4,7 @@
 @endsection
 @section('css')
     <!-- dropzone css -->
-    <link href="{{ URL::asset('build/libs/dropzone/min/dropzone.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ URL::asset('/build/libs/dropzone/min/dropzone.min.css') }}" rel="stylesheet" type="text/css" />
 
 @endsection
 @section('page-title')
@@ -106,7 +106,7 @@
                                     <div class="card mb-0">
                                         <div class="card-body">
                                             <div class="px-4">
-                                                <img src="{{ URL::asset('build/images/Upgrade-img.png') }}" class="img-fluid" alt="">
+                                                <img src="{{ URL::asset('/build/images/Upgrade-img.png') }}" class="img-fluid" alt="">
                                             </div>
                                             <h5 class="mt-4">Upgrade Features</h5>
                                             <p class="pt-1">4 integrations, 30 team members, advanced features </p>
@@ -364,13 +364,13 @@
     @endsection
     @section('scripts')
         <!-- apexcharts -->
-        <script src="{{ URL::asset('build/libs/apexcharts/apexcharts.min.js') }}"></script>
+        <script src="{{ URL::asset('/build/libs/apexcharts/apexcharts.min.js') }}"></script>
 
             <!-- dropzone plugin -->
-            <script src="{{ URL::asset('build/libs/dropzone/min/dropzone.min.js') }}"></script>
+            <script src="{{ URL::asset('/build/libs/dropzone/min/dropzone.min.js') }}"></script>
 
             <!-- file-manager js -->
-            <script src="{{ URL::asset('build/js/pages/file-manager.init.js') }}"></script>
+            <script src="{{ URL::asset('/build/js/pages/file-manager.init.js') }}"></script>
             <!-- App js -->
-            <script src="{{ URL::asset('build/js/app.js') }}"></script>
+            <script src="{{ URL::asset('/build/js/app.js') }}"></script>
         @endsection

@@ -129,7 +129,7 @@
                                 <div class="mail-list">
                                     <a href="javascript: void(0);" class="d-flex align-items-start border-bottom">
                                         <img class="flex-shrink-0 me-3 rounded-circle"
-                                            src="{{ URL::asset('build/images/users/avatar-2.jpg') }}" alt="Generic placeholder image"
+                                            src="{{ URL::asset('/build/images/users/avatar-2.jpg') }}" alt="Generic placeholder image"
                                             height="36">
                                         <div class="flex-grow-1 chat-user-box">
                                             <p class="user-title m-0">Scott Median</p>
@@ -139,7 +139,7 @@
 
                                     <a href="javascript: void(0);" class="d-flex align-items-start border-bottom">
                                         <img class="flex-shrink-0 me-3 rounded-circle"
-                                            src="{{ URL::asset('build/images/users/avatar-3.jpg') }}" alt="Generic placeholder image"
+                                            src="{{ URL::asset('/build/images/users/avatar-3.jpg') }}" alt="Generic placeholder image"
                                             height="36">
                                         <div class="flex-grow-1 chat-user-box">
                                             <p class="user-title m-0">Julian Rosa</p>
@@ -149,7 +149,7 @@
 
                                     <a href="javascript: void(0);" class="d-flex align-items-start border-bottom">
                                         <img class="flex-shrink-0 me-3 rounded-circle"
-                                            src="{{ URL::asset('build/images/users/avatar-4.jpg') }}" alt="Generic placeholder image"
+                                            src="{{ URL::asset('/build/images/users/avatar-4.jpg') }}" alt="Generic placeholder image"
                                             height="36">
                                         <div class="flex-grow-1 chat-user-box">
                                             <p class="user-title m-0">David Medina</p>
@@ -159,7 +159,7 @@
 
                                     <a href="javascript: void(0);" class="d-flex align-items-start border-bottom">
                                         <img class="flex-shrink-0 me-3 rounded-circle"
-                                            src="{{ URL::asset('build/images/users/avatar-6.jpg') }}" alt="Generic placeholder image"
+                                            src="{{ URL::asset('/build/images/users/avatar-6.jpg') }}" alt="Generic placeholder image"
                                             height="36">
                                         <div class="flex-grow-1 chat-user-box">
                                             <p class="user-title m-0">Jay Baker</p>
@@ -265,7 +265,7 @@
                                                         <label for="chk1" class="toggle"></label>
                                                     </div>
                                                     <div class="d-flex title align-items-center">
-                                                        <img src="{{ URL::asset('build/images/users/avatar-1.jpg') }}"
+                                                        <img src="{{ URL::asset('/build/images/users/avatar-1.jpg') }}"
                                                             class="avatar-sm rounded-circle" alt="">
                                                         <div class="flex-1 ms-2 ps-1">
                                                             <h5 class="font-size-14 mb-0"><a href=""
@@ -299,7 +299,7 @@
                                                         <label for="chk2" class="toggle"></label>
                                                     </div>
                                                     <div class="d-flex title align-items-center">
-                                                        <img src="{{ URL::asset('build/images/users/avatar-2.jpg') }}"
+                                                        <img src="{{ URL::asset('/build/images/users/avatar-2.jpg') }}"
                                                             class="avatar-sm rounded-circle" alt="">
                                                         <div class="flex-1 ms-2 ps-1">
                                                             <h5 class="font-size-14 mb-0"><a href=""
@@ -334,7 +334,7 @@
                                                         <label for="chk3" class="toggle"></label>
                                                     </div>
                                                     <div class="d-flex title align-items-center">
-                                                        <img src="{{ URL::asset('build/images/users/avatar-4.jpg') }}"
+                                                        <img src="{{ URL::asset('/build/images/users/avatar-4.jpg') }}"
                                                             class="avatar-sm rounded-circle" alt="">
                                                         <div class="flex-1 ms-2 ps-1">
                                                             <h5 class="font-size-14 mb-0"><a href=""
@@ -372,7 +372,7 @@
                                                         <label for="chk4" class="toggle"></label>
                                                     </div>
                                                     <div class="d-flex title align-items-center">
-                                                        <img src="{{ URL::asset('build/images/users/avatar-1.jpg') }}"
+                                                        <img src="{{ URL::asset('/build/images/users/avatar-1.jpg') }}"
                                                             class="avatar-sm rounded-circle" alt="">
                                                         <div class="flex-1 ms-2 ps-1">
                                                             <h5 class="font-size-14 mb-0"><a href=""
@@ -408,7 +408,7 @@
                                                         <label for="chk5" class="toggle"></label>
                                                     </div>
                                                     <div class="d-flex title align-items-center">
-                                                        <img src="{{ URL::asset('build/images/users/avatar-6.jpg') }}"
+                                                        <img src="{{ URL::asset('/build/images/users/avatar-6.jpg') }}"
                                                             class="avatar-sm rounded-circle" alt="">
                                                         <div class="flex-1 ms-2 ps-1">
                                                             <h5 class="font-size-14 mb-0"><a href=""
@@ -447,7 +447,7 @@
                                                         <label for="chk6" class="toggle"></label>
                                                     </div>
                                                     <div class="d-flex title align-items-center">
-                                                        <img src="{{ URL::asset('build/images/users/avatar-1.jpg') }}"
+                                                        <img src="{{ URL::asset('/build/images/users/avatar-1.jpg') }}"
                                                             class="avatar-sm rounded-circle" alt="">
                                                         <div class="flex-1 ms-2 ps-1">
                                                             <h5 class="font-size-14 mb-0"><a href=""
@@ -483,7 +483,7 @@
                                                         <label for="chk7" class="toggle"></label>
                                                     </div>
                                                     <div class="d-flex title align-items-center">
-                                                        <img src="{{ URL::asset('build/images/users/avatar-2.jpg') }}"
+                                                        <img src="{{ URL::asset('/build/images/users/avatar-2.jpg') }}"
                                                             class="avatar-sm rounded-circle" alt="">
                                                         <div class="flex-1 ms-2 ps-1">
                                                             <h5 class="font-size-14 mb-0"><a href=""
@@ -520,7 +520,7 @@
                                                         <label for="chk8" class="toggle"></label>
                                                     </div>
                                                     <div class="d-flex title align-items-center">
-                                                        <img src="{{ URL::asset('build/images/users/avatar-7.jpg') }}"
+                                                        <img src="{{ URL::asset('/build/images/users/avatar-7.jpg') }}"
                                                             class="avatar-sm rounded-circle" alt="">
                                                         <div class="flex-1 ms-2 ps-1">
                                                             <h5 class="font-size-14 mb-0"><a href=""
@@ -555,7 +555,7 @@
                                                         <label for="chk9" class="toggle"></label>
                                                     </div>
                                                     <div class="d-flex title align-items-center">
-                                                        <img src="{{ URL::asset('build/images/users/avatar-3.jpg') }}"
+                                                        <img src="{{ URL::asset('/build/images/users/avatar-3.jpg') }}"
                                                             class="avatar-sm rounded-circle" alt="">
                                                         <div class="flex-1 ms-2 ps-1">
                                                             <h5 class="font-size-14 mb-0"><a href=""
@@ -593,7 +593,7 @@
                                                             <label for="chk10" class="toggle"></label>
                                                         </div>
                                                         <div class="d-flex title align-items-center">
-                                                            <img src="{{ URL::asset('build/images/users/avatar-1.jpg') }}"
+                                                            <img src="{{ URL::asset('/build/images/users/avatar-1.jpg') }}"
                                                                 class="avatar-sm rounded-circle" alt="">
                                                             <div class="flex-1 ms-2 ps-1">
                                                                 <h5 class="font-size-14 mb-0"><a href=""
@@ -632,7 +632,7 @@
                                                             <label for="chk11" class="toggle"></label>
                                                         </div>
                                                         <div class="d-flex title align-items-center">
-                                                            <img src="{{ URL::asset('build/images/users/avatar-1.jpg') }}"
+                                                            <img src="{{ URL::asset('/build/images/users/avatar-1.jpg') }}"
                                                                 class="avatar-sm rounded-circle" alt="">
                                                             <div class="flex-1 ms-2 ps-1">
                                                                 <h5 class="font-size-14 mb-0"><a href=""
@@ -667,7 +667,7 @@
                                                             <label for="chk12" class="toggle"></label>
                                                         </div>
                                                         <div class="d-flex title align-items-center">
-                                                            <img src="{{ URL::asset('build/images/users/avatar-7.jpg') }}"
+                                                            <img src="{{ URL::asset('/build/images/users/avatar-7.jpg') }}"
                                                                 class="avatar-sm rounded-circle" alt="">
                                                             <div class="flex-1 ms-2 ps-1">
                                                                 <h5 class="font-size-14 mb-0"><a href=""
@@ -702,7 +702,7 @@
                                                             <label for="chk13" class="toggle"></label>
                                                         </div>
                                                         <div class="d-flex title align-items-center">
-                                                            <img src="{{ URL::asset('build/images/users/avatar-4.jpg') }}"
+                                                            <img src="{{ URL::asset('/build/images/users/avatar-4.jpg') }}"
                                                                 class="avatar-sm rounded-circle" alt="">
                                                             <div class="flex-1 ms-2 ps-1">
                                                                 <h5 class="font-size-14 mb-0"><a href=""
@@ -795,10 +795,10 @@
     @endsection
     @section('scripts')
         <!-- ckeditor -->
-        <script src="{{ URL::asset('build/libs/@ckeditor/ckeditor5-build-classic/build/ckeditor.js') }}"></script>
+        <script src="{{ URL::asset('/build/libs/@ckeditor/ckeditor5-build-classic/build/ckeditor.js') }}"></script>
 
         <!-- email editor init -->
-        <script src="{{ URL::asset('build/js/pages/email-editor.init.js') }}"></script>
+        <script src="{{ URL::asset('/build/js/pages/email-editor.init.js') }}"></script>
         <!-- App js -->
-        <script src="{{ URL::asset('build/js/app.js') }}"></script>
+        <script src="{{ URL::asset('/build/js/app.js') }}"></script>
     @endsection

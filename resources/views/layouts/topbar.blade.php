@@ -5,19 +5,19 @@
             <div class="navbar-brand-box">
                 <a href="index" class="logo logo-dark">
                     <span class="logo-sm">
-                        <img src="{{ URL::asset('build/images/logo-dark-sm.png') }}" alt="" height="26">
+                        <img src="{{ URL::asset('/build/images/logo-dark-sm.png') }}" alt="" height="26">
                     </span>
                     <span class="logo-lg">
-                        <img src="{{ URL::asset('build/images/logo-dark-sm.png') }}" alt="" height="26">
+                        <img src="{{ URL::asset('/build/images/logo-dark-sm.png') }}" alt="" height="26">
                     </span>
                 </a>
 
                 <a href="index" class="logo logo-light">
                     <span class="logo-lg">
-                        <img src="{{ URL::asset('build/images/logo-light.png') }}" alt="" height="30">
+                        <img src="{{ URL::asset('/build/images/logo-light.png') }}" alt="" height="30">
                     </span>
                     <span class="logo-sm">
-                        <img src="{{ URL::asset('build/images/logo-light-sm.png') }}" alt="" height="26">
+                        <img src="{{ URL::asset('/build/images/logo-light-sm.png') }}" alt="" height="26">
                     </span>
                 </a>
             </div>
@@ -39,38 +39,38 @@
             <div class="dropdown d-inline-block language-switch ms-2">
                 <button type="button" class="btn header-item" data-bs-toggle="dropdown" aria-haspopup="true"
                     aria-expanded="false">
-                    <img class="header-lang-img" src="{{ URL::asset('build/images/flags/us.jpg') }}"
+                    <img class="header-lang-img" src="{{ URL::asset('/build/images/flags/us.jpg') }}"
                         alt="Header Language" height="18">
                 </button>
                 <div class="dropdown-menu dropdown-menu-end">
 
                     <!-- item-->
                     <a href="javascript:void(0);" class="dropdown-item notify-item language" data-lang="eng">
-                        <img src="{{ URL::asset('build/images/flags/us.jpg') }}" alt="user-image" class="me-1"
+                        <img src="{{ URL::asset('/build/images/flags/us.jpg') }}" alt="user-image" class="me-1"
                             height="12"> <span class="align-middle">English</span>
                     </a>
 
                     <!-- item-->
                     <a href="javascript:void(0);" class="dropdown-item notify-item language" data-lang="sp">
-                        <img src="{{ URL::asset('build/images/flags/spain.jpg') }}" alt="user-image" class="me-1"
+                        <img src="{{ URL::asset('/build/images/flags/spain.jpg') }}" alt="user-image" class="me-1"
                             height="12"> <span class="align-middle">Spanish</span>
                     </a>
 
                     <!-- item-->
                     <a href="javascript:void(0);" class="dropdown-item notify-item language" data-lang="gr">
-                        <img src="{{ URL::asset('build/images/flags/germany.jpg') }}" alt="user-image" class="me-1"
+                        <img src="{{ URL::asset('/build/images/flags/germany.jpg') }}" alt="user-image" class="me-1"
                             height="12"> <span class="align-middle">German</span>
                     </a>
 
                     <!-- item-->
                     <a href="javascript:void(0);" class="dropdown-item notify-item language" data-lang="it">
-                        <img src="{{ URL::asset('build/images/flags/italy.jpg') }}" alt="user-image" class="me-1"
+                        <img src="{{ URL::asset('/build/images/flags/italy.jpg') }}" alt="user-image" class="me-1"
                             height="12"> <span class="align-middle">Italian</span>
                     </a>
 
                     <!-- item-->
                     <a href="javascript:void(0);" class="dropdown-item notify-item language" data-lang="ru">
-                        <img src="{{ URL::asset('build/images/flags/russia.jpg') }}" alt="user-image" class="me-1"
+                        <img src="{{ URL::asset('/build/images/flags/russia.jpg') }}" alt="user-image" class="me-1"
                             height="12"> <span class="align-middle">Russian</span>
                     </a>
                 </div>
@@ -117,7 +117,7 @@
                         <a href="#!" class="text-reset notification-item">
                             <div class="d-flex">
                                 <div class="flex-shrink-0 me-3">
-                                    <img src="{{ URL::asset('build/images/users/avatar-3.jpg') }}"
+                                    <img src="{{ URL::asset('/build/images/users/avatar-3.jpg') }}"
                                         class="rounded-circle avatar-sm" alt="user-pic">
                                 </div>
                                 <div class="flex-grow-1">
@@ -166,7 +166,7 @@
                         <a href="#!" class="text-reset notification-item">
                             <div class="d-flex">
                                 <div class="flex-shrink-0 me-3">
-                                    <img src="{{ URL::asset('build/images/users/avatar-6.jpg') }}"
+                                    <img src="{{ URL::asset('/build/images/users/avatar-6.jpg') }}"
                                         class="rounded-circle avatar-sm" alt="user-pic">
                                 </div>
                                 <div class="flex-grow-1">
@@ -192,7 +192,7 @@
                     id="page-header-user-dropdown-v" data-bs-toggle="dropdown" aria-haspopup="true"
                     aria-expanded="false">
                     <img class="rounded-circle header-profile-user"
-                        src="{{ URL::asset('build/images/users/avatar-3.jpg') }}" alt="Header Avatar">
+                        src="{{ URL::asset('/build/images/users/avatar-3.jpg') }}" alt="Header Avatar">
                     <span class="d-none d-xl-inline-block ms-2 fw-medium font-size-15">Martin Gurley</span>
                 </button>
                 <div class="dropdown-menu dropdown-menu-end pt-0">

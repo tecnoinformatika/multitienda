@@ -71,9 +71,9 @@
 
                                                                 <div
                                                                     class="d-flex flex-wrap align-items-start event-img mt-3 gap-2">
-                                                                    <img src="{{ URL::asset('build/images/small/img-2.jpg') }}" alt=""
+                                                                    <img src="{{ URL::asset('/build/images/small/img-2.jpg') }}" alt=""
                                                                         class="img-fluid rounded" width="60">
-                                                                    <img src="{{ URL::asset('build/images/small/img-5.jpg') }}" alt=""
+                                                                    <img src="{{ URL::asset('/build/images/small/img-5.jpg') }}" alt=""
                                                                         class="img-fluid rounded" width="60">
                                                                 </div>
                                                             </div>
@@ -238,5 +238,5 @@
     @endsection
     @section('scripts')
         <!-- App js -->
-        <script src="{{ URL::asset('build/js/app.js') }}"></script>
+        <script src="{{ URL::asset('/build/js/app.js') }}"></script>
     @endsection

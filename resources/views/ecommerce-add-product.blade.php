@@ -4,10 +4,10 @@
 @endsection
 @section('css')
     <!-- choices css -->
-    <link href="{{ URL::asset('build/libs/choices.js/public/assets/styles/choices.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ URL::asset('/build/libs/choices.js/public/assets/styles/choices.min.css') }}" rel="stylesheet" type="text/css" />
 
     <!-- dropzone css -->
-    <link href="{{ URL::asset('build/libs/dropzone/min/dropzone.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ URL::asset('/build/libs/dropzone/min/dropzone.min.css') }}" rel="stylesheet" type="text/css" />
 @endsection
 @section('page-title')
     Add Product
@@ -237,13 +237,13 @@
     @endsection
     @section('scripts')
         <!-- choices js -->
-        <script src="{{ URL::asset('build/libs/choices.js/public/assets/scripts/choices.min.js') }}"></script>
+        <script src="{{ URL::asset('/build/libs/choices.js/public/assets/scripts/choices.min.js') }}"></script>
 
         <!-- dropzone plugin -->
-        <script src="{{ URL::asset('build/libs/dropzone/min/dropzone.min.js') }}"></script>
+        <script src="{{ URL::asset('/build/libs/dropzone/min/dropzone.min.js') }}"></script>
 
         <!-- init js -->
-        <script src="{{ URL::asset('build/js/pages/ecommerce-choices.init.js') }}"></script>
+        <script src="{{ URL::asset('/build/js/pages/ecommerce-choices.init.js') }}"></script>
         <!-- App js -->
-        <script src="{{ URL::asset('build/js/app.js') }}"></script>
+        <script src="{{ URL::asset('/build/js/app.js') }}"></script>
     @endsection
