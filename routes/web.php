@@ -9,6 +9,7 @@ use App\Models\Canal;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Controllers\WooCommerceController;
 use Illuminate\Support\Facades\Artisan;
+use App\Http\Controllers\Auth\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,8 +25,12 @@ use Illuminate\Support\Facades\Artisan;
 
 Auth::routes();
 
-//Ruta para Iniciar el Flujo de Autorización de WooCommerce
+//Ruta para Iniciar el Flujo de Autorización de socialite
+Route::get('/auth/google', 'Auth\LoginController@redirectToGoogle')->name('auth.google');
+Route::get('/auth/google/callback', 'Auth\LoginController@handleGoogleCallback');
 
+
+//Ruta para Iniciar el Flujo de Autorización de Syscom
 Route::controller(WooCommerceController::class)->group(function () {
     Route::any('woocommerce/confirmed/{any}', 'confirmed')->name('woocommerce.confirmed');
     Route::any('woocommerce/add/{any}', 'add')->name('woocommerce.add');
@@ -34,6 +39,8 @@ Route::controller(WooCommerceController::class)->group(function () {
     Route::get('VerWoocommerce/{id}', 'VerWoocommerce')->name('VerWoocommerce');
     Route::get('/obtenerProductosWoo/{id}', 'obtenerProductosWoo')->name('obtenerProductosWoo');
 });
+
+//Ruta para Iniciar el Flujo de canales
 Route::get('/', [App\Http\Controllers\HomeController::class, 'root']);
 Route::controller(CanalesController::class)->group(function () {
     Route::get('canales', 'canales')->name('canales');
@@ -47,7 +54,11 @@ Route::controller(CanalesController::class)->group(function () {
     Route::get('validar-url', 'validarURL')->name('validar-url');
     Route::get('generar-enlace-autorizacion', 'generarEnlaceAutorizacion')->name('generarEnlaceAutorizacion');
     Route::get('obtenerCanales/{id}', 'obtenerCanales')->name('obtenerCanales');
+    Route::get('/auth/facebook', 'redirectToFacebook')->name('auth.facebook');
+    Route::get('/auth/facebook/callback', 'handleFacebookCallback');
 });
+
+//Ruta para Iniciar el Flujo de productos
 Route::controller(ProductosController::class)->group(function () {
     Route::post('sincronizar-producto/{id}', 'sincronizar')->name('sincronizar-producto');
     Route::get('sincronizarsyscom1', 'sincronizarsyscom1')->name('sincronizarsyscom1');

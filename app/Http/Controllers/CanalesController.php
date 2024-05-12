@@ -13,17 +13,37 @@ use App\Models\Canal;
 use Auth;
 use App\Models\CanalDisponible;
 use Illuminate\Support\Facades\Validator;
+use Socialite;
 
 class CanalesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     private $client;
 
+
+    public function redirectToFacebook()
+    {
+        return Socialite::driver('facebook')->redirect();
+    }
+
+    public function handleFacebookCallback()
+    {
+        $user = Socialite::driver('facebook')->user();
+
+        // Aquí puedes manejar la lógica para autenticar al usuario en tu aplicación
+
+        return redirect()->route('home');
+    }
     public function Canales()
     {
         $canales = CanalDisponible::all();
-        $miscanales = Canal::where('user_id',Auth::user()->id)->get();
-
-
+       
+        $miscanales = Canal::where('user_id',Auth::user()->id)->select('id as id','Canal as canal','url as url')->get();
+      
         return view('canal/canales')->with('canales',$canales)->with('miscanales',$miscanales);
     }
     public function obtenerCanales($id)
