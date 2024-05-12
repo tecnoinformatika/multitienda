@@ -22,11 +22,24 @@ class CanalesController extends Controller
     {
         $canales = CanalDisponible::all();
         $miscanales = Canal::where('user_id',Auth::user()->id)->get();
-        
+
 
         return view('canal/canales')->with('canales',$canales)->with('miscanales',$miscanales);
     }
+    public function obtenerCanales($id)
+    {
+         // Obtener el ID del usuario actualmente autenticado
+            $userId = Auth::id();
 
+            // Consulta para obtener los otros canales del usuario excluyendo el canal actual
+            $canales = Canal::where('user_id', $userId)
+                            ->where('id', '!=', $id) // Excluir el canal actual por su ID
+                            ->select('id as id', 'Canal as canal', 'url as url')
+                            ->get();
+
+            // Devolver los canales como respuesta en formato JSON
+            return response()->json($canales);
+    }
     public function nuevocanal(Request $request, $any){
         $parts = explode('/', $any);
         $canal = end($parts);
@@ -153,7 +166,7 @@ class CanalesController extends Controller
     public function misCanales()
     {
         $canales = Canal::where('user_id',Auth::user()->id)->get();
-        
+
         if(!empty($canales)){
             return view('miscanales', [
 

@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('title')
-    Advance Tables
+    Visualiza y sincroniza tus productos
 @endsection
 @section('css')
     <!-- gridjs css -->
@@ -64,12 +64,15 @@
             text-overflow: ellipsis; /* Mostrar puntos suspensivos (...) cuando el texto exceda el ancho máximo */
             white-space: nowrap; /* Evitar el salto de línea para mostrar el texto en una sola línea */
         }
+        .img-fluid{
+            max-width: 27% !important;
+        }
     </style>
 
 
 @endsection
 @section('page-title')
-    Advance Tables
+    Visualiza y sincroniza tus productos
 @endsection
 @section('body')
 
@@ -82,7 +85,51 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title mb-0">Search</h4>
+                        <h4 class="card-title mb-0">Sincronizar con canales</h4>
+                    </div><!-- end card header -->
+                    <div class="card-body" >
+                        <div class="d-flex flex-wrap gap-3 align-items-center">
+                            <button type="button" id="botonEnviar" class="btn btn-primary btn-lg waves-effect waves-light">Sincronizar</button>
+
+                            <div class="modal fade" id="modalEnviarProductos" data-bs-backdrop="static"
+                                data-bs-keyboard="false" tabindex="-1" role="dialog"
+                                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>IDs de los productos seleccionados:</p>
+                                            <ul id="listaProductosSeleccionados"></ul>
+                                            <div class="mb-3">
+                                                <label for="selectCanal" class="form-label">Selecciona un canal:</label>
+                                                <select class="form-select" id="selectCanal">
+                                                    <!-- Aquí puedes agregar opciones de canales -->
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-light"
+                                                data-bs-dismiss="modal">Close</button>
+                                            <button type="button" id="enviarP" class="btn btn-primary">Enviar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end card body -->
+
+                </div>
+                <!-- end card -->
+            </div>
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title mb-0">Tus productos de {{ $canal->url }}</h4>
                     </div><!-- end card header -->
                     <div class="card-body" >
                         <div class="table-responsive">
@@ -111,10 +158,12 @@
 
                     </div>
                     <!-- end card body -->
+
                 </div>
                 <!-- end card -->
             </div>
             <!-- end col -->
+
         </div>
         <!-- end row -->
     @endsection
@@ -124,6 +173,8 @@
           <!-- jQuery (obligatorio para DataTables) -->
           <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
           <script src="//cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+          <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+          <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
         <script src="{{ URL::asset('/build/js/app.js') }}"></script>
 
 
@@ -143,8 +194,8 @@
                         columns: [
                             { data: null, render: function(data, type, row) {
                                 return '<div class="form-check font-size-16">' +
-                                    '<input type="checkbox" class="form-check-input" id="checkbox' + data.index + '">' +
-                                    '<label class="form-check-label" for="checkbox' + data.index + '"></label>' +
+                                    '<input type="checkbox" class="form-check-input" id="checkbox' + data.id + '">' +
+                                    '<label class="form-check-label" for="checkbox' + data.id + '"></label>' +
                                     '</div>';
                             }},
                             { data: null, render: function(data, type, row) {
@@ -155,24 +206,41 @@
                             {data: 'name'},
                             { data: 'regular_price' },
                             { data: 'stock_quantity' },
-                            { data: function(row) {
-                                var categories = row.categories;
-                                var categoryString = '';
-                                if (categories && categories.length > 0) {
-                                    categories.forEach(function(category, index) {
-                                        if (category.name) {
-                                            if (index > 0) {
-                                                categoryString += ' > ';
+                            {
+                                data: function(row) {
+                                    var categories = row.categories;
+                                    var categoryString = '';
+                                    if (categories && categories.length > 0) {
+                                        categories.forEach(function(category, index) {
+                                            if (category.name) {
+                                                if (index > 0) {
+                                                    categoryString += ' ';
+                                                }
+                                                var badgeClass = '';
+                                                switch (index) {
+                                                    case 0:
+                                                        badgeClass = 'badge-soft-success';
+                                                        break;
+                                                    case 1:
+                                                        badgeClass = 'badge-soft-primary';
+                                                        break;
+                                                    case 2:
+                                                        badgeClass = 'badge-soft-info';
+                                                        break;
+                                                    default:
+                                                        badgeClass = 'badge-soft-secondary';
+                                                }
+                                                categoryString += '<span class="badge ' + badgeClass + ' mb-0">' + category.name + '</span>';
                                             }
-                                            categoryString += category.name;
-                                        }
-                                    });
+                                        });
+                                    }
+                                    if (categoryString === '') {
+                                        // Si no hay categorías definidas, mostrar la categoría no definida en rojo
+                                        return '<span class="badge badge-soft-danger mb-0">Categoría no definida</span>';
+                                    }
+                                    return categoryString;
                                 }
-                                if (categoryString === '') {
-                                    return 'Categoría no definida';
-                                }
-                                return categoryString;
-                            }},
+                            },
                             { data: null, render: function(data, type, row) {
                                 return '<ul class="list-inline mb-0">' +
                                     '<li class="list-inline-item">' +
@@ -201,6 +269,102 @@
                 error: function(xhr, status, error) {
                     console.error("Error al obtener los datos de los productos:", error);
                 }
+            });
+            // Función para enviar productos seleccionados al controlador
+            $('#botonEnviar').on('click', function() {
+                abrirModalEnviarProductos();
+            });
+
+            // Función para abrir el modal de enviar productos
+            function abrirModalEnviarProductos() {
+                var productosSeleccionados = [];
+                $('#productosTable tbody input[type="checkbox"]:checked').each(function() {
+                    var productoId = $(this).attr('id').replace('checkbox', '');
+                    productosSeleccionados.push(productoId);
+                });
+
+                // Mostrar los IDs de los productos seleccionados en el modal
+                var listaProductosSeleccionados = $('#listaProductosSeleccionados');
+                listaProductosSeleccionados.empty();
+                productosSeleccionados.forEach(function(id) {
+                    listaProductosSeleccionados.append('<li>' + id + '</li>');
+                });
+
+                // Aquí puedes cargar las opciones del select con los canales disponibles
+                cargarOpcionesCanales();
+
+                // Abrir el modal
+                $('#modalEnviarProductos').modal('show');
+            }
+
+            // Función para cargar las opciones del select con los canales disponibles
+            function cargarOpcionesCanales() {
+                // Aquí puedes realizar una petición AJAX para obtener los canales disponibles
+                // Por ejemplo:
+                $.ajax({
+                    url: '/obtenerCanales/'+idcanal,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(response) {
+                        var selectCanal = $('#selectCanal');
+                        selectCanal.empty();
+                        response.forEach(function(canal) {
+                            selectCanal.append('<option value="' + canal.id + '">' + canal.canal + ' '+ canal.url +'</option>');
+                        });
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("Error al obtener los canales:", error);
+                    }
+                });
+            }
+
+            // Evento de cambio en el select de canal
+            $('#selectCanal').on('change', function() {
+                // Habilitar el botón de enviar
+                $('#enviarP').prop('disabled', false);
+            });
+
+            // Evento de clic en el botón de enviar
+            $('#enviarP').on('click', function() {
+                enviarProductosSeleccionados();
+            });
+
+            // Función para enviar productos seleccionados al controlador
+            function enviarProductosSeleccionados() {
+                var productosSeleccionados = [];
+                $('#productosTable tbody input[type="checkbox"]:checked').each(function() {
+                    var productoId = $(this).attr('id').replace('checkbox', '');
+                    var producto = $('#productosTable').DataTable().row($(this).closest('tr')).data();
+                    productosSeleccionados.push(producto);
+                });
+
+                var canalSeleccionado = $('#selectCanal').val();
+
+                // Aquí puedes enviar los productos seleccionados al controlador usando AJAX
+                // Por ejemplo:
+                $.ajax({
+                    url: '/ruta-del-controlador',
+                    type: 'POST',
+                    data: { productos: productosSeleccionados, canal: canalSeleccionado },
+                    success: function(response) {
+                        // Manejar la respuesta del controlador si es necesario
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("Error al enviar los productos seleccionados:", error);
+                    }
+                });
+            }
+            // Función para seleccionar/deseleccionar todos los checkboxes en el tbody
+            function toggleSelectAll() {
+                var selectAllCheckbox = $('#selectAll');
+                var checkboxes = $('#productosTable tbody input[type="checkbox"]');
+
+                checkboxes.prop('checked', selectAllCheckbox.prop('checked'));
+            }
+
+            // Evento de cambio en el checkbox #selectAll
+            $('#selectAll').on('change', function() {
+                toggleSelectAll();
             });
 
         });

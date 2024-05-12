@@ -46,6 +46,7 @@ Route::controller(CanalesController::class)->group(function () {
     Route::get('canal/{any}/new', 'nuevocanal')->name('nuevocanal');
     Route::get('validar-url', 'validarURL')->name('validar-url');
     Route::get('generar-enlace-autorizacion', 'generarEnlaceAutorizacion')->name('generarEnlaceAutorizacion');
+    Route::get('obtenerCanales/{id}', 'obtenerCanales')->name('obtenerCanales');
 });
 Route::controller(ProductosController::class)->group(function () {
     Route::post('sincronizar-producto/{id}', 'sincronizar')->name('sincronizar-producto');
