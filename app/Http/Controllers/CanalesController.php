@@ -77,6 +77,8 @@ class CanalesController extends Controller
 
         // Guarda el token de acceso asociado con el canal correspondiente
         $canal = Canal::find($canalId);
+        $canal->Canal = 'Mercadolibre';
+        $canal->nombre = 'Mercadolibre';
         $canal->token = $accessToken;
         $canal->expires_in = $expiresIn;
         $canal->refresh_token = $refreshToken;

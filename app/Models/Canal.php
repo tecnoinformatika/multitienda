@@ -30,7 +30,9 @@ class Canal extends Model
         'token',
         'refresh_token',
         'token_type',
-        'expires_in'
+        'expires_in',
+        'scope',
+        'MeliUser_id'
     ];
 
     protected $casts = [
