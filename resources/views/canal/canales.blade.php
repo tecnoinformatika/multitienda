@@ -191,6 +191,7 @@
                                             </thead>
                                             <tbody>
                                             @foreach($miscanales as $canal)
+                                            
                                                 <tr>
                                                     <td><a href="javascript: void(0);" class="text-dark fw-medium"><i
                                                                 class="mdi mdi-file-document font-size-20 align-middle text-primary me-2"></i>

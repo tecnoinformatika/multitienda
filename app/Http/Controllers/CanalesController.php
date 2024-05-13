@@ -38,11 +38,108 @@ class CanalesController extends Controller
 
         return redirect()->route('home');
     }
+
+    public function redirectToMercadoLibre()
+    {
+        $clientId = config('services.mercadolibre.client_id');
+        $redirectUri = config('services.mercadolibre.redirect_uri');
+
+        return redirect()->away("https://auth.mercadolibre.com.ar/authorization?response_type=code&client_id={$clientId}&redirect_uri={$redirectUri}");
+    }
+
+    public function handleMercadoLibreCallback(Request $request)
+    {
+        $code = $request->input('code');
+
+        $clientId = config('services.mercadolibre.client_id');
+        $clientSecret = config('services.mercadolibre.client_secret');
+        $redirectUri = config('services.mercadolibre.redirect');
+
+        $client = new Client();
+        $response = $client->post("https://api.mercadolibre.com/oauth/token", [
+            'form_params' => [
+                'grant_type' => 'authorization_code',
+                'client_id' => $clientId,
+                'client_secret' => $clientSecret,
+                'code' => $code,
+                'redirect_uri' => $redirectUri,
+            ],
+        ]);
+
+        $accessToken = json_decode((string) $response->getBody(), true)['access_token'];
+
+        // Aquí puedes almacenar el token de acceso de manera segura para futuras solicitudes
+
+        return redirect()->route('home');
+    }
+    public function handleMercadoLibreNotification(Request $request)
+    {
+        // Procesar la notificación recibida de MercadoLibre
+        $notificationData = $request->all();
+
+        // Determinar el tipo de notificación y tomar acciones en consecuencia
+        switch ($notificationData['topic']) {
+            case 'items':
+                // Procesar notificación de items
+                $itemId = $this->extractIdFromResource($notificationData['resource']);
+                $itemInfo = $this->getItemInfo($itemId);
+                // Realizar acciones con la información del item
+                break;
+            case 'orders_v2':
+                // Procesar notificación de órdenes
+                $orderId = $this->extractIdFromResource($notificationData['resource']);
+                $orderInfo = $this->getOrderInfo($orderId);
+                // Realizar acciones con la información de la orden
+                break;
+            case 'questions':
+                // Procesar notificación de preguntas
+                $questionId = $this->extractIdFromResource($notificationData['resource']);
+                $questionInfo = $this->getQuestionInfo($questionId);
+                // Realizar acciones con la información de la pregunta
+                break;
+            // Agregar casos para otros tipos de notificaciones según sea necesario
+            default:
+                // No hacer nada o manejar otros tipos de notificaciones según sea necesario
+                break;
+        }
+
+        // Responder a MercadoLibre con un código de estado HTTP 200 para indicar que la notificación fue recibida correctamente
+        return response()->json(['message' => 'Notification received'], 200);
+    }
+
+    // Método para extraer el ID del recurso de la URL
+    private function extractIdFromResource($resourceUrl)
+    {
+        $parts = explode('/', $resourceUrl);
+        return end($parts);
+    }
+
+    // Método para obtener información del item
+    private function getItemInfo($itemId)
+    {
+        // Realizar una solicitud GET a la API de MercadoLibre para obtener información del item
+        // Implementa esta lógica según la estructura de la API de MercadoLibre y tus necesidades específicas
+    }
+
+    // Método para obtener información de la orden
+    private function getOrderInfo($orderId)
+    {
+        // Realizar una solicitud GET a la API de MercadoLibre para obtener información de la orden
+        // Implementa esta lógica según la estructura de la API de MercadoLibre y tus necesidades específicas
+    }
+
+    // Método para obtener información de la pregunta
+    private function getQuestionInfo($questionId)
+    {
+        // Realizar una solicitud GET a la API de MercadoLibre para obtener información de la pregunta
+        // Implementa esta lógica según la estructura de la API de MercadoLibre y tus necesidades específicas
+    }
+
     public function Canales()
     {
         $canales = CanalDisponible::all();
        
-        $miscanales = Canal::where('user_id',Auth::user()->id)->select('id as id','Canal as canal','url as url')->get();
+        $miscanales = Canal::where('user_id',Auth::user()->id)->select('id as id','Canal as Canal','url as url')->get();
       
         return view('canal/canales')->with('canales',$canales)->with('miscanales',$miscanales);
     }

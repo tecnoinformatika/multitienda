@@ -56,6 +56,9 @@ Route::controller(CanalesController::class)->group(function () {
     Route::get('obtenerCanales/{id}', 'obtenerCanales')->name('obtenerCanales');
     Route::get('/auth/facebook', 'redirectToFacebook')->name('auth.facebook');
     Route::get('/auth/facebook/callback', 'handleFacebookCallback');
+    Route::get('/auth/mercadolibre', 'redirectToMercadoLibre')->name('auth.mercadolibre');
+    Route::get('/auth/mercadolibre/callback', 'handleMercadoLibreCallback');
+    Route::post('/mercadolibre/notification', 'handleMercadolibreNotification');
 });
 
 //Ruta para Iniciar el Flujo de productos

@@ -656,7 +656,7 @@
         <script src="{{ URL::asset('/build/js/app.js') }}"></script>
         <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
         <script>
-           function obtenerProductos(categoriaId = null, marcaId = null) {
+           function obtenerProductos(categoriaId = null, marcaId = null, nivel = null) {
                 $.ajax({
                     url: '/obtener-productos-html',
                     type: 'GET',

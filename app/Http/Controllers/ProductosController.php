@@ -47,15 +47,10 @@ class ProductosController extends Controller
         $productos = Producto::query();
 
         // Aplica filtros si se seleccionó una categoría o marca
-        if ($request->has('nivel'))
-        {
+        if ($request->has('nivel') && $request->has('categoria_id')) {
             $nivel = $request->input('nivel');
-        }
-        if ($request->has('categoria_id')) {
-            $productos->whereHas('categorias', function ($query) use ($request) {
-                $query->where('categoria_id', $request->input('categoria_id'));
-                $query->where('nivel', $nivel); // Filtra solo las categorías principales
-            });
+            $categoriaId = $request->input('categoria_id');
+            $productos->where('nivel1', $categoriaId)->orWhere('nivel2', $categoriaId)->orWhere('nivel3', $categoriaId);
         }
 
         if ($request->has('marca_id')) {
@@ -63,10 +58,12 @@ class ProductosController extends Controller
         }
 
         $productos = $productos->get();
-
+        
         $html = '';
         foreach ($productos as $producto) {
-            $precios = json_decode($producto['precios']);
+            $precio_descuento = isset($precios->precio_descuento) ? $precios->precio_descuento : '';
+            $precio_especial = isset($precios->precio_especial) ? $precios->precio_especial : '';
+
             $html .= '<div class="col-xl-4 col-sm-6">';
             $html .= '    <div class="product-box rounded p-3 mt-4">';
             $html .= '        <div class="product-img bg-light p-3 rounded">';
@@ -77,7 +74,18 @@ class ProductosController extends Controller
             $html .= '            <h5 class="mt-1 mb-0"><a href="' . $producto->link . '" class="text-dark font-size-16">' . $producto->titulo . '</a></h5>';
             $html .= '            <!-- Aquí puedes agregar las estrellas de calificación si las tienes -->';
             $html .= '            <a href="#" class="product-buy-icon bg-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="Agregar al carrito"><i class="mdi mdi-cart-outline text-white font-size-16"></i></a>';
-            $html .= '            <h5 class="font-size-20 text-primary mt-3 mb-0">Precio desde $' . $precios->precio_descuento . ' <del class="text-muted font-size-15 fw-medium ps-1">$' . $precios->precio_especial . '</del></h5>';
+            
+            // Construir el precio según la disponibilidad de precio descuento y precio especial
+            $html .= '            <h5 class="font-size-20 text-primary mt-3 mb-0">';
+            if ($precio_descuento !== '') {
+                $html .= 'Precio desde $' . $precio_descuento;
+                if ($precio_especial !== '') {
+                    $html .= ' <del class="text-muted font-size-15 fw-medium ps-1">$' . $precio_especial . '</del>';
+                }
+            } else {
+                $html .= 'Precio: No disponible';
+            }
+            $html .= '            </h5>';
             $html .= '        </div>';
             $html .= '    </div>';
             $html .= '</div>';
