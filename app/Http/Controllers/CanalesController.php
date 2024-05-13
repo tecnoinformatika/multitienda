@@ -39,19 +39,18 @@ class CanalesController extends Controller
         return redirect()->route('home');
     }
 
-    public function redirectToMercadoLibre($canalId)
+    public function redirectToMercadoLibre()
     {
         $clientId = config('services.mercadolibre.client_id');
         $redirectUri = config('services.mercadolibre.redirect_uri');
 
         // Incluye el ID del canal como parte de la URL de redirección
-        return redirect()->away("https://auth.mercadolibre.com.co/authorization?response_type=code&client_id={$clientId}&redirect_uri={$redirectUri}&canal_id={$canalId}");
+        return redirect()->away("https://auth.mercadolibre.com.co/authorization?response_type=code&client_id={$clientId}&redirect_uri={$redirectUri}");
     }
 
     public function handleMercadoLibreCallback(Request $request)
     {
         $code = $request->input('code');
-        $canalId = $request->input('canal_id'); // Recupera el ID del canal de la solicitud
 
         $clientId = config('services.mercadolibre.client_id');
         $clientSecret = config('services.mercadolibre.client_secret');
@@ -76,7 +75,7 @@ class CanalesController extends Controller
         $scope = json_decode((string) $response->getBody(), true)['scope'];
 
         // Guarda el token de acceso asociado con el canal correspondiente
-        $canal = Canal::find($canalId);
+        $canal = new Canal();
         $canal->Canal = 'Mercadolibre';
         $canal->nombre = 'Mercadolibre';
         $canal->token = $accessToken;
