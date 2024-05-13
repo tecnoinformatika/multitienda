@@ -82,6 +82,7 @@ class CanalesController extends Controller
         $canal->expires_in = $expiresIn;
         $canal->refresh_token = $refreshToken;
         $canal->MeliUser_id = $userId;
+        $canal->user_id = Auth::user()->id;
         $canal->scope = $scope;
         $canal->token_type = $tokenType;
         $canal->save();
