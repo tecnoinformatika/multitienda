@@ -39,17 +39,19 @@ class CanalesController extends Controller
         return redirect()->route('home');
     }
 
-    public function redirectToMercadoLibre()
+    public function redirectToMercadoLibre($canalId)
     {
         $clientId = config('services.mercadolibre.client_id');
         $redirectUri = config('services.mercadolibre.redirect_uri');
 
-        return redirect()->away("https://auth.mercadolibre.com.ar/authorization?response_type=code&client_id={$clientId}&redirect_uri={$redirectUri}");
+        // Incluye el ID del canal como parte de la URL de redirección
+        return redirect()->away("https://auth.mercadolibre.com.co/authorization?response_type=code&client_id={$clientId}&redirect_uri={$redirectUri}&canal_id={$canalId}");
     }
 
     public function handleMercadoLibreCallback(Request $request)
     {
         $code = $request->input('code');
+        $canalId = $request->input('canal_id'); // Recupera el ID del canal de la solicitud
 
         $clientId = config('services.mercadolibre.client_id');
         $clientSecret = config('services.mercadolibre.client_secret');
@@ -67,10 +69,23 @@ class CanalesController extends Controller
         ]);
 
         $accessToken = json_decode((string) $response->getBody(), true)['access_token'];
+        $refreshToken = json_decode((string) $response->getBody(), true)['refresh_token'];
+        $expiresIn = json_decode((string) $response->getBody(), true)['expires_in'];
+        $tokenType = json_decode((string) $response->getBody(), true)['token_type'];
+        $userId = json_decode((string) $response->getBody(), true)['user_id'];
+        $scope = json_decode((string) $response->getBody(), true)['scope'];
 
-        // Aquí puedes almacenar el token de acceso de manera segura para futuras solicitudes
+        // Guarda el token de acceso asociado con el canal correspondiente
+        $canal = Canal::find($canalId);
+        $canal->token = $accessToken;
+        $canal->expires_in = $expiresIn;
+        $canal->refresh_token = $refreshToken;
+        $canal->MeliUser_id = $userId;
+        $canal->scope = $scope;
+        $canal->token_type = $tokenType;
+        $canal->save();
 
-        return redirect()->route('home');
+        return redirect()->route('canales');
     }
     public function handleMercadoLibreNotification(Request $request)
     {

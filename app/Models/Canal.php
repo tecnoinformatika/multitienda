@@ -25,7 +25,12 @@ class Canal extends Model
         'productosLinio',
         'productosFalabella',
         'productosFacebook',
-        'totalproductos'
+        'totalproductos',
+        'usuario_id',
+        'token',
+        'refresh_token',
+        'token_type',
+        'expires_in'
     ];
 
     protected $casts = [
