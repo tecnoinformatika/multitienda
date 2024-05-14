@@ -24,9 +24,6 @@ class MercadolibreController extends Controller
          $this->obtenerInformacionUsuario($canal);
          $productos = $this->obtenerProductos($canal->token);        
 
-         dd($productos);
-
-
         // Devuelve los productos a la vista
         return view('canal.mercadolibre', ['canal' => $canal, 'productos' => $productos]);
     }
