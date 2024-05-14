@@ -39,6 +39,11 @@ Route::controller(WooCommerceController::class)->group(function () {
     Route::get('VerWoocommerce/{id}', 'VerWoocommerce')->name('VerWoocommerce');
     Route::get('/obtenerProductosWoo/{id}', 'obtenerProductosWoo')->name('obtenerProductosWoo');
 });
+//Rutas para manejo de Mercadolibre
+Route::controller(MercadolibreController::class)->group(function () {
+    Route::get('VerMercadolibre/{id}', 'VerMercadolibre')->name('VerMercadolibre');
+    Route::get('/obtenerProductosMeli/{id}', 'obtenerProductosMeli')->name('obtenerProductosMeli');
+});
 
 //Ruta para Iniciar el Flujo de canales
 Route::get('/', [App\Http\Controllers\HomeController::class, 'root']);

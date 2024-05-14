@@ -187,7 +187,7 @@ class CanalesController extends Controller
             case 'mercadolibre':
                 return view('canal/nuevocanal/'.$canal);
                 break;
-            case 'prestashop':
+            case 'facebook':
                 return view('canal/nuevocanal/'.$canal);
                 break;
             case 'mercadoshops':
@@ -414,6 +414,24 @@ class CanalesController extends Controller
         switch ($canal) {
             case 'Woocommerce':
                 return redirect('/VerWoocommerce/'.$id);
+                break;
+            case 'Shopify':
+                return redirect('/VerShopify/'.$id);
+                break;
+            case 'Facebook':
+                return redirect('/VerFacebook/'.$id);
+                break;
+            case 'Mercadolibre':
+                return redirect('/VerMercadolibre/'.$id);
+                break;
+            case 'Shopify':
+                return redirect('/VerShopify'.$id);
+                break;
+            case 'Shopify':
+                return redirect('/VerShopify'.$id);
+                break;
+            case 'Shopify':
+                return redirect('/VerShopify'.$id);
                 break;
             case 'Shopify':
                 return redirect('/VerShopify'.$id);
