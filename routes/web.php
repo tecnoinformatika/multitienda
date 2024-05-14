@@ -43,6 +43,7 @@ Route::controller(WooCommerceController::class)->group(function () {
 Route::controller(MercadolibreController::class)->group(function () {
     Route::get('VerMercadolibre/{id}', 'VerMercadolibre')->name('VerMercadolibre');
     Route::get('/obtenerProductosMeli/{id}', 'obtenerProductosMeli')->name('obtenerProductosMeli');
+    route::get('createTestUsers', 'createTestUsers');
 });
 
 //Ruta para Iniciar el Flujo de canales
