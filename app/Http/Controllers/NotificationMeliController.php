@@ -21,8 +21,6 @@ class NotificationMeliController extends Controller
             'topic' => $notificationData['topic'],
             'application_id' => $notificationData['application_id'],
             'attempts' => $notificationData['attempts'],
-            'sent' => $notificationData['sent'],
-            'received' => $notificationData['received'],
         ]);
         // Determinar el tipo de notificación y tomar acciones en consecuencia
         switch ($notificationData['topic']) {
