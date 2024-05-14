@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Redirect;
 use App\Http\Controllers\WooCommerceController;
 use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\NotificationMeliController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,7 +48,10 @@ Route::controller(MercadolibreController::class)->group(function () {
     route::get('createTestUsers', 'createTestUsers');
     Route::post('/mercadolibre/notification', 'handleMercadolibreNotification');
 });
-
+Route::controller(NotificationMeliController::class)->group(function () {
+  
+    Route::post('/mercadolibre/notification', 'handleMercadolibreNotification');
+});
 //Ruta para Iniciar el Flujo de canales
 Route::get('/', [App\Http\Controllers\HomeController::class, 'root']);
 Route::controller(CanalesController::class)->group(function () {
