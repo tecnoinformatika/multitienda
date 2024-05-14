@@ -100,6 +100,7 @@ class MercadolibreController extends Controller
             ]);
             //dd($response);
             $userData = json_decode($response->getBody(), true);
+            UsuarioMercadoLibre::delete();
 
             // Crear un registro en la base de datos para el usuario creado
             UsuarioMercadoLibre::create([
