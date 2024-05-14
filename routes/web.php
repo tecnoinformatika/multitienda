@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CanalesController;
 use App\Http\Controllers\SyscomController;
 use App\Http\Controllers\ProductosController;
+use App\Http\Controllers\MercadolibreController;
 use Illuminate\Http\Request;
 use App\Models\Canal;
 use Illuminate\Support\Facades\Redirect;
