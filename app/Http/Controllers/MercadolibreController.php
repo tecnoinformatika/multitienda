@@ -80,7 +80,7 @@ class MercadolibreController extends Controller
     public function createTestUsers()
     {
         $canal = Canal::findOrFail(20);
-        $this->verificarYActualizarToken($canal);
+        dd($this->verificarYActualizarToken($canal));
         $accessToken = $canal->token; // Aquí deberías poner tu token de acceso
       
         $client = new Client([
