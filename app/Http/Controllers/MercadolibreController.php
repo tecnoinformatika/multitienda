@@ -21,6 +21,7 @@ class MercadolibreController extends Controller
          $this->verificarYActualizarToken($canal);
  
          // Obtener todos los productos del usuario en MercadoLibre
+         $this->obtenerInformacionUsuario($canal);
          $productos = $this->obtenerProductos($canal->token);        
 
          dd($productos);
@@ -28,6 +29,32 @@ class MercadolibreController extends Controller
 
         // Devuelve los productos a la vista
         return view('canal.mercadolibre', ['canal' => $canal, 'productos' => $productos]);
+    }
+    private function obtenerInformacionUsuario($canal)
+    {
+        $client = new Client([
+            'headers' => [
+                'Authorization' => 'Bearer ' . $canal->token,
+            ],
+        ]);
+
+        $response = $client->get('https://api.mercadolibre.com/users/me');
+        $userData = json_decode((string) $response->getBody(), true);
+
+        // Verifica si se obtuvo la información del usuario correctamente
+        if (isset($userData['id'])) {
+            $userId = $userData['id'];
+            $username = $userData['nickname']; // Aquí se obtiene el nombre de usuario
+
+            // Actualiza el nombre de usuario en el modelo Canal
+            $canal->nombre = $username;
+            $canal->save();
+
+            return ['user_id' => $userId, 'username' => $username];
+        } else {
+            // Maneja el caso en el que no se pudo obtener la información del usuario
+            return null;
+        }
     }
     private function obtenerUserId($accessToken)
     {
@@ -72,7 +99,7 @@ class MercadolibreController extends Controller
                 'refresh_token' => $refreshToken,
             ],
         ]);
-
+        
         $canal->token = json_decode((string) $response->getBody(), true)['access_token'];
         $canal->refresh_token = json_decode((string) $response->getBody(), true)['refresh_token'];
         $canal->expires_in = json_decode((string) $response->getBody(), true)['expires_in'];
