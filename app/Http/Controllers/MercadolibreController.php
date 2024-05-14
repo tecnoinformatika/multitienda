@@ -79,7 +79,9 @@ class MercadolibreController extends Controller
 
     public function createTestUsers()
     {
-        $accessToken = 'Tu_ACCESS_TOKEN'; // Aquí deberías poner tu token de acceso
+        $canal = Canal::findOrFail(20);
+        this->verificarYActualizarToken($canal);
+        $accessToken = $canal->token; // Aquí deberías poner tu token de acceso
 
         $client = new Client([
             'headers' => [
