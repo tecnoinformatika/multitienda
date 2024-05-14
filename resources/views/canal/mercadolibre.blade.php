@@ -198,48 +198,31 @@
                                     '<label class="form-check-label" for="checkbox' + data.id + '"></label>' +
                                     '</div>';
                             }},
-                            { data: null, render: function(data, type, row) {
-                                var imgSrc = (row.images.length > 0) ? row.images[0].src : '/images/iconoscanales/woocommerce.png';
-                                return '<img src="' + imgSrc + '" class="img-fluid">';
-                            }},
-                            // Columna de nombre (con ancho máximo)
-                            {data: 'name'},
-                            { data: 'regular_price' },
-                            { data: 'stock_quantity' },
                             {
+                                data: null,
+                                render: function(data, type, row) {
+                                    var imgSrc = (row.pictures.length > 0) ? row.pictures[0].url : '/images/iconoscanales/mercadolibre.png';
+                                    return '<img src="' + imgSrc + '" class="img-fluid">';
+                                }
+                            },
+                            // Columna de nombre (con ancho máximo)
+                            {data: 'title'},
+                            { data: 'price' },
+                            { data: 'initial_quantity' },
+                            { 
                                 data: function(row) {
-                                    var categories = row.categories;
+                                    var categories = row.category_name;
                                     var categoryString = '';
                                     if (categories && categories.length > 0) {
-                                        categories.forEach(function(category, index) {
-                                            if (category.name) {
-                                                if (index > 0) {
-                                                    categoryString += ' ';
-                                                }
-                                                var badgeClass = '';
-                                                switch (index) {
-                                                    case 0:
-                                                        badgeClass = 'badge-soft-success';
-                                                        break;
-                                                    case 1:
-                                                        badgeClass = 'badge-soft-primary';
-                                                        break;
-                                                    case 2:
-                                                        badgeClass = 'badge-soft-info';
-                                                        break;
-                                                    default:
-                                                        badgeClass = 'badge-soft-secondary';
-                                                }
-                                                categoryString += '<span class="badge ' + badgeClass + ' mb-0">' + category.name + '</span>';
-                                            }
-                                        });
-                                    }
-                                    if (categoryString === '') {
-                                        // Si no hay categorías definidas, mostrar la categoría no definida en rojo
-                                        return '<span class="badge badge-soft-danger mb-0">Categoría no definida</span>';
+                                        var firstCategory = categories[0]; // Tomar solo la primera categoría
+                                        if (firstCategory) {
+                                            var badgeClass = 'badge-soft-success'; // Aplicar la clase "badge-soft-success"
+                                            categoryString += '<span class="badge ' + badgeClass + ' mb-0">' + firstCategory + '</span>';
+                                        }
                                     }
                                     return categoryString;
                                 }
+                                
                             },
                             { data: null, render: function(data, type, row) {
                                 return '<ul class="list-inline mb-0">' +
