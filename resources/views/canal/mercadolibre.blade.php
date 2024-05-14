@@ -217,7 +217,7 @@
                                             var badgeClass = 'badge-soft-success'; // Aplicar la clase "badge-soft-success"
                                             categoryString += '<span class="badge ' + badgeClass + ' mb-0">' + categories + '</span>';
                                        
-                                    }
+                                    
                                     return categoryString;
                                 }
                                 
