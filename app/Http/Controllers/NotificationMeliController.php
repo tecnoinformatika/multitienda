@@ -69,8 +69,7 @@ class NotificationMeliController extends Controller
     // Método para obtener información de la orden
     private function getOrderInfo($orderId)
     {
-        
-
+            
 
     }
 
