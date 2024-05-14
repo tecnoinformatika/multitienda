@@ -89,7 +89,7 @@ class MercadolibreController extends Controller
                 'Content-Type' => 'application/json',
             ],
         ]);
-        dd($client);
+        
         // Iterar para crear 10 usuarios de prueba
         for ($i = 0; $i < 10; $i++) {
             $response = $client->post('https://api.mercadolibre.com/users/test_user', [
@@ -97,7 +97,7 @@ class MercadolibreController extends Controller
                     'site_id' => 'MLC',
                 ],
             ]);
-
+            dd($response);
             $userData = json_decode($response->getBody(), true);
 
             // Crear un registro en la base de datos para el usuario creado
