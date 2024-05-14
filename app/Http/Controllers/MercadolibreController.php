@@ -201,7 +201,7 @@ class MercadolibreController extends Controller
 
         // Assuming you have a model called Order that has the necessary fields
 
-        $orders = json_decode($response->getBody(), true);
+        $orders = json_decode($datosPedidos->getBody(), true);
     }
     // Obtener los datos de los pedidos
 
