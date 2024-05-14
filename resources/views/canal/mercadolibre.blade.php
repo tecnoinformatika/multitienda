@@ -147,6 +147,7 @@
                                         <th scope="col">Precio</th>
                                         <th scope="col">Cantidad disponible</th>
                                         <th scope="col" style="width: 200px;">Categorías</th>
+                                        <th scope="col">Estado</th>
                                         <th scope="col" style="width: 200px;">Acción</th>
                                     </tr>
                                 </thead>
@@ -212,17 +213,32 @@
                             { 
                                 data: function(row) {
                                     var categories = row.category_name;
-                                    var categoryString = '';
-                                    if (categories && categories.length > 0) {
-                                        var firstCategory = categories[0]; // Tomar solo la primera categoría
-                                        if (firstCategory) {
+                                    
                                             var badgeClass = 'badge-soft-success'; // Aplicar la clase "badge-soft-success"
-                                            categoryString += '<span class="badge ' + badgeClass + ' mb-0">' + firstCategory + '</span>';
-                                        }
+                                            categoryString += '<span class="badge ' + badgeClass + ' mb-0">' + categories + '</span>';
+                                       
                                     }
                                     return categoryString;
                                 }
                                 
+                            },
+                            {
+                                data: null,
+                                render: function(data, type, row) {
+                                    var status = row.status;
+                                    var statusClass = '';
+                                    switch(status) {
+                                        case 'active':
+                                            statusClass = 'success';
+                                            break;
+                                        case 'under_review':
+                                            statusClass = 'danger';
+                                            break;
+                                        default:
+                                            statusClass = 'warning';
+                                    }
+                                    return '<span class="badge badge-' + statusClass + '">' + ((status === 'active') ? 'Activa' : (status === 'under_review') ? 'En revisión' : 'Otro estado') + '</span>';
+                                }
                             },
                             { data: null, render: function(data, type, row) {
                                 return '<ul class="list-inline mb-0">' +
