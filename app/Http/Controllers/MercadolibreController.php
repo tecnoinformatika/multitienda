@@ -125,9 +125,17 @@ class MercadolibreController extends Controller
         ]);
 
         $response = $client->get("https://api.mercadolibre.com/users/{$userId}/items/search");
-        $productos = json_decode((string) $response->getBody(), true);
+        $productoIds = json_decode((string) $response->getBody(), true)['results'];
 
-        return $productos;
+        $productosDetallados = [];
+
+        foreach ($productoIds as $productoId) {
+            $response = $client->get("https://api.mercadolibre.com/items/{$productoId}");
+            $productoDetallado = json_decode((string) $response->getBody(), true);
+            $productosDetallados[] = $productoDetallado;
+        }
+
+        return $productosDetallados;
     }
 
     public function createTestUsers()
