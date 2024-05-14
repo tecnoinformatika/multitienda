@@ -80,7 +80,7 @@ class MercadolibreController extends Controller
     public function createTestUsers()
     {
         $canal = Canal::findOrFail(20);
-        this->verificarYActualizarToken($canal);
+        $this->verificarYActualizarToken($canal);
         $accessToken = $canal->token; // Aquí deberías poner tu token de acceso
 
         $client = new Client([
@@ -94,7 +94,7 @@ class MercadolibreController extends Controller
         for ($i = 0; $i < 10; $i++) {
             $response = $client->post('https://api.mercadolibre.com/users/test_user', [
                 'json' => [
-                    'site_id' => 'MLA',
+                    'site_id' => 'MLC',
                 ],
             ]);
 
