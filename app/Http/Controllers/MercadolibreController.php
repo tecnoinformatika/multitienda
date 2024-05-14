@@ -33,6 +33,7 @@ class MercadolibreController extends Controller
     {
         $expiresIn = $canal->expires_in ?? 0;
         $accessTokenExpiresAt = now()->addSeconds($expiresIn);
+        dd($accessTokenExpiresAt);
         if ($accessTokenExpiresAt->lte(now()->addHour())) {
             $newAccessToken = $this->refreshAccessToken($canal);
             if ($newAccessToken) {
