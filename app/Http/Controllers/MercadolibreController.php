@@ -132,6 +132,16 @@ class MercadolibreController extends Controller
         foreach ($productoIds as $productoId) {
             $response = $client->get("https://api.mercadolibre.com/items/{$productoId}");
             $productoDetallado = json_decode((string) $response->getBody(), true);
+            
+            // Obtener el nombre de la categoría
+            $categoriaId = $productoDetallado['category_id'];
+            $responseCategoria = $client->get("https://api.mercadolibre.com/categories/{$categoriaId}");
+            $categoriaDetallada = json_decode((string) $responseCategoria->getBody(), true);
+            $categoriaNombre = $categoriaDetallada['name'];
+            
+            // Agregar el nombre de la categoría al producto
+            $productoDetallado['category_name'] = $categoriaNombre;
+
             $productosDetallados[] = $productoDetallado;
         }
 
