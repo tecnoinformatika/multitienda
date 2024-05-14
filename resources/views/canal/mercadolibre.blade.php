@@ -238,7 +238,7 @@
                                         default:
                                             statusClass = 'warning';
                                     }
-                                    return '<span class="badge badge-' + statusClass + '">' + ((status === 'active') ? 'Activa' : (status === 'under_review') ? 'En revisión' : 'Otro estado') + '</span>';
+                                    return '<span class="badge badge-soft-' + statusClass + ' mb-0">' + ((status === 'active') ? 'Activa' : (status === 'under_review') ? 'En revisión' : 'Otro estado') + '</span>';
                                 }
                             },
                             { data: null, render: function(data, type, row) {
