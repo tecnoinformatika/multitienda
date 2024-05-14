@@ -34,16 +34,6 @@ class MercadolibreController extends Controller
             $expiresIn = $canal->expires_in ?? 0;
         
             $newAccessToken = $this->refreshAccessToken($canal);
-            if ($newAccessToken) {
-                $canal->token = $newAccessToken;
-                $canal->refresh_token = $data['refresh_token'];
-                $canal->expires_in = $data['expires_in'];
-                $canal->updated_at = now();
-                $canal->save();
-                return true; // Devuelve true si el token se actualiza correctamente
-            } else {
-                return false; // Devuelve false si hay un problema al actualizar el token
-            }
        
     }
     // Actualizar el token de acceso si es necesario
@@ -63,6 +53,12 @@ class MercadolibreController extends Controller
             ],
         ]);
 
+        $canal->token = json_decode((string) $response->getBody(), true)['access_token'];
+        $canal->refresh_token = json_decode((string) $response->getBody(), true)['refresh_token'];
+        $canal->expires_in = json_decode((string) $response->getBody(), true)['expires_in'];
+        $canal->updated_at = now();
+        $canal->save();    
+        dd($canal);
         return json_decode((string) $response->getBody(), true)['access_token'];
     }
     // Obtener todos los productos del usuario en MercadoLibre
@@ -84,7 +80,7 @@ class MercadolibreController extends Controller
     {
         $canal = Canal::findOrFail(20);
         
-        dd($this->verificarYActualizarToken($canal));
+        $this->verificarYActualizarToken($canal);
         $accessToken = $canal->token; // Aquí deberías poner tu token de acceso
       
         $client = new Client([
