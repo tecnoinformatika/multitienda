@@ -29,6 +29,25 @@ class MercadolibreController extends Controller
         // Devuelve los productos a la vista
         return view('canal.mercadolibre', ['canal' => $canal, 'productos' => $productos]);
     }
+    private function obtenerUserId($accessToken)
+    {
+        $client = new Client([
+            'headers' => [
+                'Authorization' => 'Bearer ' . $accessToken,
+            ],
+        ]);
+
+        $response = $client->get('https://api.mercadolibre.com/users/me');
+        $userData = json_decode((string) $response->getBody(), true);
+
+        // Verifica si se obtuvo el ID del usuario correctamente
+        if (isset($userData['id'])) {
+            return $userData['id'];
+        } else {
+            // Maneja el caso en el que no se puede obtener el ID del usuario
+            return null;
+        }
+    }
     // Verificar y actualizar el token de acceso si es necesario
     private function verificarYActualizarToken($canal)
     {
@@ -65,13 +84,20 @@ class MercadolibreController extends Controller
     // Obtener todos los productos del usuario en MercadoLibre
     private function obtenerProductos($accessToken)
     {
+        $userId = $this->obtenerUserId($accessToken);
+
+        if (!$userId) {
+            // Maneja el caso en el que no se pudo obtener el ID del usuario
+            return null;
+        }
+
         $client = new Client([
             'headers' => [
                 'Authorization' => 'Bearer ' . $accessToken,
             ],
         ]);
 
-        $response = $client->get('https://api.mercadolibre.com/users/me/items/search');
+        $response = $client->get("https://api.mercadolibre.com/users/{$userId}/items/search");
         $productos = json_decode((string) $response->getBody(), true);
 
         return $productos;
