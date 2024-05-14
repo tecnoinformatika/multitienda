@@ -46,9 +46,10 @@ Route::controller(MercadolibreController::class)->group(function () {
     Route::get('VerMercadolibre/{id}', 'VerMercadolibre')->name('VerMercadolibre');
     Route::get('/obtenerProductosMeli/{id}', 'obtenerProductosMeli')->name('obtenerProductosMeli');
     route::get('createTestUsers', 'createTestUsers');
+    Route::get('/listarPedidos/{canal_id}', 'mostrarPedidos')->name('listarPedidos');
 });
 Route::controller(NotificationMeliController::class)->group(function () {
-  
+
     Route::post('/mercadolibre/notification', 'handleMercadolibreNotification');
 });
 //Ruta para Iniciar el Flujo de canales
