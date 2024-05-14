@@ -45,6 +45,7 @@ Route::controller(MercadolibreController::class)->group(function () {
     Route::get('VerMercadolibre/{id}', 'VerMercadolibre')->name('VerMercadolibre');
     Route::get('/obtenerProductosMeli/{id}', 'obtenerProductosMeli')->name('obtenerProductosMeli');
     route::get('createTestUsers', 'createTestUsers');
+    Route::post('/mercadolibre/notification', 'handleMercadolibreNotification');
 });
 
 //Ruta para Iniciar el Flujo de canales
@@ -65,7 +66,6 @@ Route::controller(CanalesController::class)->group(function () {
     Route::get('/auth/facebook/callback', 'handleFacebookCallback');
     Route::get('/auth/mercadolibre', 'redirectToMercadoLibre')->name('auth.mercadolibre');
     Route::get('/auth/mercadolibre/callback', 'handleMercadoLibreCallback');
-    Route::post('/mercadolibre/notification', 'handleMercadolibreNotification');
 });
 
 //Ruta para Iniciar el Flujo de productos

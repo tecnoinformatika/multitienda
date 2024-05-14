@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Canal;
 use GuzzleHttp\Client;
 use App\Models\UsuarioMercadoLibre;
-
+use App\Models\NotificationMeli;
 
 class MercadolibreController extends Controller
 {
@@ -192,7 +192,16 @@ class MercadolibreController extends Controller
     {
         // Procesar la notificación recibida de MercadoLibre
         $notificationData = $request->all();
-
+        NotificationMeli::create([
+            'notification_id' => $notificationData['_id'],
+            'resource' => $notificationData['resource'],
+            'user_id' => $notificationData['user_id'],
+            'topic' => $notificationData['topic'],
+            'application_id' => $notificationData['application_id'],
+            'attempts' => $notificationData['attempts'],
+            'sent' => $notificationData['sent'],
+            'received' => $notificationData['received'],
+        ]);
         // Determinar el tipo de notificación y tomar acciones en consecuencia
         switch ($notificationData['topic']) {
             case 'items':
@@ -240,8 +249,9 @@ class MercadolibreController extends Controller
     // Método para obtener información de la orden
     private function getOrderInfo($orderId)
     {
-        // Realizar una solicitud GET a la API de MercadoLibre para obtener información de la orden
-        // Implementa esta lógica según la estructura de la API de MercadoLibre y tus necesidades específicas
+        
+
+
     }
 
     // Método para obtener información de la pregunta
