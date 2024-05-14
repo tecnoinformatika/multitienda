@@ -97,7 +97,7 @@ class MercadolibreController extends Controller
                     'site_id' => 'MLC',
                 ],
             ]);
-            dd($response);
+            //dd($response);
             $userData = json_decode($response->getBody(), true);
 
             // Crear un registro en la base de datos para el usuario creado
