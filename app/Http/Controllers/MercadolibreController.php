@@ -35,13 +35,18 @@ class MercadolibreController extends Controller
         $accessTokenExpiresAt = now()->addSeconds($expiresIn);
         if ($accessTokenExpiresAt->lte(now()->addHour())) {
             $newAccessToken = $this->refreshAccessToken($canal);
-            $canal->token = $newAccessToken;
-            $canal->refresh_token = $data['refresh_token'];
-            $canal->expires_in = $data['expires_in'];
-            $canal->updated_at = now();
-            $canal->save();
-            $canal->save();
+            if ($newAccessToken) {
+                $canal->token = $newAccessToken;
+                $canal->refresh_token = $data['refresh_token'];
+                $canal->expires_in = $data['expires_in'];
+                $canal->updated_at = now();
+                $canal->save();
+                return true; // Devuelve true si el token se actualiza correctamente
+            } else {
+                return false; // Devuelve false si hay un problema al actualizar el token
+            }
         }
+        return false; // Devuelve false si no es necesario actualizar el token
     }
     // Actualizar el token de acceso si es necesario
     private function refreshAccessToken($canal)
@@ -80,7 +85,7 @@ class MercadolibreController extends Controller
     public function createTestUsers()
     {
         $canal = Canal::findOrFail(20);
-        dd($canal);
+        
         dd($this->verificarYActualizarToken($canal));
         $accessToken = $canal->token; // Aquí deberías poner tu token de acceso
       
