@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Canal;
 use GuzzleHttp\Client;
+use App\Models\UsuarioMercadoLibre;
 
 
 class MercadolibreController extends Controller
