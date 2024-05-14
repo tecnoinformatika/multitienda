@@ -95,7 +95,7 @@ class CanalesController extends Controller
     {
         $canales = CanalDisponible::all();
        
-        $miscanales = Canal::where('user_id',Auth::user()->id)->select('id as id','Canal as Canal','url as url')->get();
+        $miscanales = Canal::where('user_id',Auth::user()->id)->select('id as id','Canal as Canal','url as url', 'nombre as nombre')->get();
       
         return view('canal/canales')->with('canales',$canales)->with('miscanales',$miscanales);
     }

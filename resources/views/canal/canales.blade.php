@@ -184,7 +184,7 @@
                                             <thead class="table-light">
                                                 <tr>
                                                     <th scope="col">Canal</th>
-                                                    <th scope="col">Url</th>
+                                                    <th scope="col">Nombre</th>
                                                     <th scope="col">Total Productos</th>
                                                     <th scope="col" colspan="2">Acciones</th>
                                                 </tr>
@@ -196,7 +196,13 @@
                                                     <td><a href="javascript: void(0);" class="text-dark fw-medium"><i
                                                                 class="mdi mdi-file-document font-size-20 align-middle text-primary me-2"></i>
                                                             {{$canal->Canal}}</a></td>
-                                                    <td>{{$canal->url}}</td>
+                                                    <td>
+                                                    @if($canal->Canal == 'Mercadolibre')    
+                                                    {{$canal->nombre}}
+                                                    @else
+                                                    {{$canal->url}}
+                                                    @endif
+                                                    </td>
                                                     <td>{{$canal->totalproductos}}</td>
                                                     <td>
                                                         <div class="dropdown">
