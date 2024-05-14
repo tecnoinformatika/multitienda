@@ -27,6 +27,13 @@ class MercadolibreController extends Controller
         // Devuelve los productos a la vista
         return view('canal.mercadolibre', ['canal' => $canal, 'productos' => $productos]);
     }
+
+    public function obtenerProductosMeli($id){
+        $canal = Canal::findOrFail($id);
+        $productos = $this->obtenerProductos($canal->token); 
+
+        return response()->json($productos);
+    }
     private function obtenerInformacionUsuario($canal)
     {
         $client = new Client([

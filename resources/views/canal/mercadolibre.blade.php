@@ -183,7 +183,7 @@
             // Realizar una solicitud AJAX para obtener los datos de los productos de WooCommerce
             var idcanal = {{ $canal->id }};
             $.ajax({
-                url: '/obtenerProductosWoo/' + idcanal,
+                url: '/obtenerProductosMeli/' + idcanal,
                 type: 'GET',
                 dataType: 'json',
                 success: function(response) {
