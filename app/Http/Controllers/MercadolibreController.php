@@ -82,7 +82,7 @@ class MercadolibreController extends Controller
         $canal = Canal::findOrFail(20);
         $this->verificarYActualizarToken($canal);
         $accessToken = $canal->token; // Aquí deberías poner tu token de acceso
-
+        dd($accessToken);
         $client = new Client([
             'headers' => [
                 'Authorization' => 'Bearer ' . $accessToken,
