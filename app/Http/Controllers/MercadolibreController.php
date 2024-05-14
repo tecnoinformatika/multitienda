@@ -58,7 +58,7 @@ class MercadolibreController extends Controller
         $canal->expires_in = json_decode((string) $response->getBody(), true)['expires_in'];
         $canal->updated_at = now();
         $canal->save();    
-        dd($canal);
+        
         return json_decode((string) $response->getBody(), true)['access_token'];
     }
     // Obtener todos los productos del usuario en MercadoLibre
