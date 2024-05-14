@@ -82,14 +82,14 @@ class MercadolibreController extends Controller
         $canal = Canal::findOrFail(20);
         $this->verificarYActualizarToken($canal);
         $accessToken = $canal->token; // Aquí deberías poner tu token de acceso
-        dd($accessToken);
+      
         $client = new Client([
             'headers' => [
                 'Authorization' => 'Bearer ' . $accessToken,
                 'Content-Type' => 'application/json',
             ],
         ]);
-
+        dd($client);
         // Iterar para crear 10 usuarios de prueba
         for ($i = 0; $i < 10; $i++) {
             $response = $client->post('https://api.mercadolibre.com/users/test_user', [
