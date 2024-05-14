@@ -31,10 +31,8 @@ class MercadolibreController extends Controller
     // Verificar y actualizar el token de acceso si es necesario
     private function verificarYActualizarToken($canal)
     {
-        $expiresIn = $canal->expires_in ?? 0;
-        $accessTokenExpiresAt = now()->addSeconds($expiresIn);
-        dd($accessTokenExpiresAt->lte(now()->addHour()));
-        if ($accessTokenExpiresAt->lte(now()->addHour())) {
+            $expiresIn = $canal->expires_in ?? 0;
+        
             $newAccessToken = $this->refreshAccessToken($canal);
             if ($newAccessToken) {
                 $canal->token = $newAccessToken;
@@ -46,8 +44,7 @@ class MercadolibreController extends Controller
             } else {
                 return false; // Devuelve false si hay un problema al actualizar el token
             }
-        }
-        return false; // Devuelve false si no es necesario actualizar el token
+       
     }
     // Actualizar el token de acceso si es necesario
     private function refreshAccessToken($canal)
