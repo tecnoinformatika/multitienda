@@ -95,7 +95,7 @@ class MercadolibreController extends Controller
         for ($i = 0; $i < 10; $i++) {
             $response = $client->post('https://api.mercadolibre.com/users/test_user', [
                 'json' => [
-                    'site_id' => 'MLC',
+                    'site_id' => 'MCO',
                 ],
             ]);
             //dd($response);
