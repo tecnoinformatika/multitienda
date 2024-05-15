@@ -207,7 +207,7 @@ class MercadolibreController extends Controller
         //dd($datosPedidos);
         // Assuming you have a model called Order that has the necessary fields
 
-        $this->almacenarPedidos($datosPedidos);
+        $this->almacenarPedidos($datosPedidos, $canal);
     }
     // Obtener los datos de los pedidos
 
@@ -229,14 +229,18 @@ class MercadolibreController extends Controller
 
         return $datosPedidos;
     }
-    public function almacenarPedidos($datosPedidos)
+    public function almacenarPedidos($datosPedidos, $canal)
     {
-        foreach ($datosPedidos['results'] as $pedido) {
+        foreach ($datosPedidos['results'] as $pedidos) {
+            $pedido = $this->consultarComprador($pedido['buyer']['id'], $canal);
+
             dd($pedido);
              // Verificar si el pedido ya existe
             if (Order::where('platform_order_id', $pedido['id'])->exists()) {
                 continue; // Saltar este pedido si ya existe
             }
+
+
             // Almacenar el cliente
             $customer = Customer::updateOrCreate(
                 ['document' => $pedido['buyer']['id']], // Suponiendo que el ID del cliente en MercadoLibre coincide con el documento
@@ -254,7 +258,7 @@ class MercadolibreController extends Controller
             );
 
             $order = Order::create([
-                'platform' => 'MercadoLibre', // Definir la plataforma
+                'platform' => 'MercadoLibre ', // Definir la plataforma
                 'platform_order_id' => $pedido['id'],
                 'status' => $pedido['status'],
                 'customer_id' => $customer->id,
@@ -297,6 +301,23 @@ class MercadolibreController extends Controller
                 'billing_country' => $pedido['billing']['country'],
             ]);
         }
+    }
+    private function consultarComprador($id, $canal)
+    {
+        $accessToken = $canal->token;
+        $client = new Client();
+
+        $response = $client->get("https://api.mercadolibre.com/orders/search?buyer={$id}", [
+            'headers' => [
+                'Authorization' => 'Bearer ' . $accessToken,
+            ],
+        ]);
+
+        $datosPedidos = json_decode($response->getBody(), true);
+
+
+
+        return $datosPedidos;
     }
 
 }
