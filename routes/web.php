@@ -49,7 +49,7 @@ Route::controller(MercadolibreController::class)->group(function () {
     Route::get('VerMercadolibre/{id}', 'VerMercadolibre')->name('VerMercadolibre');
     Route::get('/obtenerProductosMeli/{id}', 'obtenerProductosMeli')->name('obtenerProductosMeli');
     route::get('createTestUsers', 'createTestUsers');
-    Route::get('/listarPedidos/{canal_id}', 'mostrarPedidos')->name('listarPedidos');
+    Route::get('/listarPedidos/{canal_id}', 'descargarPedidos')->name('descargarPedidos');
 });
 Route::controller(NotificationMeliController::class)->group(function () {
 
