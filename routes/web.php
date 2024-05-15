@@ -5,6 +5,7 @@ use App\Http\Controllers\CanalesController;
 use App\Http\Controllers\SyscomController;
 use App\Http\Controllers\ProductosController;
 use App\Http\Controllers\MercadolibreController;
+use App\Http\Controllers\PedidosController;
 use Illuminate\Http\Request;
 use App\Models\Canal;
 use Illuminate\Support\Facades\Redirect;
@@ -31,7 +32,9 @@ Auth::routes();
 Route::get('/auth/google', 'Auth\LoginController@redirectToGoogle')->name('auth.google');
 Route::get('/auth/google/callback', 'Auth\LoginController@handleGoogleCallback');
 
-
+Route::controller(PedidosController::class)->group(function () {
+    Route::get('verpedidos', 'verpedidos')->name('verpedidos');
+});
 //Ruta para Iniciar el Flujo de Autorización de Syscom
 Route::controller(WooCommerceController::class)->group(function () {
     Route::any('woocommerce/confirmed/{any}', 'confirmed')->name('woocommerce.confirmed');
@@ -47,7 +50,6 @@ Route::controller(MercadolibreController::class)->group(function () {
     Route::get('/obtenerProductosMeli/{id}', 'obtenerProductosMeli')->name('obtenerProductosMeli');
     route::get('createTestUsers', 'createTestUsers');
     Route::get('/listarPedidos/{canal_id}', 'mostrarPedidos')->name('listarPedidos');
-    Route::get('verpedidos', 'verpedidos')->name('verpedidos');
 });
 Route::controller(NotificationMeliController::class)->group(function () {
 

@@ -187,7 +187,7 @@ class MercadolibreController extends Controller
 
         return response()->json(['message' => 'Se crearon 10 usuarios de prueba en MercadoLibre']);
     }
-    public function mostrarPedidos($canal_id)
+    public function descargarPedidos($canal_id)
     {
         $canal = Canal::findOrFail($canal_id);
         $this->verificarYActualizarToken($canal);
@@ -202,7 +202,7 @@ class MercadolibreController extends Controller
 
         // Assuming you have a model called Order that has the necessary fields
 
-        return response()->json($datosPedidos['results']);
+        $this->almacenarPedidos($datosPedidos);
     }
     // Obtener los datos de los pedidos
 
@@ -224,4 +224,74 @@ class MercadolibreController extends Controller
 
         return $datosPedidos;
     }
+    public function almacenarPedidos($datosPedidos)
+    {
+        foreach ($datosPedidos['results'] as $pedido) {
+
+             // Verificar si el pedido ya existe
+            if (Order::where('platform_order_id', $pedido['id'])->exists()) {
+                continue; // Saltar este pedido si ya existe
+            }
+            // Almacenar el cliente
+            $customer = Customer::updateOrCreate(
+                ['document' => $pedido['buyer']['id']], // Suponiendo que el ID del cliente en MercadoLibre coincide con el documento
+                [
+                    'first_name' => $pedido['buyer']['first_name'],
+                    'last_name' => $pedido['buyer']['last_name'],
+                    'email' => $pedido['buyer']['email'],
+                    'phone' => $pedido['buyer']['phone']['area_code'] . $pedido['buyer']['phone']['number'], // Suponiendo que el teléfono se divide en código de área y número
+                    'address' => $pedido['shipping']['address'],
+                    'city' => $pedido['shipping']['city'],
+                    'state' => $pedido['shipping']['state'],
+                    'postcode' => $pedido['shipping']['postcode'],
+                    'country' => $pedido['shipping']['country'],
+                ]
+            );
+
+            $order = Order::create([
+                'platform' => 'MercadoLibre', // Definir la plataforma
+                'platform_order_id' => $pedido['id'],
+                'status' => $pedido['status'],
+                'customer_id' => $customer->id,
+                'canal_id' => $pedido['canal_id'], // Suponiendo que tienes disponible el ID del canal
+            ]);
+
+            // Almacenar los detalles del pedido
+            foreach ($pedido['order_items'] as $item) {
+                OrderDetail::create([
+                    'order_id' => $order->id,
+                    'product_id' => $item['item']['id'],
+                    'product_name' => $item['item']['title'],
+                    'quantity' => $item['quantity'],
+                    'unit_price' => $item['unit_price'],
+                    'total' => $item['unit_price'] * $item['quantity'],
+                ]);
+            }
+
+            // Almacenar los datos de envío
+            OrderShipping::create([
+                'order_id' => $order->id,
+                'shipping_method' => $pedido['shipping']['shipping_method'],
+                'shipping_status' => $pedido['shipping']['status'],
+                'shipping_date' => $pedido['shipping']['date'],
+                'tracking_number' => $pedido['shipping']['tracking_number'],
+                'shipping_address' => $pedido['shipping']['address'],
+                'shipping_city' => $pedido['shipping']['city'],
+                'shipping_state' => $pedido['shipping']['state'],
+                'shipping_postcode' => $pedido['shipping']['postcode'],
+                'shipping_country' => $pedido['shipping']['country'],
+            ]);
+
+            // Almacenar los datos de facturación
+            OrderBilling::create([
+                'order_id' => $order->id,
+                'billing_address' => $pedido['billing']['address'],
+                'billing_city' => $pedido['billing']['city'],
+                'billing_state' => $pedido['billing']['state'],
+                'billing_postcode' => $pedido['billing']['postcode'],
+                'billing_country' => $pedido['billing']['country'],
+            ]);
+        }
+    }
+
 }
