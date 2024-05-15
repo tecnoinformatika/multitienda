@@ -55,7 +55,7 @@
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{ url('listarproductos') }}" data-key="t-products">Productos dropshipping</a></li>
                         <li><a href="{{ url('canales') }}" data-key="t-product-detail">Canales</a></li>
-                        <li><a href="ecommerce-orders" data-key="t-orders">Orders</a></li>
+                        <li><a href="{{ url('verpedidos') }}" data-key="t-orders">Pedidos</a></li>
                         <li><a href="ecommerce-customers" data-key="t-customers">Customers</a></li>
                         <li><a href="ecommerce-cart" data-key="t-cart">Cart</a></li>
                         <li><a href="ecommerce-checkout" data-key="t-checkout">Checkout</a></li>

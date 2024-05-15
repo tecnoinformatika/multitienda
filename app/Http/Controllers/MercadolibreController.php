@@ -190,6 +190,7 @@ class MercadolibreController extends Controller
     public function mostrarPedidos($canal_id)
     {
         $canal = Canal::findOrFail($canal_id);
+        $this->verificarYActualizarToken($canal);
         // Obtener el token de acceso del canal o de donde lo tengas almacenado
         $accessToken = $canal->token;
 
