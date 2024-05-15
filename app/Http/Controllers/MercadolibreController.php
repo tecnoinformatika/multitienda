@@ -232,7 +232,7 @@ class MercadolibreController extends Controller
     public function almacenarPedidos($datosPedidos, $canal)
     {
         foreach ($datosPedidos['results'] as $pedidos) {
-            $pedido = $this->consultarComprador($pedido['buyer']['id'], $canal);
+            $pedido = $this->consultarComprador($pedidos['buyer']['id'], $canal);
 
             dd($pedido);
              // Verificar si el pedido ya existe
