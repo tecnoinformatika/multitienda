@@ -7,6 +7,11 @@ use App\Models\Canal;
 use GuzzleHttp\Client;
 use App\Models\UsuarioMercadoLibre;
 use App\Models\NotificationMeli;
+use App\Models\Order;
+use App\Models\OrderDetail;
+use App\Models\OrderShipping;
+use App\Models\OrderBilling;
+use App\Models\Customer;
 
 class MercadolibreController extends Controller
 {
