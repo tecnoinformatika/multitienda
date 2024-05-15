@@ -232,6 +232,7 @@ class MercadolibreController extends Controller
     public function almacenarPedidos($datosPedidos, $canal)
     {
         foreach ($datosPedidos['results'] as $pedidos) {
+            dd($pedidos);
             $pedido = $this->consultarComprador($pedidos['buyer']['id'], $canal);
 
             dd($pedido);
@@ -304,6 +305,7 @@ class MercadolibreController extends Controller
     }
     private function consultarComprador($id, $canal)
     {
+
         $accessToken = $canal->token;
         $client = new Client();
 
