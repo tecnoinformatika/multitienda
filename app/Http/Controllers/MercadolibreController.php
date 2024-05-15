@@ -232,7 +232,7 @@ class MercadolibreController extends Controller
     public function almacenarPedidos($datosPedidos)
     {
         foreach ($datosPedidos['results'] as $pedido) {
-
+            dd($pedido);
              // Verificar si el pedido ya existe
             if (Order::where('platform_order_id', $pedido['id'])->exists()) {
                 continue; // Saltar este pedido si ya existe
