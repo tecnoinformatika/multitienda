@@ -206,7 +206,7 @@ class MercadolibreController extends Controller
         $datosPedidos = $this->obtenerPedidos($accessToken, $sellerId);
         //dd($datosPedidos);
         // Assuming you have a model called Order that has the necessary fields
-
+        dd($datosPedidos);
         $this->almacenarPedidos($datosPedidos, $canal);
     }
     // Obtener los datos de los pedidos
