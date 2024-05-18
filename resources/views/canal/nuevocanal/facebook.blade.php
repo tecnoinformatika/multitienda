@@ -32,14 +32,14 @@
 
                     <div class="card-body">
                         <div class="row g-4">
-                           
+
 
                             <div class="col-xl-12">
                                 <h5 class="font-size-15 mb-3">Serás redirigido a Facebook para confirmar la vinculación del catálogo.</h5>
                                 <div class="d-flex flex-wrap gap-2">
-                                    <a href="{{ route('auth.facebook') }}" class="btn btn-primary waves-effect btn-label waves-light"><i
+                                    <a href="{{ route('login/facebook') }}" class="btn btn-primary waves-effect btn-label waves-light"><i
                                             class="bx bx-smile label-icon"></i> Vincular</a>
-                                   
+
                                 </div>
                             </div><!-- end col -->
 
@@ -56,7 +56,7 @@
         <!-- choices js -->
         <script src="{{ URL::asset('../../build/libs/choices.js/public/assets/scripts/choices.min.js') }}"></script>
         <script src="{{ URL::asset('../../build/libs/alertifyjs/build/alertify.min.js') }}"></script>
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>      
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <!-- dropzone plugin -->
         <script src="{{ URL::asset('../../build/libs/dropzone/min/dropzone.min.js') }}"></script>
 
