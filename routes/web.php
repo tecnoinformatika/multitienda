@@ -49,7 +49,7 @@ Route::controller(MercadolibreController::class)->group(function () {
     Route::get('VerMercadolibre/{id}', 'VerMercadolibre')->name('VerMercadolibre');
     Route::get('/obtenerProductosMeli/{id}', 'obtenerProductosMeli')->name('obtenerProductosMeli');
     route::get('createTestUsers', 'createTestUsers');
-    Route::get('/listarPedidos/{canal_id}', 'descargarPedidos')->name('descargarPedidos');
+    Route::get('/listarPedidos/{canal_id}', 'descargarPedidos')->name('descargarPedidos ');
 });
 Route::controller(NotificationMeliController::class)->group(function () {
 
@@ -69,8 +69,8 @@ Route::controller(CanalesController::class)->group(function () {
     Route::get('validar-url', 'validarURL')->name('validar-url');
     Route::get('generar-enlace-autorizacion', 'generarEnlaceAutorizacion')->name('generarEnlaceAutorizacion');
     Route::get('obtenerCanales/{id}', 'obtenerCanales')->name('obtenerCanales');
-    Route::get('/auth/facebook', 'redirectToFacebook')->name('auth.facebook');
-    Route::get('/auth/facebook/callback', 'handleFacebookCallback');
+    Route::get('login/facebook', 'redirectToFacebook');
+    Route::get('login/facebook/callback', 'handleFacebookCallback');
     Route::get('/auth/mercadolibre', 'redirectToMercadoLibre')->name('auth.mercadolibre');
     Route::get('/auth/mercadolibre/callback', 'handleMercadoLibreCallback');
 });

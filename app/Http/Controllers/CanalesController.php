@@ -27,16 +27,40 @@ class CanalesController extends Controller
 
     public function redirectToFacebook()
     {
-        return Socialite::driver('facebook')->redirect();
+        return Socialite::driver('facebook')->scopes(['catalog_management'])->redirect();
     }
 
     public function handleFacebookCallback()
     {
         $user = Socialite::driver('facebook')->user();
+        $shortLivedToken = $user->token;
 
+        // Intercambiar el token de acceso a corto plazo por uno de largo plazo
+        $client = new Client();
+        $response = $client->get('https://graph.facebook.com/v12.0/oauth/access_token', [
+            'query' => [
+                'grant_type' => 'fb_exchange_token',
+                'client_id' => env('FACEBOOK_CLIENT_ID'),
+                'client_secret' => env('FACEBOOK_CLIENT_SECRET'),
+                'fb_exchange_token' => $shortLivedToken,
+            ]
+        ]);
+
+        $data = json_decode($response->getBody(), true);
+        $longLivedToken = $data['access_token'];
+
+        $canal = new Canal();
+        $canal->user_id = Auth::user()->id;
+        $canal->token = $longLivedToken;
+        $canal->Canal = "Facebook";
+        $canal->token_type = "Bearer";
+        $canal->MeliUserID = $user->id;
+        $canal->scope = 'catalog_management';
+        $canal->nombre = $user->name;
+        $canal->save();
         // Aquí puedes manejar la lógica para autenticar al usuario en tu aplicación
 
-        return redirect()->route('home');
+        return redirect()->route('canales');
     }
 
     public function redirectToMercadoLibre()
@@ -89,14 +113,14 @@ class CanalesController extends Controller
 
         return redirect()->route('canales');
     }
-    
+
 
     public function Canales()
     {
         $canales = CanalDisponible::all();
-       
+
         $miscanales = Canal::where('user_id',Auth::user()->id)->select('id as id','Canal as Canal','url as url', 'nombre as nombre')->get();
-      
+
         return view('canal/canales')->with('canales',$canales)->with('miscanales',$miscanales);
     }
     public function obtenerCanales($id)
