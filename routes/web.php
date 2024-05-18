@@ -69,8 +69,8 @@ Route::controller(CanalesController::class)->group(function () {
     Route::get('validar-url', 'validarURL')->name('validar-url');
     Route::get('generar-enlace-autorizacion', 'generarEnlaceAutorizacion')->name('generarEnlaceAutorizacion');
     Route::get('obtenerCanales/{id}', 'obtenerCanales')->name('obtenerCanales');
-    Route::get('login/facebook', 'redirectToFacebook')->name('login.facebook');
-    Route::get('login/facebook/callback', 'handleFacebookCallback')->name('login.facebook.callback');
+    Route::get('/login/facebook', 'redirectToFacebook')->name('login.facebook');
+    Route::get('/login/facebook/callback', 'handleFacebookCallback')->name('login.facebook.callback');
     Route::get('/auth/mercadolibre', 'redirectToMercadoLibre')->name('auth.mercadolibre');
     Route::get('/auth/mercadolibre/callback', 'handleMercadoLibreCallback');
 });

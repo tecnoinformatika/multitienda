@@ -37,7 +37,7 @@
                             <div class="col-xl-12">
                                 <h5 class="font-size-15 mb-3">Serás redirigido a Facebook para confirmar la vinculación del catálogo.</h5>
                                 <div class="d-flex flex-wrap gap-2">
-                                    <a href="{{ route('login/facebook') }}" class="btn btn-primary waves-effect btn-label waves-light"><i
+                                    <a href="{{ route('login.facebook') }}" class="btn btn-primary waves-effect btn-label waves-light"><i
                                             class="bx bx-smile label-icon"></i> Vincular</a>
 
                                 </div>
