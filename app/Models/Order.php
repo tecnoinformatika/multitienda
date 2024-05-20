@@ -13,7 +13,7 @@ class Order extends Model
         'platform',
         'platform_order_id',
         'status',
-        'customer_id',
+        'customers_id',
         'canal_id',
     ];
 

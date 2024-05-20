@@ -11,6 +11,7 @@ use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\OrderShipping;
 use App\Models\OrderBilling;
+use App\Models\OrderPayment;
 use App\Models\Customer;
 
 class MercadolibreController extends Controller
@@ -206,7 +207,7 @@ class MercadolibreController extends Controller
         $datosPedidos = $this->obtenerPedidos($accessToken, $sellerId);
         //dd($datosPedidos);
         // Assuming you have a model called Order that has the necessary fields
-        dd($datosPedidos);
+
         $this->almacenarPedidos($datosPedidos, $canal);
     }
     // Obtener los datos de los pedidos
@@ -232,10 +233,10 @@ class MercadolibreController extends Controller
     public function almacenarPedidos($datosPedidos, $canal)
     {
         foreach ($datosPedidos['results'] as $pedidos) {
-            dd($pedidos);
-            $pedido = $this->consultarComprador($pedidos['buyer']['id'], $canal);
 
-            dd($pedido);
+            $pedido = $this->consultarComprador($pedidos['id'], $canal);
+            $envio = $this->consultarEnvio($pedido['shipping']['id'], $canal);
+            //dd($envio);
              // Verificar si el pedido ya existe
             if (Order::where('platform_order_id', $pedido['id'])->exists()) {
                 continue; // Saltar este pedido si ya existe
@@ -244,17 +245,17 @@ class MercadolibreController extends Controller
 
             // Almacenar el cliente
             $customer = Customer::updateOrCreate(
-                ['document' => $pedido['buyer']['id']], // Suponiendo que el ID del cliente en MercadoLibre coincide con el documento
+                ['document' => $pedido ['buyer']['id']], // Suponiendo que el ID del cliente en MercadoLibre coincide con el documento
                 [
                     'first_name' => $pedido['buyer']['first_name'],
                     'last_name' => $pedido['buyer']['last_name'],
-                    'email' => $pedido['buyer']['email'],
-                    'phone' => $pedido['buyer']['phone']['area_code'] . $pedido['buyer']['phone']['number'], // Suponiendo que el teléfono se divide en código de área y número
-                    'address' => $pedido['shipping']['address'],
-                    'city' => $pedido['shipping']['city'],
-                    'state' => $pedido['shipping']['state'],
-                    'postcode' => $pedido['shipping']['postcode'],
-                    'country' => $pedido['shipping']['country'],
+                    'nickname' => $pedido['buyer']['nickname'],
+                    'city' => $envio['receiver_address']['city']['name'],
+                    'state' => $envio['receiver_address']['state']['name'],
+                    'postcode' => $envio['receiver_address']['zip_code'],
+                    'country' => $envio['receiver_address']['country']['name'],
+                    'address' => $envio['receiver_address']['address_line'].' - '.$envio['receiver_address']['neighborhood']['name'].' - '.$envio['receiver_address']['comment'],
+                    'canal_id' => $canal->id,
                 ]
             );
 
@@ -262,8 +263,8 @@ class MercadolibreController extends Controller
                 'platform' => 'MercadoLibre ', // Definir la plataforma
                 'platform_order_id' => $pedido['id'],
                 'status' => $pedido['status'],
-                'customer_id' => $customer->id,
-                'canal_id' => $pedido['canal_id'], // Suponiendo que tienes disponible el ID del canal
+                'customers_id' => $customer->id,
+                'canal_id' => $canal->id, // Suponiendo que tienes disponible el ID del canal
             ]);
 
             // Almacenar los detalles del pedido
@@ -272,34 +273,45 @@ class MercadolibreController extends Controller
                     'order_id' => $order->id,
                     'product_id' => $item['item']['id'],
                     'product_name' => $item['item']['title'],
+                    'categori_id' => $item['item']['category_id'],
                     'quantity' => $item['quantity'],
                     'unit_price' => $item['unit_price'],
                     'total' => $item['unit_price'] * $item['quantity'],
+                ]);
+            }
+            foreach ($pedido['payments'] as $item) {
+                OrderPayment::create([
+                    'order_id' => $order->id,
+                    'payment_method' => $item['payment_method_id'],
+                    'payment_status' => $item['status'],
+                    'payment_date' => $item['date_approved'],
+                    'total_paid_amount' => $item['total_paid_amount'],
+                    'currency' => $item['currency_id'],
                 ]);
             }
 
             // Almacenar los datos de envío
             OrderShipping::create([
                 'order_id' => $order->id,
-                'shipping_method' => $pedido['shipping']['shipping_method'],
-                'shipping_status' => $pedido['shipping']['status'],
-                'shipping_date' => $pedido['shipping']['date'],
-                'tracking_number' => $pedido['shipping']['tracking_number'],
-                'shipping_address' => $pedido['shipping']['address'],
-                'shipping_city' => $pedido['shipping']['city'],
-                'shipping_state' => $pedido['shipping']['state'],
-                'shipping_postcode' => $pedido['shipping']['postcode'],
-                'shipping_country' => $pedido['shipping']['country'],
+                'shipping_method' => $envio['tracking_method'],
+                'shipping_status' => $envio['status'],
+                'shipping_date' => $envio['date_created'],
+                'tracking_number' => $envio['tracking_number'],
+                'shipping_address' => $envio['receiver_address']['address_line'].' - '.$envio['receiver_address']['neighborhood']['name'].' - '.$envio['receiver_address']['comment'],
+                'shipping_city' => $envio['receiver_address']['city']['name'],
+                'shipping_state' => $envio['receiver_address']['state']['name'],
+                'shipping_postcode' => $envio['receiver_address']['zip_code'],
+                'shipping_country' => $envio['receiver_address']['country']['name'],
             ]);
 
             // Almacenar los datos de facturación
             OrderBilling::create([
                 'order_id' => $order->id,
-                'billing_address' => $pedido['billing']['address'],
-                'billing_city' => $pedido['billing']['city'],
-                'billing_state' => $pedido['billing']['state'],
-                'billing_postcode' => $pedido['billing']['postcode'],
-                'billing_country' => $pedido['billing']['country'],
+                'billing_address' => $envio['receiver_address']['address_line'].' - '.$envio['receiver_address']['neighborhood']['name'].' - '.$envio['receiver_address']['comment'],
+                'billing_city' => $envio['receiver_address']['city']['name'],
+                'billing_state' => $envio['receiver_address']['state']['name'],
+                'billing_postcode' => $envio['receiver_address']['zip_code'],
+                'billing_country' => $envio['receiver_address']['country']['name'],
             ]);
         }
     }
@@ -309,7 +321,25 @@ class MercadolibreController extends Controller
         $accessToken = $canal->token;
         $client = new Client();
 
-        $response = $client->get("https://api.mercadolibre.com/orders/search?buyer={$id}", [
+        $response = $client->get("https://api.mercadolibre.com/orders/{$id}", [
+            'headers' => [
+                'Authorization' => 'Bearer ' . $accessToken,
+            ],
+        ]);
+
+        $datosPedidos = json_decode($response->getBody(), true);
+
+
+
+        return $datosPedidos;
+    }
+    private function consultarEnvio($id, $canal)
+    {
+
+        $accessToken = $canal->token;
+        $client = new Client();
+
+        $response = $client->get("https://api.mercadolibre.com/shipments/{$id}", [
             'headers' => [
                 'Authorization' => 'Bearer ' . $accessToken,
             ],

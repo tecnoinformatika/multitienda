@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('customers', function (Blueprint $table) {
             $table->id();
+            $table->string('nickname')->nullable();
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
             $table->string('document')->nullable();
@@ -42,6 +43,7 @@ return new class extends Migration
             $table->foreignId('order_id')->constrained()->onDelete('cascade');
             $table->string('product_id')->nullable();
             $table->string('product_name')->nullable();
+            $table->string('categori_id')->nullable();
             $table->integer('quantity')->nullable();
             $table->decimal('unit_price', 8, 2)->nullable();
             $table->decimal('total', 10, 2)->nullable();
@@ -53,18 +55,18 @@ return new class extends Migration
             $table->foreignId('order_id')->constrained()->onDelete('cascade');
             $table->string('payment_method')->nullable();
             $table->string('payment_status')->nullable();
-            $table->dateTime('payment_date')->nullable();
+            $table->string('payment_date')->nullable();
             $table->decimal('total_paid_amount', 10, 2)->nullable();
             $table->string('currency')->nullable();
             $table->timestamps();
         });
 
-        Schema::create('order_shipping', function (Blueprint $table) {
+        Schema::create('order_shippings', function (Blueprint $table) {
             $table->id();
             $table->foreignId('order_id')->constrained()->onDelete('cascade');
             $table->string('shipping_method')->nullable();
             $table->string('shipping_status')->nullable();
-            $table->dateTime('shipping_date')->nullable();
+            $table->string('shipping_date')->nullable();
             $table->string('tracking_number')->nullable();
             $table->string('shipping_address')->nullable();
             $table->string('shipping_city')->nullable();
@@ -74,7 +76,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('order_billing', function (Blueprint $table) {
+        Schema::create('order_billings', function (Blueprint $table) {
             $table->id();
             $table->foreignId('order_id')->constrained()->onDelete('cascade');
             $table->string('billing_address')->nullable();
@@ -90,12 +92,11 @@ return new class extends Migration
     public function down()
     {
 
-        Schema::dropIfExists('order_billing');
-        Schema::dropIfExists('order_shipping');
-        Schema::dropIfExists('orders');
+        Schema::dropIfExists('order_billings');
+        Schema::dropIfExists('order_shippings');
         Schema::dropIfExists('order_payments');
         Schema::dropIfExists('order_details');
+        Schema::dropIfExists('orders');
         Schema::dropIfExists('customers');
-
     }
 };
