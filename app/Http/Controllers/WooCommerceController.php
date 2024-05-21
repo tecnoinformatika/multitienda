@@ -308,6 +308,7 @@ class WooCommerceController extends Controller
         $client = new Client([
             'verify' => false
         ]);
+        $secret = env('WEBHOOK_SECRET');
         $deliveryUrl = route('woocommerce.webhook', ['canal_id' => $canal->id,'tipo' => 'order.created']);
         $response = $client->post($canal->url.'/wp-json/wc/v3/webhooks', [
             'auth' => [$consumerKey, $consumerSecret],
@@ -315,6 +316,7 @@ class WooCommerceController extends Controller
                 'name' => 'Order Created Webhook',
                 'topic' => 'order.created',
                 'delivery_url' => $deliveryUrl,
+                'secret' => $secret, // Incluye tu secreto aquí
                 'status' => 'active',
             ]
         ]);
@@ -344,6 +346,7 @@ class WooCommerceController extends Controller
                 'name' => 'Order Updated Webhook',
                 'topic' => 'order.updated',
                 'delivery_url' => $deliveryUrl,
+                'secret' => $secret, // Incluye tu secreto aquí
                 'status' => 'active',
             ]
         ]);
@@ -372,6 +375,7 @@ class WooCommerceController extends Controller
                 'name' => 'Order deleted Webhook',
                 'topic' => 'order.deleted',
                 'delivery_url' => $deliveryUrl,
+                'secret' => $secret, // Incluye tu secreto aquí
                 'status' => 'active',
             ]
         ]);
@@ -400,6 +404,7 @@ class WooCommerceController extends Controller
                 'name' => 'Product created Webhook',
                 'topic' => 'product.created',
                 'delivery_url' => $deliveryUrl,
+                'secret' => $secret, // Incluye tu secreto aquí
                 'status' => 'active',
             ]
         ]);
@@ -428,6 +433,7 @@ class WooCommerceController extends Controller
                 'name' => 'Product updated Webhook',
                 'topic' => 'product.updated',
                 'delivery_url' => $deliveryUrl,
+                'secret' => $secret, // Incluye tu secreto aquí
                 'status' => 'active',
             ]
         ]);
@@ -456,6 +462,7 @@ class WooCommerceController extends Controller
                 'name' => 'Product deleted Webhook',
                 'topic' => 'product.deleted',
                 'delivery_url' => $deliveryUrl,
+                'secret' => $secret, // Incluye tu secreto aquí
                 'status' => 'active',
             ]
         ]);
@@ -484,6 +491,18 @@ class WooCommerceController extends Controller
 
     public function handleWebhook(Request $request, $canal_id, $tipo)
     {
+        // Obtener el secreto almacenado (puedes ajustar según cómo almacenes el secreto)
+        $secret = env('WEBHOOK_SECRET');
+
+        // Verificar la firma del webhook
+        $signature = $request->header('X-WC-Webhook-Signature');
+        $payload = $request->getContent();
+        $calculatedSignature = base64_encode(hash_hmac('sha256', $payload, $secret, true));
+
+        if ($signature !== $calculatedSignature) {
+            Log::error('La firma del webhook no coincide. Posible ataque.');
+            return response()->json(['error' => 'Firma del webhook no válida'], 401);
+        }
         // Aquí determina el tipo de webhook
         switch ($tipo) {
             case 'order.created':
