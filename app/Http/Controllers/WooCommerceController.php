@@ -298,7 +298,9 @@ class WooCommerceController extends Controller
 
     private function createWebhook($consumerKey,$consumerSecret,$canal)
     {
-        $client = new Client();
+        $client = new Client([
+            'verify' => false
+        ]);
         $deliveryUrl = route('woocommerce.webhook', ['canal_id' => $canal->id]) . '/webhooks-order';
         $response = $client->post($canal->url.'/wp-json/wc/v3/webhooks', [
             'auth' => [$consumerKey, $consumerSecret],
