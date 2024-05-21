@@ -232,7 +232,7 @@ class CanalesController extends Controller
 
         $authorizationUrl = $url.'/wc-auth/v1/authorize';
         $params = [
-            'app_name' => 'Mi Aplicación',
+            'app_name' => 'Multitiendas',
             'scope' => 'read_write',
             'user_id' => Auth()->user()->id, // ID del usuario autenticado en Laravel
             'return_url' => route('woocommerce.callback'),

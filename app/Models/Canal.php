@@ -26,7 +26,7 @@ class Canal extends Model
         'productosFalabella',
         'productosFacebook',
         'totalproductos',
-        'usuario_id',
+        'user_id',
         'token',
         'refresh_token',
         'token_type',
@@ -50,5 +50,5 @@ class Canal extends Model
     {
         return $this->belongsTo(Usuario::class);
     }
-    
+
 }

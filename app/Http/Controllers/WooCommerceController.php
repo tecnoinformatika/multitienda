@@ -77,6 +77,7 @@ class WooCommerceController extends Controller
         $consumerKey = $request->consumer_key;
         $consumerSecret = $request->consumer_secret;
         $urlClient = $request->urlRequest;
+        $webhookOrders = $this->createWebhook($consumerKey, $consumerSecret,$canal);
 
         $woocommerce = new WooCommerceClient(
             $urlClient,
@@ -295,11 +296,11 @@ class WooCommerceController extends Controller
         throw new \Exception('No se pudo obtener el token de acceso de WooCommerce');
         }
 
-    private function createWebhook($accessToken,$storeUrl)
+    private function createWebhook($consumerKey,$consumerSecret,$canal)
     {
-        $client = new \GuzzleHttp\Client();
+        $client = new Client();
 
-        $response = $client->post('https://tutienda.com/wp-json/wc/v3/webhooks', [
+        $response = $client->post($canal->url.'/wp-json/wc/v3/webhooks', [
             'auth' => [$consumerKey, $consumerSecret],
             'json' => [
                 'name' => 'Order Created Webhook',
@@ -310,6 +311,21 @@ class WooCommerceController extends Controller
         ]);
 
         $data = json_decode($response->getBody(), true);
+        // Guardar el webhook en la base de datos
+        Webhook::create([
+            'name' => $data['name'],
+            'canal_id' => $canal->id,
+            'status' => $data['status'],
+            'topic' => $data['topic'],
+            'resource' => $data['resource'],
+            'event' => $data['event'],
+            'hooks' => $data['hooks'],
+            'delivery_url' => $data['delivery_url'],
+            'date_created' => $data['date_created'],
+            'date_created_gmt' => $data['date_created_gmt'],
+            'date_modified' => $data['date_modified'],
+            'date_modified_gmt' => $data['date_modified_gmt'],
+        ]);
 
         return $data;
 
@@ -319,7 +335,7 @@ class WooCommerceController extends Controller
     public function handleWebhook(Request $request)
     {
         $payload = $request->all();
-
+        dd($payload);
         // Procesar el payload del webhook, por ejemplo, guardando el pedido en la base de datos
         // Asegúrate de validar y manejar los datos según tus necesidades
 
