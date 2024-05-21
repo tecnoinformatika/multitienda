@@ -45,11 +45,10 @@ class ProductosController extends Controller
     public function obtenerProductosHTML(Request $request)
     {
         $productos = Producto::query();
-
+        $categoriaId = '22';
         // Aplica filtros si se seleccionó una categoría o marca
-        if ($request->has('nivel') && $request->has('categoria_id')) {
-            $nivel = $request->input('nivel');
-            $categoriaId = $request->input('categoria_id');
+        if ($categoriaId) {
+
             $productos->where('nivel1', $categoriaId)->orWhere('nivel2', $categoriaId)->orWhere('nivel3', $categoriaId);
         }
 
@@ -58,7 +57,7 @@ class ProductosController extends Controller
         }
 
         $productos = $productos->get();
-        
+
         $html = '';
         foreach ($productos as $producto) {
             $precio_descuento = isset($precios->precio_descuento) ? $precios->precio_descuento : '';
@@ -74,7 +73,7 @@ class ProductosController extends Controller
             $html .= '            <h5 class="mt-1 mb-0"><a href="' . $producto->link . '" class="text-dark font-size-16">' . $producto->titulo . '</a></h5>';
             $html .= '            <!-- Aquí puedes agregar las estrellas de calificación si las tienes -->';
             $html .= '            <a href="#" class="product-buy-icon bg-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="Agregar al carrito"><i class="mdi mdi-cart-outline text-white font-size-16"></i></a>';
-            
+
             // Construir el precio según la disponibilidad de precio descuento y precio especial
             $html .= '            <h5 class="font-size-20 text-primary mt-3 mb-0">';
             if ($precio_descuento !== '') {
@@ -96,7 +95,7 @@ class ProductosController extends Controller
     public function obtenerultimosProductos()
     {
         $productos = Producto::where('total_existencia','>', 0)->latest()->take(10)->get();
-        
+
         $html = '';
         foreach ($productos as $producto) {
             $precios = json_decode($producto['precios']);
