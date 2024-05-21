@@ -208,37 +208,67 @@ class WooCommerceController extends Controller
     }
     public function handleAuthorizationCallback(Request $request)
     {
-        if ($request->has('code') && $request->has('store_url')) {
-            $authorizationCode = $request->input('code');
-            $storeUrl = $request->input('store_url');
+        $success = $request->input('success');
+        $userId = $request->input('user_id');
 
-            // Intercambiar el código de autorización por un token de acceso
-            $accessTokenData = $this->exchangeAuthorizationCodeForToken($authorizationCode, $storeUrl);
-
-            // Crear y guardar el canal en la base de datos
-            $canal = Canal::create([
-                'canal' => 'woocommerce',
-                'nombre' => 'Woocommerce', // Puedes obtener este nombre de otro campo del request si es necesario
-                'url' => $storeUrl,
-                'usuario_id' => Auth::user()->id(), // O el ID del usuario autenticado
-                'token' => $accessTokenData['access_token'],
-                'refresh_token' => $accessTokenData['refresh_token'],
-                'token_type' => $accessTokenData['token_type'],
-                'expires_in' => $accessTokenData['expires_in'],
-                'scope' => $accessTokenData['scope'],
-                // Añade otros campos necesarios
-            ]);
-
-            // Guardar el token de acceso en la sesión
-            Session::put('woocommerce_access_token', $accessTokenData['access_token']);
-
-            // Crear el webhook en WooCommerce
-            $this->createWebhook($accessTokenData['access_token'], $storeUrl);
-
-            return redirect()->route('canales')->with('success', 'Autorización y webhook creados exitosamente');
+        if ($success == 1) {
+        // El usuario ha sido autenticado con éxito
+            return redirect()->route('canales')->with('success', 'Autenticación exitosa. Ahora espere las credenciales.');
         }
 
-        return redirect()->route('canales')->with('error', 'La autorización falló');
+        // La autenticación falló
+        return redirect()->route('dashboard')->with('error', 'La autenticación falló.');
+    }
+    public function handleCallback(Request $request)
+    {
+        $data = json_decode(file_get_contents('php://input'), true);
+
+        if (isset($data['consumer_key']) && isset($data['consumer_secret'])) {
+            // Guardar las claves API en la base de datos o en la sesión
+            Session::put('woocommerce_consumer_key', $data['consumer_key']);
+            Session::put('woocommerce_consumer_secret', $data['consumer_secret']);
+
+            // Crear el webhook en WooCommerce
+            $this->createWebhook($data['consumer_key'], $data['consumer_secret']);
+
+            return response()->json(['status' => 'success'], 200);
+        }
+
+        return response()->json(['status' => 'error', 'message' => 'API keys not received'], 400);
+
+        // if ($request->has('code') && $request->has('store_url')) {
+        //     $authorizationCode = $request->input('code');
+        //     $storeUrl = $request->input('store_url');
+
+        //     // Intercambiar el código de autorización por un token de acceso
+        //     $accessTokenData = $this->exchangeAuthorizationCodeForToken($authorizationCode, $storeUrl);
+
+        //     // Crear y guardar el canal en la base de datos
+        //     $canal = Canal::create([
+        //         'canal' => 'woocommerce',
+        //         'nombre' => 'Woocommerce', // Puedes obtener este nombre de otro campo del request si es necesario
+        //         'url' => $storeUrl,
+        //         'usuario_id' => Auth::user()->id(), // O el ID del usuario autenticado
+        //         'apikey' => $accessTokenData['consumer_key'],
+        //         'secret' => $accessTokenData['consumer_secret'],
+        //         'token' => $accessTokenData['access_token'],
+        //         'refresh_token' => $accessTokenData['refresh_token'],
+        //         'token_type' => $accessTokenData['token_type'],
+        //         'expires_in' => $accessTokenData['expires_in'],
+        //         'scope' => $accessTokenData['scope'],
+        //         // Añade otros campos necesarios
+        //     ]);
+
+        //     // Guardar el token de acceso en la sesión
+        //     Session::put('woocommerce_access_token', $accessTokenData['access_token']);
+
+        //     // Crear el webhook en WooCommerce
+        //     $this->createWebhook($accessTokenData['access_token'], $storeUrl);
+
+        //     return redirect()->route('canales')->with('success', 'Autorización y webhook creados exitosamente');
+        // }
+
+       // return redirect()->route('canales')->with('error', 'La autorización falló');
 
     }
 
@@ -267,40 +297,40 @@ class WooCommerceController extends Controller
 
     private function createWebhook($accessToken,$storeUrl)
     {
-        $client = new Client();
-        $response = $client->post($storeUrl.'/wp-json/wc/v3/webhooks', [
-            'headers' => [
-                'Authorization' => 'Bearer ' . $accessToken,
-            ],
+        $client = new \GuzzleHttp\Client();
+
+        $response = $client->post('https://tutienda.com/wp-json/wc/v3/webhooks', [
+            'auth' => [$consumerKey, $consumerSecret],
             'json' => [
-                'name' => 'Pedido Creado',
+                'name' => 'Order Created Webhook',
                 'topic' => 'order.created',
                 'delivery_url' => route('woocommerce.webhook'),
-                'secret' => env('WEBHOOK_SECRET'), // Una clave secreta para validar los webhooks entrantes
-            ],
+                'status' => 'active',
+            ]
         ]);
 
-        $webhook = json_decode($response->getBody(), true);
+        $data = json_decode($response->getBody(), true);
+
+        return $data;
 
         // Maneja la respuesta del webhook si es necesario
     }
 
     public function handleWebhook(Request $request)
     {
-        $payload = $request->getContent();
-        $signature = $request->header('x-wc-webhook-signature');
+        $payload = $request->all();
 
-        // Valida la firma del webhook
-        if ($this->validateWebhookSignature($payload, $signature)) {
-            $data = json_decode($payload, true);
+        // Procesar el payload del webhook, por ejemplo, guardando el pedido en la base de datos
+        // Asegúrate de validar y manejar los datos según tus necesidades
 
-            // Almacenar el pedido en la base de datos
-            $this->storeOrder($data);
+        // Ejemplo de guardar un pedido
+        $order = new Order();
+        $order->platform_order_id = $payload['id'];
+        $order->status = $payload['status'];
+        $order->total = $payload['total'];
+        $order->save();
 
-            return response()->json(['message' => 'Webhook recibido y procesado correctamente'], 200);
-        }
-
-        return response()->json(['message' => 'Firma de webhook inválida'], 400);
+        return response()->json(['status' => 'success'], 200);
     }
 
     private function validateWebhookSignature($payload, $signature)

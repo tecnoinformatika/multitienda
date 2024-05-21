@@ -31,8 +31,9 @@ Auth::routes();
 //Ruta para Iniciar el Flujo de Autorización de socialite
 Route::get('/auth/google', 'Auth\LoginController@redirectToGoogle')->name('auth.google');
 Route::get('/auth/google/callback', 'Auth\LoginController@handleGoogleCallback');
-Route::get('/woocommerce-callback', 'WooCommerceController@handleAuthorizationCallback')->name('woocommerce.callback');
-Route::post('/woocommerce-webhook', 'WooCommerceController@handleWebhook')->name('woocommerce.webhook');
+Route::get('/woocommerce/callback', [WooCommerceController::class, 'handleAuthorizationCallback'])->name('woocommerce.callback');
+Route::post('/woocommerce/handle-callback', [WooCommerceController::class, 'handleCallback'])->name('woocommerce.handleCallback');
+Route::post('/woocommerce/webhook', [WooCommerceController::class, 'handleWebhook'])->name('woocommerce.webhook');
 
 
 

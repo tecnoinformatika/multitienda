@@ -229,17 +229,17 @@ class CanalesController extends Controller
         $store->url = $url;
         $store->save();
         // Construye el enlace de autorización
- 
+
         $authorizationUrl = $url.'/wc-auth/v1/authorize';
         $params = [
             'app_name' => 'Mi Aplicación',
             'scope' => 'read_write',
-            'user_id' => auth()->user()->id, // ID del usuario autenticado en Laravel
+            'user_id' => Auth()->user()->id, // ID del usuario autenticado en Laravel
             'return_url' => route('woocommerce.callback'),
             'callback_url' => route('woocommerce.webhook'),
         ];
         $authorization_link = $authorizationUrl . '?' . http_build_query($params);
-        // Redirige al usuario al enlace de autorización    
+        // Redirige al usuario al enlace de autorización
         // Retorna el enlace de autorización
         return response()->json(['authorization_link' => $authorization_link]);
     }
