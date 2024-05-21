@@ -41,4 +41,8 @@ class Order extends Model
     {
         return $this->hasOne(OrderBilling::class);
     }
+    public function canal()
+    {
+        return $this->belongsTo(Canal::class, 'canal_id');
+    }
 }

@@ -7,6 +7,25 @@
 
     <!-- datepicker css -->
     <link rel="stylesheet" href="{{ URL::asset('/build/libs/flatpickr/flatpickr.min.css') }}">
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+    <style>
+        .platform-woocommerce {
+            background-color: #9370DB; /* Morado claro */
+            color: white;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+        .platform-mercadolibre {
+            background-color: #FFD700; /* Amarillo */
+            color: black;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+        .payment-status {
+            font-weight: bold;
+        }
+    </style>
 @endsection
 @section('page-title')
     Pedidos
@@ -102,7 +121,21 @@
                                     Add New Order</button>
                             </div>
                         </div>
-                        <div id="table-ecommerce-orders"></div>
+                        <table id="orders-table" class="table table-responsive table-hover table-sm display" >
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Orden ID</th>
+                                    <th>Plataforma</th>
+                                    <th>Order Date</th>
+                                    <th>Total facturado</th>
+                                    <th>Estado del pago</th>
+                                    <th>Estado del envio</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -304,13 +337,43 @@
         <!-- apexcharts -->
         <script src="{{ URL::asset('/build/libs/apexcharts/apexcharts.min.js') }}"></script>
 
-        <!-- gridjs js -->
-        <script src="{{ URL::asset('/build/libs/gridjs/gridjs.umd.js') }}"></script>
 
         <!-- datepicker js -->
         <script src="{{ URL::asset('/build/libs/flatpickr/flatpickr.min.js') }}"></script>
-
-        <script src="{{ URL::asset('/build/js/pages/ecommerce-orders.init.js') }}"></script>
-        <!-- App js -->
         <script src="{{ URL::asset('/build/js/app.js') }}"></script>
+        <script>
+        $(document).ready(function() {
+            $('#orders-table').DataTable({
+                "ajax": {
+                    "url": "listarTodoslosPedidos", // Cambia esta URL a la URL de tu controlador
+                    "dataSrc": ""
+                },
+                "columns": [
+                    { "data": "id" },
+                    { "data": "platform_order_id" },
+                    { 
+                        "data": "platform",
+                        "render": function(data, type, row) {
+                            if (data.toLowerCase() == 'Woocommerce') {
+                                return '<span class="platform-woocommerce">' + data + '</span>';
+                            } else if (data.toLowerCase() == 'MercadoLibre') {
+                                return '<span class="platform-mercadolibre">' + data + '</span>';
+                            } else {
+                                return '<span>' + data + '</span>';
+                            }
+                        }
+                    },
+                    { "data": "created_at" },
+                    { "data": "payment.total_paid_amount" },
+                    { 
+                        "data": "payment.payment_status",
+                        "render": function(data, type, row) {
+                            return '<span class="payment-status">' + data + '</span>';
+                        }
+                    },
+                    { "data": "shipping.shipping_status" }
+                ]
+            });
+        });
+    </script>
     @endsection

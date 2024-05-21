@@ -229,14 +229,17 @@ class CanalesController extends Controller
         $store->url = $url;
         $store->save();
         // Construye el enlace de autorización
-        $woocommerce_auth_url = $url.'/wc-auth/v1/authorize';
-        $app_name = 'MultiTiendas';
-        $scope = 'read_write';
-        $user_id = Auth::user()->id;
-        $return_url = urlencode($urlbase.'/woocommerce/confirmed/'.$store->id);
-        $callback_url = urlencode($urlbase.'/woocommerce/add/'.$store->id);
-        $authorization_link = "$woocommerce_auth_url?app_name=$app_name&scope=$scope&user_id=$user_id&return_url=$return_url&callback_url=$callback_url";
-
+ 
+        $authorizationUrl = $url.'/wc-auth/v1/authorize';
+        $params = [
+            'app_name' => 'Mi Aplicación',
+            'scope' => 'read_write',
+            'user_id' => auth()->user()->id, // ID del usuario autenticado en Laravel
+            'return_url' => route('woocommerce.callback'),
+            'callback_url' => route('woocommerce.webhook'),
+        ];
+        $authorization_link = $authorizationUrl . '?' . http_build_query($params);
+        // Redirige al usuario al enlace de autorización    
         // Retorna el enlace de autorización
         return response()->json(['authorization_link' => $authorization_link]);
     }

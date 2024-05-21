@@ -31,9 +31,14 @@ Auth::routes();
 //Ruta para Iniciar el Flujo de Autorización de socialite
 Route::get('/auth/google', 'Auth\LoginController@redirectToGoogle')->name('auth.google');
 Route::get('/auth/google/callback', 'Auth\LoginController@handleGoogleCallback');
+Route::get('/woocommerce-callback', 'WooCommerceController@handleAuthorizationCallback')->name('woocommerce.callback');
+Route::post('/woocommerce-webhook', 'WooCommerceController@handleWebhook')->name('woocommerce.webhook');
+
+
 
 Route::controller(PedidosController::class)->group(function () {
     Route::get('verpedidos', 'verpedidos')->name('verpedidos');
+    Route::get('listarTodoslosPedidos', 'listarTodoslosPedidos')->name('listarTodoslosPedidos');
 });
 //Ruta para Iniciar el Flujo de Autorización de Syscom
 Route::controller(WooCommerceController::class)->group(function () {
