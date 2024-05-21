@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Auth;
 class PedidosController extends Controller
 {
     public function verpedidos()
-    {   
+    {
 
 
         return view('canal.transacciones.ordenes');
@@ -26,7 +26,7 @@ class PedidosController extends Controller
     {
         // Obtener el usuario logueado
         $user = Auth::user();
-        
+
         // Obtener las órdenes del usuario logueado con sus relaciones
         $orders = Order::with(['customer', 'details', 'payment', 'shipping', 'billing', 'canal'])
                        ->whereHas('canal', function($query) use ($user) {

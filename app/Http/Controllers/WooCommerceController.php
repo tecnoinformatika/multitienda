@@ -14,12 +14,12 @@ use App\Models\CanalDisponible;
 use Illuminate\Support\Facades\Validator;
 
 class WooCommerceController extends Controller
-{   
+{
     public function __construct()
     {
         $this->middleware('auth');
     }
-    
+
     public function confirmed($any, Request $request)
     {
         $canales = CanalDisponible::all();
@@ -208,26 +208,44 @@ class WooCommerceController extends Controller
     }
     public function handleAuthorizationCallback(Request $request)
     {
-        if ($request->has('code')) {
+        if ($request->has('code') && $request->has('store_url')) {
             $authorizationCode = $request->input('code');
-            $accessToken = $this->exchangeAuthorizationCodeForToken($authorizationCode);
+            $storeUrl = $request->input('store_url');
+
+            // Intercambiar el código de autorización por un token de acceso
+            $accessTokenData = $this->exchangeAuthorizationCodeForToken($authorizationCode, $storeUrl);
+
+            // Crear y guardar el canal en la base de datos
+            $canal = Canal::create([
+                'canal' => 'woocommerce',
+                'nombre' => 'Woocommerce', // Puedes obtener este nombre de otro campo del request si es necesario
+                'url' => $storeUrl,
+                'usuario_id' => Auth::user()->id(), // O el ID del usuario autenticado
+                'token' => $accessTokenData['access_token'],
+                'refresh_token' => $accessTokenData['refresh_token'],
+                'token_type' => $accessTokenData['token_type'],
+                'expires_in' => $accessTokenData['expires_in'],
+                'scope' => $accessTokenData['scope'],
+                // Añade otros campos necesarios
+            ]);
 
             // Guardar el token de acceso en la sesión
-            Session::put('woocommerce_access_token', $accessToken);
+            Session::put('woocommerce_access_token', $accessTokenData['access_token']);
 
             // Crear el webhook en WooCommerce
-            $this->createWebhook($accessToken);
+            $this->createWebhook($accessTokenData['access_token'], $storeUrl);
 
-            return redirect()->route('dashboard')->with('success', 'Autorización y webhook creados exitosamente');
+            return redirect()->route('canales')->with('success', 'Autorización y webhook creados exitosamente');
         }
 
-        return redirect()->route('dashboard')->with('error', 'La autorización falló');
+        return redirect()->route('canales')->with('error', 'La autorización falló');
+
     }
 
-    private function exchangeAuthorizationCodeForToken($authorizationCode)
+    private function exchangeAuthorizationCodeForToken($authorizationCode, $storeUrl)
     {
-        $client = new \GuzzleHttp\Client();
-        $response = $client->post('https://tutienda.com/wp-json/wc/v3/oauth/token', [
+        $client = new Client();
+        $response = $client->post($storeUrl.'/wp-json/wc/v3/oauth/token', [
             'form_params' => [
                 'client_id' => env('WOOCOMMERCE_CLIENT_ID'), // Asegúrate de configurar estos valores en tu archivo .env
                 'client_secret' => env('WOOCOMMERCE_CLIENT_SECRET'),
@@ -247,10 +265,10 @@ class WooCommerceController extends Controller
         throw new \Exception('No se pudo obtener el token de acceso de WooCommerce');
         }
 
-    private function createWebhook($accessToken)
+    private function createWebhook($accessToken,$storeUrl)
     {
         $client = new Client();
-        $response = $client->post('https://tutienda.com/wp-json/wc/v3/webhooks', [
+        $response = $client->post($storeUrl.'/wp-json/wc/v3/webhooks', [
             'headers' => [
                 'Authorization' => 'Bearer ' . $accessToken,
             ],
@@ -293,6 +311,7 @@ class WooCommerceController extends Controller
 
     private function storeOrder($data)
     {
+
         // Implementa la lógica para almacenar el pedido en la base de datos
         // Esto puede incluir modelos como Order, Customer, OrderDetails, etc.
     }

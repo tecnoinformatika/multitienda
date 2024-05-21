@@ -7,8 +7,7 @@
 
     <!-- datepicker css -->
     <link rel="stylesheet" href="{{ URL::asset('/build/libs/flatpickr/flatpickr.min.css') }}">
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+
     <style>
         .platform-woocommerce {
             background-color: #9370DB; /* Morado claro */
@@ -24,6 +23,62 @@
         }
         .payment-status {
             font-weight: bold;
+        }
+        .dataTables_paginate {
+            text-align: center;
+        }
+
+        .dataTables_paginate a.paginate_button {
+            display: inline-block;
+            padding: 5px 10px;
+            margin: 0 2px;
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            color: #495057;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .dataTables_paginate a.paginate_button.current {
+            background-color: #007bff;
+            border-color: #007bff;
+            color: #fff;
+        }
+
+        .dataTables_paginate a.paginate_button:hover {
+            background-color: #e9ecef;
+        }
+
+        .dataTables_paginate a.paginate_button.disabled {
+            pointer-events: none;
+            opacity: 0.5;
+        }
+        #productosTable_filter {
+            margin-bottom: 20px; /* Espacio entre el cuadro de búsqueda y la tabla */
+        }
+
+        #productosTable_filter label {
+            font-weight: bold; /* Texto en negrita */
+        }
+
+        #productosTable_filter input[type="search"] {
+            padding: 5px; /* Espacio interno del cuadro de búsqueda */
+            border: 1px solid #ccc; /* Borde del cuadro de búsqueda */
+            border-radius: 5px; /* Bordes redondeados del cuadro de búsqueda */
+            width: 200px; /* Ancho del cuadro de búsqueda */
+        }
+        #productosTable th:nth-child(2),
+        #productosTable td:nth-child(2),
+        #productosTable th:nth-child(5),
+        #productosTable td:nth-child(5) {
+            max-width: 200px; /* Ancho máximo permitido */
+            overflow: hidden; /* Ocultar el texto que exceda el ancho máximo */
+            text-overflow: ellipsis; /* Mostrar puntos suspensivos (...) cuando el texto exceda el ancho máximo */
+            white-space: nowrap; /* Evitar el salto de línea para mostrar el texto en una sola línea */
+        }
+        .img-fluid{
+            max-width: 27% !important;
         }
     </style>
 @endsection
@@ -341,6 +396,10 @@
         <!-- datepicker js -->
         <script src="{{ URL::asset('/build/libs/flatpickr/flatpickr.min.js') }}"></script>
         <script src="{{ URL::asset('/build/js/app.js') }}"></script>
+
+        <script src="{{ URL::asset('/build/js/pages/ecommerce-orders.init.js') }}"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+        <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
         <script>
         $(document).ready(function() {
             $('#orders-table').DataTable({
@@ -351,7 +410,7 @@
                 "columns": [
                     { "data": "id" },
                     { "data": "platform_order_id" },
-                    { 
+                    {
                         "data": "platform",
                         "render": function(data, type, row) {
                             if (data.toLowerCase() == 'Woocommerce') {
@@ -365,7 +424,7 @@
                     },
                     { "data": "created_at" },
                     { "data": "payment.total_paid_amount" },
-                    { 
+                    {
                         "data": "payment.payment_status",
                         "render": function(data, type, row) {
                             return '<span class="payment-status">' + data + '</span>';
