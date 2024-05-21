@@ -77,7 +77,7 @@ class WooCommerceController extends Controller
         $consumerKey = $request->consumer_key;
         $consumerSecret = $request->consumer_secret;
         $urlClient = $request->urlRequest;
-        $webhookOrders = $this->createWebhook($consumerKey, $consumerSecret,$canal);
+
 
         $woocommerce = new WooCommerceClient(
             $urlClient,
@@ -135,7 +135,7 @@ class WooCommerceController extends Controller
             $canal->totalproductos = $total;
             $canal->save();
         }
-
+        $webhookOrdersCreate = $this->createWebhook($consumerKey, $consumerSecret,$canal);
 
 
         $usuario->canales()->save($canal);
@@ -299,13 +299,13 @@ class WooCommerceController extends Controller
     private function createWebhook($consumerKey,$consumerSecret,$canal)
     {
         $client = new Client();
-
+        $deliveryUrl = route('woocommerce.webhook', ['canal_id' => $canal->id]) . '/webhooks-order';
         $response = $client->post($canal->url.'/wp-json/wc/v3/webhooks', [
             'auth' => [$consumerKey, $consumerSecret],
             'json' => [
                 'name' => 'Order Created Webhook',
                 'topic' => 'order.created',
-                'delivery_url' => route('woocommerce.webhook'),
+                'delivery_url' => $deliveryUrl,
                 'status' => 'active',
             ]
         ]);
