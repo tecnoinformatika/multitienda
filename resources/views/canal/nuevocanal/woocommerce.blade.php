@@ -123,7 +123,7 @@
         <!-- choices js -->
         <script src="{{ URL::asset('../../build/libs/choices.js/public/assets/scripts/choices.min.js') }}"></script>
         <script src="{{ URL::asset('../../build/libs/alertifyjs/build/alertify.min.js') }}"></script>
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>      
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <!-- dropzone plugin -->
         <script src="{{ URL::asset('../../build/libs/dropzone/min/dropzone.min.js') }}"></script>
 
@@ -138,7 +138,7 @@
 
                         var url = $('#urlRequest').val();
                         $.ajax({
-                            url: '{{ route("validar-url") }}',
+                            url: '{{ route("/validar-url") }}',
                             type: 'GET',
                             data: {
                                 _token: '{{ csrf_token() }}',
