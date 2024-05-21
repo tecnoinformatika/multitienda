@@ -138,7 +138,7 @@
 
                         var url = $('#urlRequest').val();
                         $.ajax({
-                            url: '{{ route("/validar-url") }}',
+                            url: '{{ route("validar-url") }}',
                             type: 'GET',
                             data: {
                                 _token: '{{ csrf_token() }}',
