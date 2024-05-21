@@ -9,6 +9,13 @@ use GuzzleHttp\Exception\RequestException;
 use Illuminate\Support\Facades\Http;
 use Automattic\WooCommerce\Client as WooCommerceClient;
 use App\Models\Canal;
+use App\Models\Webhook;
+use App\Models\Order;
+use App\Models\OrderDetail;
+use App\Models\OrderShipping;
+use App\Models\OrderBilling;
+use App\Models\OrderPayment;
+use App\Models\Customer;
 use Auth;
 use App\Models\CanalDisponible;
 use Illuminate\Support\Facades\Validator;
@@ -301,7 +308,7 @@ class WooCommerceController extends Controller
         $client = new Client([
             'verify' => false
         ]);
-        $deliveryUrl = route('woocommerce.webhook', ['canal_id' => $canal->id]) . '/webhooks-order';
+        $deliveryUrl = route('woocommerce.webhook', ['canal_id' => $canal->id]);
         $response = $client->post($canal->url.'/wp-json/wc/v3/webhooks', [
             'auth' => [$consumerKey, $consumerSecret],
             'json' => [
@@ -334,20 +341,74 @@ class WooCommerceController extends Controller
         // Maneja la respuesta del webhook si es necesario
     }
 
-    public function handleWebhook(Request $request)
+    public function handleWebhook(Request $request, $canal_id)
     {
-        $payload = $request->all();
-        dd($payload);
+        $pedido = $request->all();
+
         // Procesar el payload del webhook, por ejemplo, guardando el pedido en la base de datos
         // Asegúrate de validar y manejar los datos según tus necesidades
 
         // Ejemplo de guardar un pedido
-        $order = new Order();
-        $order->platform_order_id = $payload['id'];
-        $order->status = $payload['status'];
-        $order->total = $payload['total'];
-        $order->save();
 
+
+
+                // Almacenar el cliente
+        $customer = Customer::updateOrCreate(
+            ['document' => $pedido['customer_id']], // Suponiendo que el correo electrónico del cliente sea único
+            [
+                'first_name' => $pedido['billing']['first_name'],
+                'last_name' => $pedido['billing']['last_name'],
+                'city' => $pedido['billing']['city'],
+                'state' => $pedido['billing']['state'],
+                'postcode' => $pedido['billing']['postcode'],
+                'country' => $pedido['billing']['country'],
+                'canal_id' => $canal_id,
+            ]
+        );
+
+        $order = Order::create([
+            'platform' => 'WooCommerce', // Definir la plataforma
+            'platform_order_id' => $pedido['id'],
+            'status' => $pedido['status'],
+            'customer_id' => $customer->id,
+            'canal_id' => $canal_id, // Suponiendo que tienes disponible el ID del canal
+        ]);
+
+        // Almacenar los detalles del pedido
+        foreach ($pedido['line_items'] as $item) {
+            OrderDetail::create([
+                'order_id' => $order->id,
+                'product_id' => $item['product_id'],
+                'product_name' => $item['name'],
+                'quantity' => $item['quantity'],
+                'unit_price' => $item['price'],
+                'total' => $item['total'],
+            ]);
+        }
+
+        // Almacenar los datos de envío
+        OrderShipping::create([
+            'order_id' => $order->id,
+            'shipping_method' => $pedido['shipping_lines'][0]['method_title'],
+            'shipping_status' => $pedido['status'],
+            'shipping_date' => $pedido['date_created'],
+            'tracking_number' => '', // No proporcionado en el JSON
+            'shipping_address' => $pedido['shipping']['address_1'],
+            'shipping_city' => $pedido['shipping']['city'],
+            'shipping_state' => $pedido['shipping']['state'],
+            'shipping_postcode' => $pedido['shipping']['postcode'],
+            'shipping_country' => $pedido['shipping']['country'],
+        ]);
+
+        // Almacenar los datos de facturación
+        OrderBilling::create([
+            'order_id' => $order->id,
+            'billing_address' => $pedido['billing']['address_1'],
+            'billing_city' => $pedido['billing']['city'],
+            'billing_state' => $pedido['billing']['state'],
+            'billing_postcode' => $pedido['billing']['postcode'],
+            'billing_country' => $pedido['billing']['country'],
+        ]);
         return response()->json(['status' => 'success'], 200);
     }
 
