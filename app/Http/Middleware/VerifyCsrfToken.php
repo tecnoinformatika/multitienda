@@ -13,5 +13,7 @@ class VerifyCsrfToken extends Middleware
      */
     protected $except = [
         '/mercadolibre/notification',
+        'woocommerce.webhook',
+        '/woocommerce/webhook/{canal_id}/{tipo}',
     ];
 }
