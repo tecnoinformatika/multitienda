@@ -482,75 +482,102 @@ class WooCommerceController extends Controller
         // Maneja la respuesta del webhook si es necesario
     }
 
-    public function handleWebhook(Request $request, $canal_id)
+    public function handleWebhook(Request $request, $canal_id, $tipo)
     {
-        $pedido = $request->all();
-
-        // Procesar el payload del webhook, por ejemplo, guardando el pedido en la base de datos
-        // Asegúrate de validar y manejar los datos según tus necesidades
-
-        // Ejemplo de guardar un pedido
-
-
-
-                // Almacenar el cliente
-        $customer = Customer::updateOrCreate(
-            ['document' => $pedido['customer_id']], // Suponiendo que el correo electrónico del cliente sea único
-            [
-                'first_name' => $pedido['billing']['first_name'],
-                'last_name' => $pedido['billing']['last_name'],
-                'city' => $pedido['billing']['city'],
-                'state' => $pedido['billing']['state'],
-                'postcode' => $pedido['billing']['postcode'],
-                'country' => $pedido['billing']['country'],
-                'canal_id' => $canal_id,
-            ]
-        );
-
-        $order = Order::create([
-            'platform' => 'WooCommerce', // Definir la plataforma
-            'platform_order_id' => $pedido['id'],
-            'status' => $pedido['status'],
-            'customer_id' => $customer->id,
-            'canal_id' => $canal_id, // Suponiendo que tienes disponible el ID del canal
-        ]);
-
-        // Almacenar los detalles del pedido
-        foreach ($pedido['line_items'] as $item) {
-            OrderDetail::create([
-                'order_id' => $order->id,
-                'product_id' => $item['product_id'],
-                'product_name' => $item['name'],
-                'quantity' => $item['quantity'],
-                'unit_price' => $item['price'],
-                'total' => $item['total'],
-            ]);
+        // Aquí determina el tipo de webhook
+        switch ($tipo) {
+            case 'order.created':
+                return $this->handleOrderCreated($request, $canal_id);
+            case 'order.updated':
+                return $this->handleOrderUpdated($request, $canal_id);
+            case 'order.deleted':
+                return $this->handleOrderDeleted($request, $canal_id);
+            case 'product.created':
+                return $this->handleProductCreated($request, $canal_id);
+            // Agrega más casos según sea necesario para otros tipos de webhook
+            default:
+                return response()->json(['error' => 'Tipo de webhook no válido'], 400);
         }
 
-        // Almacenar los datos de envío
-        OrderShipping::create([
-            'order_id' => $order->id,
-            'shipping_method' => $pedido['shipping_lines'][0]['method_title'],
-            'shipping_status' => $pedido['status'],
-            'shipping_date' => $pedido['date_created'],
-            'tracking_number' => '', // No proporcionado en el JSON
-            'shipping_address' => $pedido['shipping']['address_1'],
-            'shipping_city' => $pedido['shipping']['city'],
-            'shipping_state' => $pedido['shipping']['state'],
-            'shipping_postcode' => $pedido['shipping']['postcode'],
-            'shipping_country' => $pedido['shipping']['country'],
-        ]);
 
-        // Almacenar los datos de facturación
-        OrderBilling::create([
-            'order_id' => $order->id,
-            'billing_address' => $pedido['billing']['address_1'],
-            'billing_city' => $pedido['billing']['city'],
-            'billing_state' => $pedido['billing']['state'],
-            'billing_postcode' => $pedido['billing']['postcode'],
-            'billing_country' => $pedido['billing']['country'],
-        ]);
-        return response()->json(['status' => 'success'], 200);
+    }
+    // Define métodos para manejar diferentes tipos de webhooks
+    public function handleOrderCreated(Request $request, $canal_id)
+    {
+
+                // Almacenar el cliente
+                $customer = Customer::updateOrCreate(
+                    ['document' => $pedido['customer_id']], // Suponiendo que el correo electrónico del cliente sea único
+                    [
+                        'first_name' => $pedido['billing']['first_name'],
+                        'last_name' => $pedido['billing']['last_name'],
+                        'city' => $pedido['billing']['city'],
+                        'state' => $pedido['billing']['state'],
+                        'postcode' => $pedido['billing']['postcode'],
+                        'country' => $pedido['billing']['country'],
+                        'canal_id' => $canal_id,
+                    ]
+                );
+
+                $order = Order::create([
+                    'platform' => 'WooCommerce', // Definir la plataforma
+                    'platform_order_id' => $pedido['id'],
+                    'status' => $pedido['status'],
+                    'customer_id' => $customer->id,
+                    'canal_id' => $canal_id, // Suponiendo que tienes disponible el ID del canal
+                ]);
+
+                // Almacenar los detalles del pedido
+                foreach ($pedido['line_items'] as $item) {
+                    OrderDetail::create([
+                        'order_id' => $order->id,
+                        'product_id' => $item['product_id'],
+                        'product_name' => $item['name'],
+                        'quantity' => $item['quantity'],
+                        'unit_price' => $item['price'],
+                        'total' => $item['total'],
+                    ]);
+                }
+
+                // Almacenar los datos de envío
+                OrderShipping::create([
+                    'order_id' => $order->id,
+                    'shipping_method' => $pedido['shipping_lines'][0]['method_title'],
+                    'shipping_status' => $pedido['status'],
+                    'shipping_date' => $pedido['date_created'],
+                    'tracking_number' => '', // No proporcionado en el JSON
+                    'shipping_address' => $pedido['shipping']['address_1'],
+                    'shipping_city' => $pedido['shipping']['city'],
+                    'shipping_state' => $pedido['shipping']['state'],
+                    'shipping_postcode' => $pedido['shipping']['postcode'],
+                    'shipping_country' => $pedido['shipping']['country'],
+                ]);
+
+                // Almacenar los datos de facturación
+                OrderBilling::create([
+                    'order_id' => $order->id,
+                    'billing_address' => $pedido['billing']['address_1'],
+                    'billing_city' => $pedido['billing']['city'],
+                    'billing_state' => $pedido['billing']['state'],
+                    'billing_postcode' => $pedido['billing']['postcode'],
+                    'billing_country' => $pedido['billing']['country'],
+                ]);
+                return response()->json(['status' => 'success'], 200);
+    }
+
+    public function handleOrderUpdated(Request $request, $canal_id)
+    {
+        // Lógica para manejar order.updated
+    }
+
+    public function handleOrderDeleted(Request $request, $canal_id)
+    {
+        // Lógica para manejar order.deleted
+    }
+
+    public function handleProductCreated(Request $request, $canal_id)
+    {
+        // Lógica para manejar product.created
     }
 
     private function validateWebhookSignature($payload, $signature)
