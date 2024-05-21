@@ -33,7 +33,7 @@ Route::get('/auth/google', 'Auth\LoginController@redirectToGoogle')->name('auth.
 Route::get('/auth/google/callback', 'Auth\LoginController@handleGoogleCallback');
 Route::get('/woocommerce/callback', [WooCommerceController::class, 'handleAuthorizationCallback'])->name('woocommerce.callback');
 Route::post('/woocommerce/handle-callback', [WooCommerceController::class, 'handleCallback'])->name('woocommerce.handleCallback');
-Route::post('/woocommerce/webhook/{canal_id}/webhooks-order', [WooCommerceController::class, 'handleWebhook'])->name('woocommerce.webhook');
+Route::post('/woocommerce/webhook/{canal_id}/{any}', [WooCommerceController::class, 'handleWebhook'])->name('woocommerce.webhook');
 
 
 

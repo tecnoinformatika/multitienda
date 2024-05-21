@@ -308,12 +308,153 @@ class WooCommerceController extends Controller
         $client = new Client([
             'verify' => false
         ]);
-        $deliveryUrl = route('woocommerce.webhook', ['canal_id' => $canal->id]);
+        $deliveryUrl = route('woocommerce.webhook', ['canal_id' => $canal->id,'tipo' => 'order.created']);
         $response = $client->post($canal->url.'/wp-json/wc/v3/webhooks', [
             'auth' => [$consumerKey, $consumerSecret],
             'json' => [
                 'name' => 'Order Created Webhook',
                 'topic' => 'order.created',
+                'delivery_url' => $deliveryUrl,
+                'status' => 'active',
+            ]
+        ]);
+
+        $data = json_decode($response->getBody(), true);
+        // Guardar el webhook en la base de datos
+        Webhook::create([
+            'name' => $data['name'],
+            'canal_id' => $canal->id,
+            'status' => $data['status'],
+            'topic' => $data['topic'],
+            'resource' => $data['resource'],
+            'event' => $data['event'],
+            'hooks' => $data['hooks'],
+            'delivery_url' => $data['delivery_url'],
+            'date_created' => $data['date_created'],
+            'date_created_gmt' => $data['date_created_gmt'],
+            'date_modified' => $data['date_modified'],
+            'date_modified_gmt' => $data['date_modified_gmt'],
+        ]);
+
+
+        $deliveryUrl = route('woocommerce.webhook', ['canal_id' => $canal->id,'tipo' => 'order.updated']);
+        $response = $client->post($canal->url.'/wp-json/wc/v3/webhooks', [
+            'auth' => [$consumerKey, $consumerSecret],
+            'json' => [
+                'name' => 'Order Updated Webhook',
+                'topic' => 'order.updated',
+                'delivery_url' => $deliveryUrl,
+                'status' => 'active',
+            ]
+        ]);
+
+        $data = json_decode($response->getBody(), true);
+        // Guardar el webhook en la base de datos
+        Webhook::create([
+            'name' => $data['name'],
+            'canal_id' => $canal->id,
+            'status' => $data['status'],
+            'topic' => $data['topic'],
+            'resource' => $data['resource'],
+            'event' => $data['event'],
+            'hooks' => $data['hooks'],
+            'delivery_url' => $data['delivery_url'],
+            'date_created' => $data['date_created'],
+            'date_created_gmt' => $data['date_created_gmt'],
+            'date_modified' => $data['date_modified'],
+            'date_modified_gmt' => $data['date_modified_gmt'],
+        ]);
+
+        $deliveryUrl = route('woocommerce.webhook', ['canal_id' => $canal->id,'tipo' => 'order.deleted']);
+        $response = $client->post($canal->url.'/wp-json/wc/v3/webhooks', [
+            'auth' => [$consumerKey, $consumerSecret],
+            'json' => [
+                'name' => 'Order deleted Webhook',
+                'topic' => 'order.deleted',
+                'delivery_url' => $deliveryUrl,
+                'status' => 'active',
+            ]
+        ]);
+
+        $data = json_decode($response->getBody(), true);
+        // Guardar el webhook en la base de datos
+        Webhook::create([
+            'name' => $data['name'],
+            'canal_id' => $canal->id,
+            'status' => $data['status'],
+            'topic' => $data['topic'],
+            'resource' => $data['resource'],
+            'event' => $data['event'],
+            'hooks' => $data['hooks'],
+            'delivery_url' => $data['delivery_url'],
+            'date_created' => $data['date_created'],
+            'date_created_gmt' => $data['date_created_gmt'],
+            'date_modified' => $data['date_modified'],
+            'date_modified_gmt' => $data['date_modified_gmt'],
+        ]);
+
+        $deliveryUrl = route('woocommerce.webhook', ['canal_id' => $canal->id,'tipo' => 'product.created']);
+        $response = $client->post($canal->url.'/wp-json/wc/v3/webhooks', [
+            'auth' => [$consumerKey, $consumerSecret],
+            'json' => [
+                'name' => 'Product created Webhook',
+                'topic' => 'product.created',
+                'delivery_url' => $deliveryUrl,
+                'status' => 'active',
+            ]
+        ]);
+
+        $data = json_decode($response->getBody(), true);
+        // Guardar el webhook en la base de datos
+        Webhook::create([
+            'name' => $data['name'],
+            'canal_id' => $canal->id,
+            'status' => $data['status'],
+            'topic' => $data['topic'],
+            'resource' => $data['resource'],
+            'event' => $data['event'],
+            'hooks' => $data['hooks'],
+            'delivery_url' => $data['delivery_url'],
+            'date_created' => $data['date_created'],
+            'date_created_gmt' => $data['date_created_gmt'],
+            'date_modified' => $data['date_modified'],
+            'date_modified_gmt' => $data['date_modified_gmt'],
+        ]);
+
+        $deliveryUrl = route('woocommerce.webhook', ['canal_id' => $canal->id,'tipo' => 'product.updated']);
+        $response = $client->post($canal->url.'/wp-json/wc/v3/webhooks', [
+            'auth' => [$consumerKey, $consumerSecret],
+            'json' => [
+                'name' => 'Product updated Webhook',
+                'topic' => 'product.updated',
+                'delivery_url' => $deliveryUrl,
+                'status' => 'active',
+            ]
+        ]);
+
+        $data = json_decode($response->getBody(), true);
+        // Guardar el webhook en la base de datos
+        Webhook::create([
+            'name' => $data['name'],
+            'canal_id' => $canal->id,
+            'status' => $data['status'],
+            'topic' => $data['topic'],
+            'resource' => $data['resource'],
+            'event' => $data['event'],
+            'hooks' => $data['hooks'],
+            'delivery_url' => $data['delivery_url'],
+            'date_created' => $data['date_created'],
+            'date_created_gmt' => $data['date_created_gmt'],
+            'date_modified' => $data['date_modified'],
+            'date_modified_gmt' => $data['date_modified_gmt'],
+        ]);
+
+        $deliveryUrl = route('woocommerce.webhook', ['canal_id' => $canal->id,'tipo' => 'product.deleted']);
+        $response = $client->post($canal->url.'/wp-json/wc/v3/webhooks', [
+            'auth' => [$consumerKey, $consumerSecret],
+            'json' => [
+                'name' => 'Product deleted Webhook',
+                'topic' => 'product.deleted',
                 'delivery_url' => $deliveryUrl,
                 'status' => 'active',
             ]
