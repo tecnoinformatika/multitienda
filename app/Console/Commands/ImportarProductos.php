@@ -35,12 +35,14 @@ class ImportarProductos extends Command
     }
     /**
      * Execute the console command.
+     *
+     * @param categoria_id $categoriaId
+     * @return void
      */
-    public function handle()
+    public function handle($categoriaId = null)
     {
 
-        // Retrieve the categoria_id argument
-        $categoria_id = $this->argument('categoria_id');
+
 
 
                 $clientId = env('SYSCOM_CLIENT_ID');
