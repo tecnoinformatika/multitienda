@@ -27,7 +27,12 @@ class ImportarProductos extends Command
      */
     protected $description = 'Importa productos con sus relaciones y los guarda en la base de datos';
 
-
+    protected function configure()
+    {
+        $this->setName('importar:productos')
+             ->setDescription('Importa productos de Syscom (añadida opción para filtrar por categoría)')
+             ->addOption('categoria-id', null, InputArgument::OPTIONAL, 'ID de la categoría a importar');
+    }
     /**
      * Execute the console command.
      */
