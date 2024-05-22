@@ -778,37 +778,32 @@ class SyscomController extends Controller
 
             // Inicializar variables
             $productosData = [];
-            $page = 1;
-            $catDatas = [];
             $totalProductos = 0;
-            $shouldContinue = true;
 
-            while ($shouldContinue) {
-                $catDataSubs = [];
-                $responseCatSubs = $client->get('https://developers.syscomcolombia.com/api/v1/categorias/' . $categoria_id);
-                $dataSubs = json_decode($responseCatSubs->getBody(), true);
-                $catDataSubs = array_merge($catDataSubs, $dataSubs);
+            $responseCatSubs = $client->get('https://developers.syscomcolombia.com/api/v1/categorias/' . $categoria_id);
+            $dataSubs = json_decode($responseCatSubs->getBody(), true);
 
-                foreach ($catDataSubs['subcategorias'] as $catDataSub) {
-                    $response = $client->get('https://developers.syscomcolombia.com/api/v1/productos', [
-                        'query' => [
-                            'categoria' => $catDataSub['id'],
-                            'stock' => 0,
-                            'pagina' => $page,
-                        ],
-                    ]);
+            // Recopilar todas las IDs de las subcategorías
+            $subcategoriaIds = [];
+            foreach ($dataSubs['subcategorias'] as $catDataSub) {
+                $subcategoriaIds[] = $catDataSub['id'];
+            }
 
+            // Dividir las subcategorías en grupos más pequeños (por ejemplo, de 10 en 10)
+            $subcategoriaChunks = array_chunk($subcategoriaIds, 4);
 
+            foreach ($subcategoriaChunks as $subcategoriaChunk) {
+                // Convertir el array de IDs en una cadena separada por comas
+                $subcategoriaIdsString = implode(',', $subcategoriaChunk);
+                $page = 1;
+
+                while (true) {
+                    $url = 'https://developers.syscomcolombia.com/api/v1/productos?categoria=' . $subcategoriaIdsString . '&stock=true&pagina=' . $page;
+                    $response = $client->get($url);
                     $data = json_decode($response->getBody(), true);
 
                     $productosData = array_merge($productosData, $data['productos']);
-
                     $totalProductos += count($data['productos']); // Sumar la cantidad de productos de la subcategoría
-
-                    if ($page > $data['paginas']) {
-                        $shouldContinue = false;
-                        break;
-                    }
 
                     // Dividir los productos en grupos de 100
                     $productosChunks = array_chunk($productosData, 100);
@@ -817,11 +812,19 @@ class SyscomController extends Controller
                         // Procesar los productos en grupos de 100
                         $this->procesarProductos($productoChunk, $client);
                     }
+
+                    // Verificar si se han procesado todas las páginas
+                    if ($page >= $data['paginas']) {
+                        break;
+                    }
+
+                    // Incrementa la página después de procesar todas las subcategorías
+                    $page++;
                 }
-                $page++;
             }
 
             return "Productos importados exitosamente. Total de productos en la categoría $categoria_id: $totalProductos";
+
         } else {
             return 'Error al obtener el token de acceso de la API de SYSCOM Colombia.';
         }
