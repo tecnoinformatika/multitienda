@@ -853,21 +853,23 @@ class SyscomController extends Controller
                 $nombreArchivo = str_replace(' ', '_', $producto['marca']) . '.jpg';
                 // Ruta completa para la imagen temporal
                 $tempImageFilePath = $tempDirectory . '/' . $nombreArchivo;
-                // Descargar y guardar la imagen de la marca en el directorio temporal
-                file_put_contents($tempImageFilePath, @file_get_contents($producto['marca_logo'], false, $context));
-                // Cambiar permisos de la imagen temporal
-                chmod($tempImageFilePath, 0777);
-                // Mover la imagen temporal al directorio de marcas
-                $rutaDestino = public_path('images/marcas/' . $nombreArchivo);
-                rename($tempImageFilePath, $rutaDestino);
-                // Obtener la URL pública de la imagen guardada en la carpeta de marcas
-                $urlImagenMarca = asset('images/marcas/' . $nombreArchivo);
+                // Intentar descargar y guardar la imagen de la marca desde la API
+                if (@file_get_contents($producto['marca_logo'], false, $context)) {
+                    file_put_contents($tempImageFilePath, @file_get_contents($producto['marca_logo'], false, $context));
+                    // Mover la imagen temporal al directorio de marcas
+                    $rutaDestino = public_path('images/marcas/' . $nombreArchivo);
+                    rename($tempImageFilePath, $rutaDestino);
+                    // Obtener la URL pública de la imagen guardada en la carpeta de marcas
+                    $urlImagenMarca = asset('images/marcas/' . $nombreArchivo);
+                } else {
+                    // Si no hay imagen disponible desde la API, definir la URL de la imagen por defecto
+                    $urlImagenMarca = asset('images/marcas/no-foto.png');
+                }
 
                 $marca = Marca::updateOrCreate(
                     ['nombre' => $producto['marca']],
                     ['logo' => $urlImagenMarca],
                     ['descripcion' => ''] // Ajustar según la estructura real de los datos
-
                 );
 
                 if($producto['img_portada'] != '')
