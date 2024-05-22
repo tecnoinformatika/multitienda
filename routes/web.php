@@ -94,12 +94,9 @@ Route::controller(SyscomController::class)->group(function () {
     Route::get('sincronizar-syscom/{idProducto}/{canal}/{canalelegido}/{stock}/{aumento}', 'sincronizarsyscom')->name('sincronizar-syscom');
     Route::get('/subcategorias/{categoria_id}', 'obtenerSubcategorias')->name('subcategorias.obtener');
     Route::get('/productos/{categoria_id}/{canal}', 'productos')->name('productos.obtener');
+    route::get('importSyscom/{categoria_id}', 'importSyscom')->name('importSyscom');
+});
 
-});
-Route::get('/import-syscom-products/{categoriaId?}', function ($categoriaId = null) {
-    Artisan::call('importar:productos', ['categoriaId' => $categoriaId]);
-    return 'Importación de productos iniciada';
-});
 
 Route::middleware('auth')->group(function () {
 
