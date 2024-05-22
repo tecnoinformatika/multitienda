@@ -781,8 +781,9 @@ class SyscomController extends Controller
             $page = 1;
             $catDatas = [];
             $totalProductos = 0;
+            $shouldContinue = true;
 
-            while (true) {
+            while ($shouldContinue) {
                 $catDataSubs = [];
                 $responseCatSubs = $client->get('https://developers.syscomcolombia.com/api/v1/categorias/' . $categoria_id);
                 $dataSubs = json_decode($responseCatSubs->getBody(), true);
@@ -805,7 +806,7 @@ class SyscomController extends Controller
                     $totalProductos += count($data['productos']); // Sumar la cantidad de productos de la subcategoría
 
                     if ($page > $data['paginas']) {
-
+                        $shouldContinue = false;
                         break;
                     }
 
