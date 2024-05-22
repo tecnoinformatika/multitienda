@@ -34,6 +34,7 @@ class ImportarProductos extends Command
     public function handle()
     {
 
+        // Retrieve the categoria_id argument
         $categoria_id = $this->argument('categoria_id');
 
 
