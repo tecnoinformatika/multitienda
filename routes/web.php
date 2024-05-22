@@ -97,9 +97,8 @@ Route::controller(SyscomController::class)->group(function () {
 
 });
 Route::get('/import-syscom-products/{categoria_id}', function ($categoria_id) {
-    // Call the Artisan command with the categoria_id parameter
     Artisan::call('importar:productos', ['categoria_id' => $categoria_id]);
-    return 'Importación de productos iniciada para la categoría ' . $categoria_id;
+    return "Importación de productos iniciada para la categoría $categoria_id";
 });
 
 Route::middleware('auth')->group(function () {
