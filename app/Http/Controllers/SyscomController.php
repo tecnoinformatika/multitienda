@@ -811,7 +811,7 @@ class SyscomController extends Controller
                     }
 
                     // Dividir los productos en grupos de 100
-                    $productosChunks = array_chunk($productosData, 10);
+                    $productosChunks = array_chunk($productosData, 100);
 
                     foreach ($productosChunks as $productoChunk) {
                         // Procesar los productos en grupos de 100
