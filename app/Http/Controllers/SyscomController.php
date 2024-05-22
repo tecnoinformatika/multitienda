@@ -742,14 +742,12 @@ class SyscomController extends Controller
 
     public function importSyscom($categoria_id)
     {
-
         $clientId = env('SYSCOM_CLIENT_ID');
         $clientSecret = env('SYSCOM_CLIENT_SECRET');
 
         // Verificar si se han definido las credenciales
         if (!$clientId || !$clientSecret) {
-            return ('Las credenciales de cliente de SYSCOM Colombia no están definidas en el archivo .env.');
-
+            return 'Las credenciales de cliente de SYSCOM Colombia no están definidas en el archivo .env.';
         }
 
         // Solicitar un token de acceso
@@ -758,6 +756,7 @@ class SyscomController extends Controller
             'client_secret' => $clientSecret,
             'grant_type' => 'client_credentials',
         ]);
+
         // Verificar si la solicitud de token fue exitosa
         if ($tokenResponse->successful()) {
             $token = $tokenResponse->json('access_token');
@@ -768,68 +767,55 @@ class SyscomController extends Controller
             ]);
             $context = stream_context_create([
                 'http' => [
-                    'timeout' => 30, // Ajusta el tiempo de espera aquí (en segundos)
+                    'timeout' => 30000, // Ajusta el tiempo de espera aquí (en segundos)
                 ],
                 'ssl' => [
                     'verify_peer' => false,
                     'verify_peer_name' => false,
                 ],
             ]);
-            // Obtener todas las categorías
+
+            // Inicializar variables
             $productosData = [];
             $page = 1;
             $catDatas = [];
+            $totalProductos = 0;
 
             while (true) {
                 $catDataSubs = [];
+                $responseCatSubs = $client->get('https://developers.syscomcolombia.com/api/v1/categorias/' . $categoria_id);
+                $dataSubs = json_decode($responseCatSubs->getBody(), true);
+                $catDataSubs = array_merge($catDataSubs, $dataSubs);
 
+                foreach ($catDataSubs['subcategorias'] as $catDataSub) {
+                    $response = $client->get('https://developers.syscomcolombia.com/api/v1/productos', [
+                        'query' => [
+                            'categoria' => $catDataSub['id'],
+                            'stock' => 0,
+                            'pagina' => $page,
+                        ],
+                    ]);
+                    $data = json_decode($response->getBody(), true);
+                    $productosData = array_merge($productosData, $data['productos']);
+                    $totalProductos += count($data['productos']); // Sumar la cantidad de productos de la subcategoría
 
-
-
-
-
-                    $responseCatSubs = $client->get('https://developers.syscomcolombia.com/api/v1/categorias/'.$categoria_id);
-                    $dataSubs = json_decode($responseCatSubs->getBody(), true);
-
-                    $catDataSubs = array_merge($catDataSubs, $dataSubs);
-
-                    foreach($catDataSubs['subcategorias'] as $catDataSub)
-                    {
-
-                            $response = $client->get('https://developers.syscomcolombia.com/api/v1/productos', [
-                                'query' => [
-                                    'categoria' => $catDataSub['id'],
-                                    'stock' => 0,
-                                    'pagina' => $page,
-                                ],
-                            ]);
-
-                            $data = json_decode($response->getBody(), true);
-                            $productosData = array_merge($productosData, $data['productos']);
-
-                            if ($page >= $data['paginas']) {
-                                break;
-                            }
-
-                            // Dividir los productos en grupos de 100
-                            $productosChunks = array_chunk($productosData, 100);
-
-                            foreach ($productosChunks as $productoChunk) {
-                                // Procesar los productos en grupos de 100
-                                procesarProductos($productoChunk,$client);
-                            }
-
+                    if ($page >= $data['paginas']) {
+                        break;
                     }
 
-
-
+                    // Dividir los productos en grupos de 100
+                    $productosChunks = array_chunk($productosData, 100);
+                    foreach ($productosChunks as $productoChunk) {
+                        // Procesar los productos en grupos de 100
+                        procesarProductos($productoChunk, $client);
+                    }
+                }
                 $page++;
             }
 
-
-            return ('Productos importados exitosamente.');
+            return "Productos importados exitosamente. Total de productos en la categoría $categoria_id: $totalProductos";
         } else {
-            return ('Error al obtener el token de acceso de la API de SYSCOM Colombia.');
+            return 'Error al obtener el token de acceso de la API de SYSCOM Colombia.';
         }
     }
 
