@@ -14,6 +14,7 @@ use Illuminate\Support\Str as Str;
 use App\Models\Canal;
 use App\Models\Producto;
 use App\Models\Categoria;
+use App\Models\Marca;
 use Illuminate\Support\Facades\Storage;
 use Automattic\WooCommerce\Client as WooCommerceClient;
 use Auth;
@@ -795,19 +796,25 @@ class SyscomController extends Controller
                             'pagina' => $page,
                         ],
                     ]);
+
+
                     $data = json_decode($response->getBody(), true);
+
                     $productosData = array_merge($productosData, $data['productos']);
+
                     $totalProductos += count($data['productos']); // Sumar la cantidad de productos de la subcategoría
 
-                    if ($page >= $data['paginas']) {
+                    if ($page > $data['paginas']) {
+
                         break;
                     }
 
                     // Dividir los productos en grupos de 100
-                    $productosChunks = array_chunk($productosData, 100);
+                    $productosChunks = array_chunk($productosData, 10);
+
                     foreach ($productosChunks as $productoChunk) {
                         // Procesar los productos en grupos de 100
-                        procesarProductos($productoChunk, $client);
+                        $this->procesarProductos($productoChunk, $client);
                     }
                 }
                 $page++;
