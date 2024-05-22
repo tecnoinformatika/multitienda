@@ -31,7 +31,7 @@ class ImportarProductos extends Command
     {
         $this->setName('importar:productos')
              ->setDescription('Importa productos de Syscom (añadida opción para filtrar por categoría)')
-             ->addArgument('categoria-id', InputArgument::OPTIONAL, 'ID de la categoría a importar');
+             ->addArgument('categoria-id', OPTIONAL, 'ID de la categoría a importar');
     }
     /**
      * Execute the console command.
