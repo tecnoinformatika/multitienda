@@ -34,7 +34,7 @@ class ImportarProductos extends Command
     public function handle()
     {
 
-
+        $categoria_id = $this->argument('categoria_id');
 
 
                 $clientId = env('SYSCOM_CLIENT_ID');
@@ -74,6 +74,7 @@ class ImportarProductos extends Command
                 $page = 1;
                 $catDatas = [];
 
+                //procesamos los productos en la base de datos
                 function procesarProductos($productosData,$client)
                 {
                     $context = stream_context_create([
@@ -113,7 +114,7 @@ class ImportarProductos extends Command
                                 ['descripcion' => ''] // Ajustar según la estructura real de los datos
 
                             );
-                            
+
                             if($producto['img_portada'] != '')
                             {
                                 // Eliminar el archivo temporal
@@ -160,7 +161,7 @@ class ImportarProductos extends Command
                                     'precios' => json_encode($producto['precios']),
                                     'unidad_de_medida' => json_encode($producto['unidad_de_medida']),
                                     'categorias' => json_encode($producto['categorias']),
-                                    
+
                                     // Otros campos del producto
                                 ]
                             );
@@ -192,7 +193,7 @@ class ImportarProductos extends Command
                                             'nivel' => $subcategoria['nivel']
                                         ];
                                     }
-                                    
+
                                     $origenes = [];
                                     foreach ($categoriaAPI['origen'] as $origen) {
                                         $origenes[] = [
@@ -201,7 +202,7 @@ class ImportarProductos extends Command
                                             'nivel' => $origen['nivel']
                                         ];
                                     }
-                                    
+
                                     // Crear o actualizar la categoría
                                     $categoria = Categoria::updateOrCreate(
                                         ['categoria_id' => $categoriaData['id']],
@@ -212,7 +213,7 @@ class ImportarProductos extends Command
                                             'subcategorías' => json_encode($subcategorias), // Guardar las subcategorías como JSON
                                         ]
                                     );
-                                    
+
 
                                 } catch (\Exception $e) {
 
@@ -222,7 +223,7 @@ class ImportarProductos extends Command
 
                             }
 
-                            $imagenes = [];    
+                            $imagenes = [];
                             // Guardar imágenes del producto en el servidor
                             // Itera sobre todas las imágenes del producto
                             foreach ($producto['imagenes'] as $imagenData) {
@@ -256,19 +257,17 @@ class ImportarProductos extends Command
                         }
                     }
                 }
+
+
                 while (true) {
                     $catDataSubs = [];
-                    $responseCat = $client->get('https://developers.syscomcolombia.com/api/v1/categorias');
-                    $dataC = json_decode($responseCat->getBody(), true);
 
-                    $catDatas = array_merge($catDatas, $dataC);
 
-                    //recorriendo todas las categorias principales para obtener las de segundo nivel
 
-                    foreach($catDatas as $catData)
-                    {
 
-                        $responseCatSubs = $client->get('https://developers.syscomcolombia.com/api/v1/categorias/'.$catData['id']);
+
+
+                        $responseCatSubs = $client->get('https://developers.syscomcolombia.com/api/v1/categorias/'.$categoria_id);
                         $dataSubs = json_decode($responseCatSubs->getBody(), true);
 
                         $catDataSubs = array_merge($catDataSubs, $dataSubs);
@@ -290,7 +289,7 @@ class ImportarProductos extends Command
                                 if ($page >= $data['paginas']) {
                                     break;
                                 }
-                               
+
                                 // Dividir los productos en grupos de 100
                                 $productosChunks = array_chunk($productosData, 100);
 
@@ -298,9 +297,9 @@ class ImportarProductos extends Command
                                     // Procesar los productos en grupos de 100
                                     procesarProductos($productoChunk,$client);
                                 }
-                                
+
                         }
-                    }
+
 
 
                     $page++;
@@ -316,7 +315,7 @@ class ImportarProductos extends Command
 
 
     }
-    
+
 
 
 }
