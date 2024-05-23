@@ -85,12 +85,12 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title mb-0">Sincronizar con canales</h4>
+                        <h4 class="card-title mb-0">Opciones</h4>
                     </div><!-- end card header -->
                     <div class="card-body" >
                         <div class="d-flex flex-wrap gap-3 align-items-center">
                             <button type="button" id="botonEnviar" class="btn btn-primary btn-lg waves-effect waves-light">Sincronizar</button>
-
+                            <button type="button" id="botonNuevoP" class="btn btn-success btn-lg waves-effect waves-light">Nuevo producto</button>
                             <div class="modal fade" id="modalEnviarProductos" data-bs-backdrop="static"
                                 data-bs-keyboard="false" tabindex="-1" role="dialog"
                                 aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -210,18 +210,18 @@
                             {data: 'title'},
                             { data: 'price' },
                             { data: 'initial_quantity' },
-                            { 
+                            {
                                 data: function(row) {
                                     var categories = row.category_name;
                                     var categoryString = '';
-                                    
+
                                             var badgeClass = 'badge-soft-success'; // Aplicar la clase "badge-soft-success"
                                             categoryString += '<span class="badge ' + badgeClass + ' mb-0">' + categories + '</span>';
-                                        
-                                    
+
+
                                     return categoryString;
                                 }
-                                
+
                             },
                             {
                                 data: null,
@@ -274,7 +274,11 @@
             $('#botonEnviar').on('click', function() {
                 abrirModalEnviarProductos();
             });
+            $('#botonNuevoP').on('click', function() {
 
+                var url = "{{ url('nuevo-producto-meli') }}/" + idcanal;
+                window.location.href = url;
+            });
             // Función para abrir el modal de enviar productos
             function abrirModalEnviarProductos() {
                 var productosSeleccionados = [];

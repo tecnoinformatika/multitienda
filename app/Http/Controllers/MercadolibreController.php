@@ -352,4 +352,15 @@ class MercadolibreController extends Controller
         return $datosPedidos;
     }
 
+    public function nuevoProductoMeli($canalId)
+    {
+
+
+        $canal = Canal::findOrFail($canalId);
+        // Utiliza $canalId en tu lógica de controlador
+
+
+        return view('canal.transacciones.nuevo-producto-mercadolibre',['canal' => $canal]);
+    }
+
 }
