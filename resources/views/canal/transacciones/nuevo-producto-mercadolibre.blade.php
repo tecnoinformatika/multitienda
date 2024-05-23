@@ -34,8 +34,8 @@
                                         </div>
                                     </div>
                                     <div class="flex-grow-1 overflow-hidden">
-                                        <h5 class="font-size-16 mb-1">Product Info</h5>
-                                        <p class="text-muted text-truncate mb-0">Fill all information below</p>
+                                        <h5 class="font-size-16 mb-1">Nuevo producto</h5>
+                                        <p class="text-muted text-truncate mb-0">Completa toda la información</p>
                                     </div>
                                     <div class="flex-shrink-0">
                                         <i class="mdi mdi-chevron-up accor-down-icon font-size-24"></i>
@@ -51,9 +51,16 @@
                             <div class="p-4 border-top">
                                 <form>
                                     <div class="mb-3">
-                                        <label class="form-label" for="productname">Product Name</label>
+                                        <label class="form-label" for="productname">Nombre del producto</label>
                                         <input id="productname" name="productname" placeholder="Enter Product Name"
                                             type="text" class="form-control">
+                                    </div>
+                                    <div id="suggested-category-container" class="mb-3" style="display: none;">
+                                        <label class="form-label" for="suggested-category">Categoria sugerida</label>
+                                        <input id="suggested-category" name="suggested-category" type="text" class="form-control" readonly>
+                                        <input id="category-id" name="category-id" type="hidden">
+                                        <a href="#" class="btn btn-success" id="boton-buscar-categoria" > <i
+                                            class=" bx bx-plus me-1"></i> Buscar otra categoría </a>
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-4">
@@ -82,30 +89,33 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
+                                    <div class="row" style="display: none" id="categorias-container">
+                                        <div class="col-md-4">
                                             <div class="mb-3">
-                                                <label for="choices-single-default" class="form-label">Category</label>
-                                                <select class="form-control" data-trigger name="choices-single-category"
+                                                <label for="choices-single-default" class="form-label">Categoria</label>
+                                                <select class="form-control" name="choices-single-category"
                                                     id="choices-single-category">
-                                                    <option value="">Select</option>
-                                                    <option value="EL">Electronic</option>
-                                                    <option value="FA">Fashion</option>
-                                                    <option value="FI">Fitness</option>
+                                                    <option value="">Selecciona</option>
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-4">
                                             <div class="mb-3">
                                                 <label for="choices-single-specifications"
-                                                    class="form-label">Specifications</label>
-                                                <select class="form-control" data-trigger name="choices-single-category"
-                                                    id="choices-single-specifications">
-                                                    <option value="HI" selected>High Quality</option>
-                                                    <option value="LE" selected>Leather</option>
-                                                    <option value="NO">Notifications</option>
-                                                    <option value="SI">Sizes</option>
-                                                    <option value="DI">Different Color</option>
+                                                    class="form-label">Subcategoria</label>
+                                                <select class="form-control" name="choices-single-specifications"
+                                                    id="choices-single-subcategoria">
+                                                    
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="mb-3">
+                                                <label for="choices-single-specifications"
+                                                    class="form-label">Categoria final</label>
+                                                <select class="form-control" name="choices-single-specifications"
+                                                    id="choices-single-subcategoria2">
+                                                    
                                                 </select>
                                             </div>
                                         </div>
@@ -246,4 +256,114 @@
         <script src="{{ URL::asset('/build/js/pages/ecommerce-choices.init.js') }}"></script>
         <!-- App js -->
         <script src="{{ URL::asset('/build/js/app.js') }}"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+        <script>
+                var idcanal = {{ $canal->id }};
+            document.getElementById('productname').addEventListener('blur', function() {
+                var productName = this.value;
+
+                if (productName.length > 0) {
+                    fetch(`/predict-category?q=${encodeURIComponent(productName)}&canal_id=${idcanal}`, {
+                        method: 'GET'
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.length > 0) {
+                            var suggestedCategory = data[0];
+                            document.getElementById('suggested-category').value = suggestedCategory.category_name;
+                            document.getElementById('category-id').value = suggestedCategory.category_id;
+                            document.getElementById('suggested-category-container').style.display = 'block';
+                        } else {
+                            document.getElementById('suggested-category-container').style.display = 'none';
+                        }
+                    })
+                    .catch(error => console.error('Error fetching category:', error));
+                } else {
+                    document.getElementById('suggested-category-container').style.display = 'none';
+                }
+            });
+            function loadCategories(idcanal) {
+                console.log(idcanal);
+                $.ajax({
+                    url: `/obtener-categorias-meli?canal_id=${idcanal}`,
+                    method: 'GET',
+                    success: function(data) {
+                        var $select = $('#choices-single-category');
+                        $.each(data, function(index, category) {
+                            var $option = $('<option>').val(category.id).text(category.name);
+                            $select.append($option);
+                        });
+                    },
+                    error: function(error) {
+                        console.error('Error loading categories:', error);
+                    }
+                });
+            }
+            // Función para cargar las subcategorías según la categoría principal seleccionada
+            function loadSubcategorias(categoriaId) {
+                $.ajax({
+                    url: '/obtener-subcategorias', // Reemplaza con la URL correcta de tu backend
+                    method: 'GET',
+                    data: { 
+                        categoriaId: categoriaId,
+                        canal_id: {{ $canal->id }} 
+                    },
+                    success: function(data) {
+                        var $selectSubcategoria = $('#choices-single-subcategoria');
+                        $selectSubcategoria.empty();
+                        $.each(data, function(index, subcategoria) {
+                            console.log(subcategoria);
+                            var $option = $('<option>').val(subcategoria.id).text(subcategoria.name);
+                            $selectSubcategoria.append($option);
+                        });
+                    },
+                    error: function(error) {
+                        console.error('Error loading subcategorías:', error);
+                    }
+                });
+            }
+            // Función para cargar las categorías finales según la subcategoría seleccionada
+            function loadCategoriasFinal(subcategoriaId) {
+                $.ajax({
+                    url: '/obtener-categorias-final', // Reemplaza con la URL correcta de tu backend
+                    method: 'GET',
+                    data: { 
+                        subcategoriaId: subcategoriaId,
+                        canal_id: {{ $canal->id }} 
+                    },
+                    success: function(data) {
+                        var $selectCategoriaFinal = $('#choices-single-subcategoria2');
+                        $selectCategoriaFinal.empty();
+                        $.each(data, function(index, categoriaFinal) {
+                            var $option = $('<option>').val(categoriaFinal.id).text(categoriaFinal.name);
+                            $selectCategoriaFinal.append($option);
+                        });
+                    },
+                    error: function(error) {
+                        console.error('Error loading categorías final:', error);
+                    }
+                });
+            }
+
+            // Escucha el evento change en el select de categorías para cargar las subcategorías
+            $('#choices-single-category').on('change', function() {
+                var categoriaId = $(this).val();
+                loadSubcategorias(categoriaId);
+            });
+
+            // Escucha el evento change en el select de subcategorías para cargar las categorías finales
+            $('#choices-single-subcategoria').on('change', function() {
+                var subcategoriaId = $(this).val();
+                loadCategoriasFinal(subcategoriaId);
+            });
+            $('#boton-buscar-categoria').on('click', function() {
+                document.getElementById('categorias-container').style.display = 'flex';
+            });
+            
+            // Llamar a la función para cargar las categorías
+            $(document).ready(function() {
+                var idcanal = {{ $canal->id }};
+                loadCategories(idcanal);
+            });
+        </script>
     @endsection

@@ -57,6 +57,11 @@ Route::controller(MercadolibreController::class)->group(function () {
     route::get('createTestUsers', 'createTestUsers');
     Route::get('/listarPedidos/{canal_id}', 'descargarPedidos')->name('descargarPedidos ');
     Route::get('/nuevo-producto-meli/{canal_id}', 'nuevoProductoMeli')->name('nuevo-producto-meli');
+    Route::get('/predict-category', 'predictCategory')->name('predictCategory');
+    Route::get('/obtener-categorias-meli', 'getCategories')->name('obtener-categorias-meli');
+    Route::get('/obtener-subcategorias', 'getSubcategorias')->name('obtener-subcategorias');
+    Route::get('/obtener-categorias-final', 'getCategoriasFinal')->name('obtener-categorias-final');
+
 });
 Route::controller(NotificationMeliController::class)->group(function () {
 
