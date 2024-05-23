@@ -362,16 +362,14 @@ class MercadolibreController extends Controller
 
         return view('canal.transacciones.nuevo-producto-mercadolibre',['canal' => $canal]);
     }
-
+    //predicción de categorias
     public function predictCategory(Request $request)
     {
         $canal = Canal::findOrFail($request->query('canal_id'));
-        // Obtener el token de acceso del canal o de donde lo tengas almacenado
         $accessToken = $canal->token;
-
         $siteId = 'MCO'; // Sitio de Colombia
         $productName = $request->query('q');
-        $limit = 1;
+        $limit = 8; // Cambiar el límite a 5 para obtener más categorías
 
         $client = new Client();
         $response = $client->request('GET', "https://api.mercadolibre.com/sites/$siteId/domain_discovery/search", [
@@ -384,9 +382,26 @@ class MercadolibreController extends Controller
             ]
         ]);
 
-        $data = json_decode($response->getBody(), true);
-        return response()->json($data);
+        $categories = json_decode($response->getBody(), true);
+
+        // Obtener detalles adicionales para cada categoría
+        $detailedCategories = [];
+        foreach ($categories as $category) {
+
+            $categoryId = $category['category_id'];
+            $categoryDetailResponse = $client->request('GET', "https://api.mercadolibre.com/categories/$categoryId", [
+                'headers' => [
+                    'Authorization' => 'Bearer ' . $accessToken,
+                ],
+            ]);
+            $categoryDetail = json_decode($categoryDetailResponse->getBody(), true);
+
+            $detailedCategories[] = $categoryDetail;
+        }
+
+        return response()->json($detailedCategories);
     }
+
     public function getCategories(Request $request)
     {
         $canal = Canal::findOrFail($request->query('canal_id'));

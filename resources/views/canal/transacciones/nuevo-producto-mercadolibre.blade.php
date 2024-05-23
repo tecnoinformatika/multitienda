@@ -55,36 +55,46 @@
                                         <input id="productname" name="productname" placeholder="Enter Product Name"
                                             type="text" class="form-control">
                                     </div>
-                                    <div id="suggested-category-container" class="mb-3" style="display: none;">
-                                        <label class="form-label" for="suggested-category">Categoria sugerida</label>
-                                        <input id="suggested-category" name="suggested-category" type="text" class="form-control" readonly>
-                                        <input id="category-id" name="category-id" type="hidden">
-                                        <a href="#" class="btn btn-success" id="boton-buscar-categoria" > <i
-                                            class=" bx bx-plus me-1"></i> Buscar otra categoría </a>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div id="suggested-category-container" class="mb-3" style="display: none;">
+                                                <label class="form-label" for="suggested-category">Categorías sugeridas</label>
+                                                <div id="suggested-category-list" class="list-group"></div>
+                                                <input id="category-id" name="category-id" type="hidden">
+                                                <a href="#" class="btn btn-success" id="boton-buscar-categoria"> <i class="bx bx-plus me-1"></i> Buscar otra categoría </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div id="condition-container" class="mb-3" style="display: none;">
+                                                <label class="form-label" for="item-condition">Condición del ítem</label>
+                                                Indica el estado en que se encuentra tu producto.
+                                                <select id="item-condition" name="item-condition" class="form-control"></select>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-4">
 
                                             <div class="mb-3">
-                                                <label class="form-label" for="manufacturername">Manufacturer Name</label>
-                                                <input id="manufacturername" name="manufacturername"
-                                                    placeholder="Enter Manufacturer Name" type="text"
+                                                <label class="form-label" for="manufacturername">Marca</label>
+                                                <input id="marca" name="marca"
+                                                    placeholder="Ingresa la marca del producto" type="text"
                                                     class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-lg-4">
 
                                             <div class="mb-3">
-                                                <label class="form-label" for="manufacturerbrand">Manufacturer Brand</label>
-                                                <input id="manufacturerbrand" name="manufacturerbrand"
+                                                <label class="form-label" for="fabricante">Fabricante</label>
+                                                <input id="fabricante" name="fabricante"
                                                     placeholder="Enter Manufacturer Brand" type="text"
                                                     class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-lg-4">
                                             <div class="mb-3">
-                                                <label class="form-label" for="price">Price</label>
-                                                <input id="price" name="price" placeholder="Enter Price"
+                                                <label class="form-label" for="precio">Precio</label>
+                                                <input id="precio" name="precio" placeholder="Enter Price"
                                                     type="text" class="form-control">
                                             </div>
                                         </div>
@@ -105,7 +115,7 @@
                                                     class="form-label">Subcategoria</label>
                                                 <select class="form-control" name="choices-single-specifications"
                                                     id="choices-single-subcategoria">
-                                                    
+
                                                 </select>
                                             </div>
                                         </div>
@@ -115,7 +125,7 @@
                                                     class="form-label">Categoria final</label>
                                                 <select class="form-control" name="choices-single-specifications"
                                                     id="choices-single-subcategoria2">
-                                                    
+
                                                 </select>
                                             </div>
                                         </div>
@@ -258,30 +268,98 @@
         <script src="{{ URL::asset('/build/js/app.js') }}"></script>
         <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
         <script>
-                var idcanal = {{ $canal->id }};
-            document.getElementById('productname').addEventListener('blur', function() {
-                var productName = this.value;
+            var idcanal = {{ $canal->id }};
+            $(document).ready(function() {
+                $('#productname').on('blur', function() {
+                    var productName = $(this).val();
+                    if (productName.length > 0) {
+                        $.ajax({
+                            url: `/predict-category?q=${encodeURIComponent(productName)}&canal_id=${idcanal}`,
+                            method: 'GET',
+                            success: function(data) {
+                                var $container = $('#suggested-category-list');
+                                $container.empty(); // Limpiar el contenedor antes de añadir nuevas opciones
 
-                if (productName.length > 0) {
-                    fetch(`/predict-category?q=${encodeURIComponent(productName)}&canal_id=${idcanal}`, {
-                        method: 'GET'
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.length > 0) {
-                            var suggestedCategory = data[0];
-                            document.getElementById('suggested-category').value = suggestedCategory.category_name;
-                            document.getElementById('category-id').value = suggestedCategory.category_id;
-                            document.getElementById('suggested-category-container').style.display = 'block';
-                        } else {
-                            document.getElementById('suggested-category-container').style.display = 'none';
+                                if (data.length > 0) {
+                                    data.forEach(function(category) {
+                                        console.log(category);
+                                        var $item = $('<div>').addClass('list-group-item list-group-item-action').attr('data-category-id', category.id);
+                                        var $title = $('<h5>').addClass('mb-1').text(category.name);
+                                        var $path = $('<p>').addClass('mb-1').text(category.path_from_root.map(c => c.name).join(' > '));
+
+                                        $item.append($title).append($path);
+                                        $container.append($item);
+                                    });
+
+                                    // Mostrar el contenedor de categorías sugeridas
+                                    $('#suggested-category-container').show();
+                                } else {
+                                    $('#suggested-category-container').hide();
+                                }
+                            },
+                            error: function(error) {
+                                console.error('Error fetching category:', error);
+                                $('#suggested-category-container').hide();
+                            }
+                        });
+                    } else {
+                        $('#suggested-category-container').hide();
+                    }
+                });
+                // Evento para seleccionar una categoría del select
+                $('#suggested-category-list').on('click', '.list-group-item', function() {
+                    var categoryId = $(this).data('category-id');
+                    var categoryName = $(this).find('h5').text();
+
+                    $('#category-id').val(categoryId);
+                    $('#suggested-category').val(categoryName);
+
+                    // Opcional: marcar el elemento seleccionado visualmente
+                    $(this).addClass('active').siblings().removeClass('active');
+
+                    // Hacer una solicitud para obtener los detalles de la categoría
+                    $.ajax({
+                        url: `https://api.mercadolibre.com/categories/${categoryId}`,
+                        method: 'GET',
+                        success: function(categoryDetails) {
+                            var $conditionSelect = $('#item-condition');
+                            $conditionSelect.empty(); // Limpiar el select antes de añadir nuevas opciones
+
+                            if (categoryDetails.settings && categoryDetails.settings.item_conditions) {
+                                var conditionMapping = {
+                                    "used": "Usado",
+                                    "new": "Nuevo",
+                                    "not_specified": "No especificado"
+                                };
+                                categoryDetails.settings.item_conditions.forEach(function(condition) {
+                                    var translatedCondition = conditionMapping[condition] || condition;
+                                    var $option = $('<option>').val(condition).text(translatedCondition);
+                                    $conditionSelect.append($option);
+                                });
+
+                                // Mostrar el contenedor de condiciones del ítem
+                                $('#condition-container').show();
+                            } else {
+                                $('#condition-container').hide();
+                            }
+                        },
+                        error: function(error) {
+                            console.error('Error fetching category details:', error);
+                            $('#condition-container').hide();
                         }
-                    })
-                    .catch(error => console.error('Error fetching category:', error));
-                } else {
-                    document.getElementById('suggested-category-container').style.display = 'none';
-                }
+                    });
+                });
+
+                // Evento para seleccionar una categoría del select
+                $('#suggested-category-list').on('click', '.list-group-item', function() {
+                    var categoryId = $(this).data('category-id');
+                    var categoryName = $(this).find('h5').text();
+
+                    $('#category-id').val(categoryId);
+                    $('#suggested-category').val(categoryName);
+                });
             });
+
             function loadCategories(idcanal) {
                 console.log(idcanal);
                 $.ajax({
@@ -304,9 +382,9 @@
                 $.ajax({
                     url: '/obtener-subcategorias', // Reemplaza con la URL correcta de tu backend
                     method: 'GET',
-                    data: { 
+                    data: {
                         categoriaId: categoriaId,
-                        canal_id: {{ $canal->id }} 
+                        canal_id: {{ $canal->id }}
                     },
                     success: function(data) {
                         var $selectSubcategoria = $('#choices-single-subcategoria');
@@ -327,9 +405,9 @@
                 $.ajax({
                     url: '/obtener-categorias-final', // Reemplaza con la URL correcta de tu backend
                     method: 'GET',
-                    data: { 
+                    data: {
                         subcategoriaId: subcategoriaId,
-                        canal_id: {{ $canal->id }} 
+                        canal_id: {{ $canal->id }}
                     },
                     success: function(data) {
                         var $selectCategoriaFinal = $('#choices-single-subcategoria2');
@@ -359,7 +437,7 @@
             $('#boton-buscar-categoria').on('click', function() {
                 document.getElementById('categorias-container').style.display = 'flex';
             });
-            
+
             // Llamar a la función para cargar las categorías
             $(document).ready(function() {
                 var idcanal = {{ $canal->id }};
